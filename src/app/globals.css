@@ -1,26 +1,97 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* =====================================================================
+   Jura Auto Center - design tokens
+   Valores vindos do Brand Book v1.1 (paginas 04, 05 e 12)
+   ===================================================================== */
+@theme {
+  /* Superficies */
+  --color-ink: #141414;          /* fundo do site */
+  --color-ink-deep: #101010;     /* faixas alternadas dentro do mesmo tema */
+  --color-surface: #1f1f1f;      /* cards */
+  --color-surface-2: #2f2f2f;    /* inputs e hover */
+  --color-line: #333333;
+
+  /* Marca */
+  --color-jura: #c8102e;         /* SO fundo de botao e faixas */
+  --color-jura-strong: #8e1120;  /* hover e bordo */
+  --color-jura-title: #e5304c;   /* titulo sobre preto, 5,4:1 */
+  --color-offer: #ffc400;        /* SO preco, selo e estrela */
+  --color-whats: #25d366;
+  --color-whats-ink: #0b2e1a;
+
+  /* Texto */
+  --color-cream: #f5f5f5;
+  --color-muted: #c9c9c9;
+  --color-soft: #8a8a8a;
+
+  /* Tipografia - as variaveis vem do next/font no layout */
+  --font-display: var(--font-bebas), "Anton", Impact, sans-serif;
+  --font-sans: var(--font-poppins), system-ui, sans-serif;
+  --font-ui: var(--font-montserrat), system-ui, sans-serif;
+
+  /* Forma - uma regra so: 8px interativo, 12px superficie */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+
+  --ease-jura: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 84px;
   }
+  body {
+    background-color: var(--color-ink);
+    color: var(--color-cream);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, .display {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: 0.01em;
+    font-weight: 400;
+  }
+  :focus-visible {
+    outline: 3px solid var(--color-offer);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+  ::selection { background: var(--color-jura); color: #fff; }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer utilities {
+  /* Textura de pneu: o friso do logo virado padrao de fundo a 7% (brand book p.06) */
+  .tread-bg::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      repeating-linear-gradient(102deg, rgb(245 245 245 / 0.07) 0 3px, transparent 3px 15px),
+      repeating-linear-gradient(102deg, rgb(245 245 245 / 0.045) 0 9px, transparent 9px 34px);
+    -webkit-mask-image: linear-gradient(180deg, transparent, #000 22%, #000 78%, transparent);
+    mask-image: linear-gradient(180deg, transparent, #000 22%, #000 78%, transparent);
+  }
+
+  /* Angulo unico da marca: mesmo -18deg do italico dos precos */
+  .skew-jura { transform: skewX(-18deg); }
+  .unskew-jura { transform: skewX(18deg); }
+
+  .no-scrollbar::-webkit-scrollbar { height: 6px; }
+  .no-scrollbar::-webkit-scrollbar-thumb { background: #444; border-radius: 99px; }
+  .no-scrollbar::-webkit-scrollbar-track { background: transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
