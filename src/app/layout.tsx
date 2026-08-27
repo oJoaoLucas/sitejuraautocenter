@@ -3,6 +3,7 @@ import { Bebas_Neue, Montserrat, Poppins } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { WhatsFloat } from "@/components/whats-float";
+import { CookieBanner } from "@/components/cookie-banner";
 import { faq, site } from "@/lib/site";
 import "./globals.css";
 
@@ -136,6 +137,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="conteudo">{children}</main>
         <Footer />
         <WhatsFloat />
+        <CookieBanner />
       </body>
     </html>
   );

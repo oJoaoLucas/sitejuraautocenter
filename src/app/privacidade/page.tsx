@@ -44,10 +44,10 @@ export default function Privacidade() {
                 WhatsApp e o bom senso da conversa comercial.
               </p>
               <p className={`mt-3 ${paragrafo}`}>
-                A página usa um mapa incorporado do Google (carregado só quando você clica em
-                &quot;Ver mapa&quot;) para mostrar onde fica a loja. Ao clicar, o Google pode
-                registrar cookies próprios de acordo com a política de privacidade dele — o site
-                não tem acesso a esses dados.
+                A página usa um mapa incorporado do Google pra mostrar onde fica a loja, que
+                carrega já na primeira visita. Por causa dele, o Google pode registrar cookies
+                próprios de acordo com a política de privacidade dele — o site não tem acesso a
+                esses dados. Por isso o aviso de cookies aparece na primeira vez que você visita.
               </p>
             </div>
 

@@ -5,7 +5,6 @@ import { Diferenciais } from "@/components/diferenciais";
 import { Faq } from "@/components/faq";
 import { OndeEstamosCarrossel } from "@/components/carrossel";
 import { ArrowIcon, InstagramIcon, PinIcon, StarIcon, Stars, WhatsAppIcon } from "@/components/icons";
-import { MapaClicavel } from "@/components/mapa";
 import { QuoteForm } from "@/components/quote-form";
 import { Reveal } from "@/components/reveal";
 import { Btn, BtnWhats, Eyebrow, SpeedBars, Wrap } from "@/components/ui";
@@ -303,7 +302,13 @@ export default function Home() {
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <Reveal className="grid content-start gap-6">
               <div className="h-[220px] overflow-hidden rounded-md border border-line bg-surface">
-                <MapaClicavel src={site.mapsEmbed} titulo={`Mapa com a localização do ${site.nome}`} />
+                <iframe
+                  src={site.mapsEmbed}
+                  title={`Mapa com a localização do ${site.nome}`}
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                  className="h-full w-full border-0 grayscale-[0.35] contrast-[1.05]"
+                />
               </div>
 
               <div className="border-l-[3px] border-jura pl-4.5">
