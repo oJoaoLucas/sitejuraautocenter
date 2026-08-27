@@ -108,7 +108,12 @@ export function Footer() {
           <p>
             {site.nome} - {site.endereco.cidade}/{site.endereco.uf}
           </p>
-          <p>&copy; {new Date().getFullYear()} {site.nome}. Todos os direitos reservados.</p>
+          <p>
+            &copy; {new Date().getFullYear()} {site.nome}. Todos os direitos reservados. -{" "}
+            <Link href="/privacidade" className="underline underline-offset-4 transition-colors hover:text-jura-title">
+              Política de Privacidade
+            </Link>
+          </p>
         </div>
       </Wrap>
     </footer>

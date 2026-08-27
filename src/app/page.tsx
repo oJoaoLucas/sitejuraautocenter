@@ -5,6 +5,7 @@ import { Diferenciais } from "@/components/diferenciais";
 import { Faq } from "@/components/faq";
 import { OndeEstamosCarrossel } from "@/components/carrossel";
 import { ArrowIcon, InstagramIcon, PinIcon, StarIcon, Stars, WhatsAppIcon } from "@/components/icons";
+import { MapaClicavel } from "@/components/mapa";
 import { QuoteForm } from "@/components/quote-form";
 import { Reveal } from "@/components/reveal";
 import { Btn, BtnWhats, Eyebrow, SpeedBars, Wrap } from "@/components/ui";
@@ -27,7 +28,7 @@ export default function Home() {
       <section className="relative flex min-h-[90dvh] items-end overflow-hidden pt-[76px]">
         <div className="absolute inset-0">
           <Image
-            src="/img/fachada-hero.jpg"
+            src="/img/fachada-hero.webp"
             alt="Fachada do Jura Auto Center aberta na Avenida Loreto, 889, em Araras"
             fill
             priority
@@ -153,7 +154,7 @@ export default function Home() {
             <Reveal delay={0.12}>
               <figure className="overflow-hidden rounded-md border border-line">
                 <Image
-                  src="/img/pneus-close.jpg"
+                  src="/img/pneus-close.webp"
                   alt="Pneus novos no estoque do Jura Auto Center"
                   width={1000}
                   height={850}
@@ -245,7 +246,7 @@ export default function Home() {
             <Reveal>
               <figure className="relative overflow-hidden rounded-md border border-line">
                 <Image
-                  src="/img/loja-antiga.jpg"
+                  src="/img/loja-antiga.webp"
                   alt="A primeira loja do Jura Auto Center em Araras, antes da mudança"
                   width={1200}
                   height={750}
@@ -302,13 +303,7 @@ export default function Home() {
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <Reveal className="grid content-start gap-6">
               <div className="h-[220px] overflow-hidden rounded-md border border-line bg-surface">
-                <iframe
-                  src={site.mapsEmbed}
-                  title={`Mapa com a localização do ${site.nome}`}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="h-full w-full border-0 grayscale-[0.35] contrast-[1.05]"
-                />
+                <MapaClicavel src={site.mapsEmbed} titulo={`Mapa com a localização do ${site.nome}`} />
               </div>
 
               <div className="border-l-[3px] border-jura pl-4.5">

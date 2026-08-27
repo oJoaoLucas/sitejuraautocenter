@@ -17,7 +17,7 @@ const marcos = [
     texto:
       "No dia do próprio aniversário do Jura, nascia também o Jura Auto Center. A primeira loja abriu na Avenida Loreto, 829, com estrutura simples e o objetivo de conquistar a confiança de Araras, um carro de cada vez.",
     foto: {
-      src: "/img/loja-antiga.jpg",
+      src: "/img/loja-antiga.webp",
       alt: "A primeira loja do Jura Auto Center",
     },
   },
@@ -39,7 +39,7 @@ const marcos = [
     texto:
       "O crescimento pediu uma estrutura maior. O Jura ficou na mesma avenida, mudando só do número 829 para o 889: mais espaço, mais elevador, mais organização, pra atender com o mesmo cuidado de sempre.",
     foto: {
-      src: "/img/box-elevadores.jpg",
+      src: "/img/box-elevadores.webp",
       alt: "Box de elevadores da loja nova do Jura Auto Center",
     },
   },

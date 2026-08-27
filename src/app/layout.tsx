@@ -3,7 +3,7 @@ import { Bebas_Neue, Montserrat, Poppins } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { WhatsFloat } from "@/components/whats-float";
-import { site } from "@/lib/site";
+import { faq, site } from "@/lib/site";
 import "./globals.css";
 
 /* Fontes do brand book (p.05), auto-hospedadas pelo next/font: zero request externo. */
@@ -46,7 +46,14 @@ export const metadata: Metadata = {
     title: "Jura Auto Center - Pneus, Suspensão e Freios em Araras/SP",
     description:
       "Sete anos em Araras cuidando de quem depende do carro todo dia. Nota 4,9 no Google. Vem pro Jura!",
-    images: [{ url: "/img/fachada.jpg", width: 1200, height: 630, alt: "Fachada do Jura Auto Center" }],
+    images: [{ url: "/img/og.jpg", width: 1200, height: 630, alt: "Fachada do Jura Auto Center" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jura Auto Center - Pneus, Suspensão e Freios em Araras/SP",
+    description:
+      "Sete anos em Araras cuidando de quem depende do carro todo dia. Nota 4,9 no Google. Vem pro Jura!",
+    images: ["/img/og.jpg"],
   },
   robots: { index: true, follow: true },
   alternates: { canonical: "/" },
@@ -57,12 +64,15 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-/* Schema LocalBusiness: o que faz o Google entender horário, nota e endereço. */
+/* Schema LocalBusiness: o que faz o Google entender horário e endereço.
+   A nota (aggregateRating) fica só visível na página: marcada aqui conta
+   como "self-serving review" pra política do Google e pode gerar aviso
+   no Search Console. */
 const schema = {
   "@context": "https://schema.org",
   "@type": "AutoRepair",
   name: site.nome,
-  image: "https://juraautocenter.com.br/img/fachada.jpg",
+  image: "https://juraautocenter.com.br/img/fachada.webp",
   "@id": "https://juraautocenter.com.br",
   url: "https://juraautocenter.com.br",
   telephone: "+5519997818371",
@@ -89,12 +99,19 @@ const schema = {
       closes: "12:00",
     },
   ],
-  aggregateRating: {
-    "@type": "AggregateRating",
-    ratingValue: "4.9",
-    reviewCount: "300",
-  },
   sameAs: [site.instagramUrl],
+};
+
+/* Schema FAQPage: as mesmas perguntas do bloco de dúvidas do site, pro
+   Google poder mostrar como rich result. */
+const schemaFaq = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faq.map((item) => ({
+    "@type": "Question",
+    name: item.q,
+    acceptedAnswer: { "@type": "Answer", text: item.a },
+  })),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -104,6 +121,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFaq) }}
         />
         <a
           href="#conteudo"

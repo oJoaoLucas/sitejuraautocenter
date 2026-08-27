@@ -7,27 +7,27 @@ import { ChevronIcon } from "./icons";
 
 const fotos = [
   {
-    src: "/img/fachada.jpg",
+    src: "/img/fachada.webp",
     alt: "Fachada do Jura Auto Center na Avenida Loreto, 889",
     pos: "object-[52%_46%]",
   },
   {
-    src: "/img/estacionamento.jpg",
+    src: "/img/estacionamento.webp",
     alt: "Estacionamento próprio do Jura Auto Center, ao lado da loja",
     pos: "object-[50%_62%]",
   },
   {
-    src: "/img/box-elevadores.jpg",
+    src: "/img/box-elevadores.webp",
     alt: "Box com elevadores do Jura Auto Center",
     pos: "object-center",
   },
   {
-    src: "/img/prateleira.jpg",
+    src: "/img/prateleira.webp",
     alt: "Prateleira com o estoque de pneus do Jura Auto Center",
     pos: "object-center",
   },
   {
-    src: "/img/box-pneus.jpg",
+    src: "/img/box-pneus.webp",
     alt: "Vista interna do auto center com elevadores e pneus",
     pos: "object-center",
   },

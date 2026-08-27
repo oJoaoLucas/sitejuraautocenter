@@ -19,6 +19,7 @@ export function Header() {
   const [preso, setPreso] = useState(false);
   const [aberto, setAberto] = useState(false);
   const sentinela = useRef<HTMLDivElement>(null);
+  const botaoMenu = useRef<HTMLButtonElement>(null);
   const pathname = usePathname();
 
   /* IntersectionObserver em vez de listener de scroll: sem trabalho por frame. */
@@ -32,13 +33,24 @@ export function Header() {
     return () => io.disconnect();
   }, []);
 
-  useEffect(() => setAberto(false), [pathname]);
-
   useEffect(() => {
     document.body.style.overflow = aberto ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";
     };
+  }, [aberto]);
+
+  /* Escape fecha o menu mobile e devolve o foco pro botão que abriu. */
+  useEffect(() => {
+    if (!aberto) return;
+    function aoTeclar(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        setAberto(false);
+        botaoMenu.current?.focus();
+      }
+    }
+    document.addEventListener("keydown", aoTeclar);
+    return () => document.removeEventListener("keydown", aoTeclar);
   }, [aberto]);
 
   return (
@@ -93,6 +105,7 @@ export function Header() {
           </a>
 
           <button
+            ref={botaoMenu}
             type="button"
             onClick={() => setAberto((v) => !v)}
             aria-expanded={aberto}
@@ -124,6 +137,7 @@ export function Header() {
             <Link
               key={l.href}
               href={l.href}
+              onClick={() => setAberto(false)}
               className="border-b border-line py-4 text-base font-medium text-muted transition-colors hover:text-cream"
             >
               {l.label}
@@ -134,6 +148,7 @@ export function Header() {
           href={cta.whatsPrincipal}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={() => setAberto(false)}
           className="mt-5 flex h-[52px] items-center justify-center gap-2.5 rounded-sm bg-whats font-ui text-[0.9375rem] font-bold uppercase tracking-[0.05em] text-whats-ink"
         >
           <WhatsAppIcon className="size-5" />

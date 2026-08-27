@@ -19,7 +19,7 @@ export default function Historia() {
       <section className="relative flex min-h-[72vh] items-end overflow-hidden pt-[76px]">
         <div className="absolute inset-0">
           <Image
-            src="/img/loja-antiga.jpg"
+            src="/img/loja-antiga.webp"
             alt="A primeira sede do Jura Auto Center em Araras"
             fill
             priority
@@ -70,12 +70,12 @@ export default function Historia() {
 
           <div className="grid grid-cols-2 gap-3.5 lg:grid-cols-3">
             {[
-              { src: "/img/box-elevadores.jpg", alt: "Box com elevadores do Jura Auto Center" },
-              { src: "/img/prateleira.jpg", alt: "Prateleira com o estoque de pneus" },
-              { src: "/img/box-pneus.jpg", alt: "Vista interna do auto center com elevadores e pneus" },
-              { src: "/img/galpao-alto.jpg", alt: "Vista ampla do Jura Auto Center" },
-              { src: "/img/galpao-wide.jpg", alt: "Área de serviço do Jura Auto Center" },
-              { src: "/img/fachada.jpg", alt: "Fachada do Jura Auto Center na Avenida Loreto, 889" },
+              { src: "/img/box-elevadores.webp", alt: "Box com elevadores do Jura Auto Center" },
+              { src: "/img/prateleira.webp", alt: "Prateleira com o estoque de pneus" },
+              { src: "/img/box-pneus.webp", alt: "Vista interna do auto center com elevadores e pneus" },
+              { src: "/img/galpao-alto.webp", alt: "Vista ampla do Jura Auto Center" },
+              { src: "/img/galpao-wide.webp", alt: "Área de serviço do Jura Auto Center" },
+              { src: "/img/fachada.webp", alt: "Fachada do Jura Auto Center na Avenida Loreto, 889" },
             ].map((img, i) => (
               <Reveal key={img.src} delay={i * 0.05}>
                 <figure className="group overflow-hidden rounded-md border border-line">
@@ -105,7 +105,7 @@ export default function Historia() {
             <Reveal>
               <figure className="relative overflow-hidden rounded-md border border-line">
                 <Image
-                  src="/img/jura.jpg"
+                  src="/img/jura.webp"
                   alt="Jura, mecânico e dono do Jura Auto Center"
                   width={1200}
                   height={1500}
