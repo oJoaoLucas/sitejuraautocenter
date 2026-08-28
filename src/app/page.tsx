@@ -4,7 +4,7 @@ import { Diferenciais } from "@/components/diferenciais";
 import { Faq } from "@/components/faq";
 import { Foto } from "@/components/foto";
 import { OndeEstamosCarrossel } from "@/components/carrossel";
-import { ArrowIcon, InstagramIcon, PinIcon, StarIcon, Stars, WhatsAppIcon } from "@/components/icons";
+import { ArrowIcon, InstagramIcon, PhoneIcon, PinIcon, StarIcon, Stars, WhatsAppIcon } from "@/components/icons";
 import { QuoteForm } from "@/components/quote-form";
 import { Reveal } from "@/components/reveal";
 import { Servicos } from "@/components/servicos";
@@ -361,7 +361,7 @@ export default function Home() {
                   href={telefoneFixoLink}
                   className="flex items-center gap-3 transition-colors hover:text-jura-title"
                 >
-                  <PinIcon className="size-5 shrink-0 text-jura-title" />
+                  <PhoneIcon className="size-5 shrink-0 text-jura-title" />
                   <span>
                     <span className="block text-[0.72rem] tracking-[0.08em] text-soft uppercase">
                       Telefone fixo

@@ -32,7 +32,7 @@ export function Servicos() {
             {s.titulo}
           </h3>
           <p className="text-[0.78rem] leading-relaxed text-soft sm:text-[0.84rem]">{s.texto}</p>
-          <span className="mt-3 flex items-center gap-1.5 font-ui text-[0.68rem] font-bold tracking-[0.06em] text-jura-title uppercase sm:text-[0.72rem]">
+          <span className="mt-auto flex items-center gap-1.5 pt-3 font-ui text-[0.68rem] font-bold tracking-[0.06em] text-jura-title uppercase sm:text-[0.72rem]">
             <WhatsAppIcon className="size-3.5 shrink-0" />
             Pedir no WhatsApp
           </span>
