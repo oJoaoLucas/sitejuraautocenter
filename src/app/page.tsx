@@ -1,19 +1,19 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Diferenciais } from "@/components/diferenciais";
 import { Faq } from "@/components/faq";
+import { Foto } from "@/components/foto";
 import { OndeEstamosCarrossel } from "@/components/carrossel";
 import { ArrowIcon, InstagramIcon, PinIcon, StarIcon, Stars, WhatsAppIcon } from "@/components/icons";
 import { QuoteForm } from "@/components/quote-form";
 import { Reveal } from "@/components/reveal";
 import { Servicos } from "@/components/servicos";
 import { Btn, BtnWhats, Eyebrow, SpeedBars, Wrap } from "@/components/ui";
-import { avaliacoesGoogle, cta, site } from "@/lib/site";
+import { avaliacoesGoogle, cta, site, telefoneFixoLink } from "@/lib/site";
 
 export const metadata: Metadata = {
   description:
-    "Pneus, alinhamento, balanceamento, freios, suspensão, troca de óleo e revisão em Araras/SP. Sete anos, mais de 10 mil carros atendidos e nota 4,9 no Google.",
+    "Pneus, alinhamento, balanceamento, freios, suspensão, troca de óleo e revisão em Araras/SP. Em Araras desde 2019, mais de 10 mil carros atendidos e nota 4,9 no Google.",
 };
 
 export default function Home() {
@@ -27,13 +27,12 @@ export default function Home() {
           ============================================================ */}
       <section className="relative flex min-h-[90dvh] items-end overflow-hidden pt-[76px]">
         <div className="absolute inset-0">
-          <Image
+          <Foto
             src="/img/fachada-hero.webp"
             alt="Fachada do Jura Auto Center aberta na Avenida Loreto, 889, em Araras"
             fill
             priority
             sizes="100vw"
-            quality={80}
             className="object-cover object-[58%_42%]"
           />
           <div
@@ -59,7 +58,7 @@ export default function Home() {
             </h1>
 
             <p className="mb-8 max-w-lg text-[1.075rem] leading-relaxed text-[#e4e4e4]">
-              Sete anos em Araras cuidando de quem depende do carro todo dia.
+              Em Araras desde 2019, cuidando de quem depende do carro todo dia.
               Orçamento na hora, pelo WhatsApp.
             </p>
 
@@ -123,7 +122,7 @@ export default function Home() {
             trás do formulário, em vez de uma figura separada grande.
             No desktop ela some daqui e volta como a foto ao lado. */}
         <div className="absolute inset-0 lg:hidden">
-          <Image src="/img/pneus-close.webp" alt="" fill sizes="100vw" className="object-cover" />
+          <Foto src="/img/pneus-estoque.webp" alt="" fill sizes="100vw" className="object-cover" />
           <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(16_16_16/0.8)_0%,rgb(16_16_16/0.92)_40%,rgb(16_16_16/0.98)_100%)]" />
         </div>
 
@@ -131,19 +130,19 @@ export default function Home() {
           <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <Reveal>
               <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
-                Orçamento de pneu em <span className="text-jura-title">trinta segundos</span>
+                Orçamento de pneus em <span className="text-jura-title">trinta segundos</span>
               </h2>
               <p className="mt-4 leading-relaxed text-muted">
                 Diz a medida que está escrita no seu pneu e quantos você precisa. A gente responde
-                com o preço à vista e o parcelado, já com alinhamento e balanceamento inclusos.
+                com o preço à vista e o parcelado.
               </p>
               <QuoteForm />
             </Reveal>
 
             <Reveal delay={0.12} className="hidden lg:block">
               <figure className="overflow-hidden rounded-md border border-line">
-                <Image
-                  src="/img/pneus-close.webp"
+                <Foto
+                  src="/img/pneus-estoque.webp"
                   alt="Pneus novos no estoque do Jura Auto Center"
                   width={1000}
                   height={850}
@@ -234,8 +233,8 @@ export default function Home() {
           <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-18">
             <Reveal>
               <figure className="relative overflow-hidden rounded-md border border-line">
-                <Image
-                  src="/img/loja-antiga.webp"
+                <Foto
+                  src="/img/loja-antiga-2019.webp"
                   alt="A primeira loja do Jura Auto Center em Araras, antes da mudança"
                   width={1200}
                   height={750}
@@ -358,7 +357,10 @@ export default function Home() {
                     <b className="font-ui text-[0.975rem] font-bold">{site.whatsappExibicao}</b>
                   </span>
                 </a>
-                <div className="flex items-center gap-3">
+                <a
+                  href={telefoneFixoLink}
+                  className="flex items-center gap-3 transition-colors hover:text-jura-title"
+                >
                   <PinIcon className="size-5 shrink-0 text-jura-title" />
                   <span>
                     <span className="block text-[0.72rem] tracking-[0.08em] text-soft uppercase">
@@ -366,7 +368,7 @@ export default function Home() {
                     </span>
                     <b className="font-ui text-[0.975rem] font-bold">{site.telefoneFixo}</b>
                   </span>
-                </div>
+                </a>
                 <a
                   href={site.instagramUrl}
                   target="_blank"

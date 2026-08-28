@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
 import { useRef } from "react";
+import { Foto } from "./foto";
 
 /**
  * Linha do tempo com a linha vermelha se desenhando conforme a leitura.
@@ -17,7 +17,7 @@ const marcos = [
     texto:
       "No dia do próprio aniversário do Jura, nascia também o Jura Auto Center. A primeira loja abriu na Avenida Loreto, 829, com estrutura simples e o objetivo de conquistar a confiança de Araras, um carro de cada vez.",
     foto: {
-      src: "/img/loja-antiga.webp",
+      src: "/img/loja-antiga-2019.webp",
       alt: "A primeira loja do Jura Auto Center",
     },
   },
@@ -102,7 +102,7 @@ export function Timeline() {
 
             {m.foto && (
               <figure className="mt-5 max-w-xl overflow-hidden rounded-md border border-line">
-                <Image
+                <Foto
                   src={m.foto.src}
                   alt={m.foto.alt}
                   width={1000}

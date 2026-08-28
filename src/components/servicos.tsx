@@ -1,11 +1,16 @@
 import Image from "next/image";
 import { servicos } from "@/lib/site";
+import { WhatsAppIcon } from "./icons";
 import { Reveal } from "./reveal";
 
 /**
  * Grade de serviços. 2 colunas já no mobile (em vez de empilhar os
  * 8 cards um embaixo do outro) — reduz a altura do bloco pela metade
  * sem esconder texto atrás de clique nenhum.
+ *
+ * Cada card é um link pro WhatsApp com a mensagem já falando desse
+ * serviço específico — facilita o atendimento e mostra de onde veio
+ * o contato.
  */
 export function Servicos() {
   return (
@@ -13,7 +18,10 @@ export function Servicos() {
       {servicos.map((s, i) => (
         <Reveal
           key={s.slug}
-          as="article"
+          as="a"
+          href={s.whatsHref}
+          target="_blank"
+          rel="noopener noreferrer"
           delay={i * 0.05}
           className="group relative isolate flex flex-col overflow-hidden rounded-md border border-line bg-surface px-3.5 pt-4 pb-5 transition-[transform,border-color,background-color] duration-300 ease-jura hover:-translate-y-1.5 hover:border-jura-title hover:bg-[#232323] sm:px-5 sm:pt-5 sm:pb-6"
         >
@@ -24,6 +32,10 @@ export function Servicos() {
             {s.titulo}
           </h3>
           <p className="text-[0.78rem] leading-relaxed text-soft sm:text-[0.84rem]">{s.texto}</p>
+          <span className="mt-3 flex items-center gap-1.5 font-ui text-[0.68rem] font-bold tracking-[0.06em] text-jura-title uppercase sm:text-[0.72rem]">
+            <WhatsAppIcon className="size-3.5 shrink-0" />
+            Pedir no WhatsApp
+          </span>
           <span
             aria-hidden="true"
             className="absolute inset-x-[-14%] bottom-0 h-[5px] origin-left skew-jura scale-x-0 bg-jura transition-transform duration-400 ease-jura group-hover:scale-x-100"

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { cta, site } from "@/lib/site";
+import { cta, site, telefoneFixoLink } from "@/lib/site";
 import { InstagramIcon, WhatsAppIcon } from "./icons";
 import { SpeedBars, Wrap } from "./ui";
 
@@ -56,7 +56,11 @@ export function Footer() {
                   WhatsApp {site.whatsappExibicao}
                 </a>
               </li>
-              <li>Fixo {site.telefoneFixo}</li>
+              <li>
+                <a href={telefoneFixoLink} className="transition-colors hover:text-jura-title">
+                  Fixo {site.telefoneFixo}
+                </a>
+              </li>
               <li>
                 <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer"
                    className="transition-colors hover:text-jura-title">

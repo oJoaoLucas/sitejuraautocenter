@@ -46,14 +46,14 @@ export const metadata: Metadata = {
     siteName: site.nome,
     title: "Jura Auto Center - Pneus, Suspensão e Freios em Araras/SP",
     description:
-      "Sete anos em Araras cuidando de quem depende do carro todo dia. Nota 4,9 no Google. Vem pro Jura!",
+      "Em Araras desde 2019, cuidando de quem depende do carro todo dia. Nota 4,9 no Google. Vem pro Jura!",
     images: [{ url: "/img/og.jpg", width: 1200, height: 630, alt: "Fachada do Jura Auto Center" }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Jura Auto Center - Pneus, Suspensão e Freios em Araras/SP",
     description:
-      "Sete anos em Araras cuidando de quem depende do carro todo dia. Nota 4,9 no Google. Vem pro Jura!",
+      "Em Araras desde 2019, cuidando de quem depende do carro todo dia. Nota 4,9 no Google. Vem pro Jura!",
     images: ["/img/og.jpg"],
   },
   robots: { index: true, follow: true },

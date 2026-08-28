@@ -1,5 +1,5 @@
-import Image from "next/image";
 import type { Metadata } from "next";
+import { Foto } from "@/components/foto";
 import { Timeline } from "@/components/timeline";
 import { Reveal } from "@/components/reveal";
 import { Btn, BtnWhats, SpeedBars, Wrap } from "@/components/ui";
@@ -18,13 +18,12 @@ export default function Historia() {
       {/* Hero da página: a loja antiga, que é literalmente de onde a história vem */}
       <section className="relative flex min-h-[72vh] items-end overflow-hidden pt-[76px]">
         <div className="absolute inset-0">
-          <Image
-            src="/img/loja-antiga.webp"
+          <Foto
+            src="/img/loja-antiga-2019.webp"
             alt="A primeira sede do Jura Auto Center em Araras"
             fill
             priority
             sizes="100vw"
-            quality={78}
             className="object-cover object-[50%_55%]"
           />
           <div
@@ -70,16 +69,16 @@ export default function Historia() {
 
           <div className="grid grid-cols-2 gap-3.5 lg:grid-cols-3">
             {[
-              { src: "/img/box-elevadores.webp", alt: "Box com elevadores do Jura Auto Center" },
-              { src: "/img/prateleira.webp", alt: "Prateleira com o estoque de pneus" },
-              { src: "/img/box-pneus.webp", alt: "Vista interna do auto center com elevadores e pneus" },
-              { src: "/img/galpao-alto.webp", alt: "Vista ampla do Jura Auto Center" },
-              { src: "/img/galpao-wide.webp", alt: "Área de serviço do Jura Auto Center" },
+              { src: "/img/oficina-elevadores.webp", alt: "Box com elevadores do Jura Auto Center" },
+              { src: "/img/pneus-prateleira.webp", alt: "Prateleira com o estoque de pneus" },
+              { src: "/img/oficina-interior.webp", alt: "Vista interna do auto center com elevadores e pneus" },
+              { src: "/img/oficina-galpao-alto.webp", alt: "Vista ampla do Jura Auto Center" },
+              { src: "/img/oficina-galpao-amplo.webp", alt: "Área de serviço do Jura Auto Center" },
               { src: "/img/fachada.webp", alt: "Fachada do Jura Auto Center na Avenida Loreto, 889" },
             ].map((img, i) => (
               <Reveal key={img.src} delay={i * 0.05}>
                 <figure className="group overflow-hidden rounded-md border border-line">
-                  <Image
+                  <Foto
                     src={img.src}
                     alt={img.alt}
                     width={900}
@@ -104,8 +103,8 @@ export default function Historia() {
           <div className="grid items-center gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
             <Reveal>
               <figure className="relative overflow-hidden rounded-md border border-line">
-                <Image
-                  src="/img/jura.webp"
+                <Foto
+                  src="/img/jura-mecanico.webp"
                   alt="Jura, mecânico e dono do Jura Auto Center"
                   width={1200}
                   height={1500}

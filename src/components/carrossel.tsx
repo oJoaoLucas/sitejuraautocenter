@@ -1,8 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import { useReducedMotion } from "motion/react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Foto } from "./foto";
 import { ChevronIcon } from "./icons";
 
 const fotos = [
@@ -17,17 +17,17 @@ const fotos = [
     pos: "object-[50%_62%]",
   },
   {
-    src: "/img/box-elevadores.webp",
+    src: "/img/oficina-elevadores.webp",
     alt: "Box com elevadores do Jura Auto Center",
     pos: "object-center",
   },
   {
-    src: "/img/prateleira.webp",
+    src: "/img/pneus-prateleira.webp",
     alt: "Prateleira com o estoque de pneus do Jura Auto Center",
     pos: "object-center",
   },
   {
-    src: "/img/box-pneus.webp",
+    src: "/img/oficina-interior.webp",
     alt: "Vista interna do auto center com elevadores e pneus",
     pos: "object-center",
   },
@@ -100,7 +100,7 @@ export function OndeEstamosCarrossel() {
       >
         {fotos.map((f) => (
           <div key={f.src} className="relative h-full w-full shrink-0 snap-center">
-            <Image
+            <Foto
               src={f.src}
               alt={f.alt}
               fill

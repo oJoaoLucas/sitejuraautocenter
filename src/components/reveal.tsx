@@ -15,18 +15,28 @@ export function Reveal({
   y = 26,
   className = "",
   as = "div",
+  href,
+  target,
+  rel,
 }: {
   children: ReactNode;
   delay?: number;
   y?: number;
   className?: string;
-  as?: "div" | "li" | "section" | "article";
+  as?: "div" | "li" | "section" | "article" | "a";
+  /** Só faz sentido com as="a" — vira um card inteiro clicável. */
+  href?: string;
+  target?: string;
+  rel?: string;
 }) {
   const reduce = useReducedMotion();
   const M = motion[as];
 
   return (
     <M
+      href={href}
+      target={target}
+      rel={rel}
       className={className}
       initial={reduce ? false : { opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
