@@ -7,8 +7,9 @@ import { OndeEstamosCarrossel } from "@/components/carrossel";
 import { ArrowIcon, InstagramIcon, PinIcon, StarIcon, Stars, WhatsAppIcon } from "@/components/icons";
 import { QuoteForm } from "@/components/quote-form";
 import { Reveal } from "@/components/reveal";
+import { Servicos } from "@/components/servicos";
 import { Btn, BtnWhats, Eyebrow, SpeedBars, Wrap } from "@/components/ui";
-import { avaliacoesGoogle, cta, servicos, site } from "@/lib/site";
+import { avaliacoesGoogle, cta, site } from "@/lib/site";
 
 export const metadata: Metadata = {
   description:
@@ -105,26 +106,7 @@ export default function Home() {
             <SpeedBars className="mt-6" />
           </Reveal>
 
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-            {servicos.map((s, i) => (
-              <Reveal
-                key={s.slug}
-                as="article"
-                delay={i * 0.05}
-                className="group relative isolate flex flex-col overflow-hidden rounded-md border border-line bg-surface px-5 pt-5 pb-6 transition-[transform,border-color,background-color] duration-300 ease-jura hover:-translate-y-1.5 hover:border-jura-title hover:bg-[#232323]"
-              >
-                <div className="mb-3.5 grid size-11 place-items-center rounded-md border border-line bg-[#171717] transition-[transform,border-color] duration-300 ease-jura group-hover:-translate-y-1 group-hover:scale-110 group-hover:border-jura-title">
-                  <Image src={s.icone} alt="" width={512} height={512} className="size-6" />
-                </div>
-                <h3 className="mb-1.5 font-ui text-[1.1rem] leading-tight font-bold">{s.titulo}</h3>
-                <p className="text-[0.84rem] leading-relaxed text-soft">{s.texto}</p>
-                <span
-                  aria-hidden="true"
-                  className="absolute inset-x-[-14%] bottom-0 h-[5px] origin-left skew-jura scale-x-0 bg-jura transition-transform duration-400 ease-jura group-hover:scale-x-100"
-                />
-              </Reveal>
-            ))}
-          </div>
+          <Servicos />
         </Wrap>
       </section>
 
@@ -135,9 +117,17 @@ export default function Home() {
           ============================================================ */}
       <section
         id="orcamento"
-        className="scroll-mt-20 border-y border-line bg-ink-deep py-14 lg:py-20"
+        className="relative scroll-mt-20 overflow-hidden border-y border-line py-14 lg:bg-ink-deep lg:py-20"
       >
-        <Wrap>
+        {/* Fundo só no mobile: a foto do pneu com degradê escuro por
+            trás do formulário, em vez de uma figura separada grande.
+            No desktop ela some daqui e volta como a foto ao lado. */}
+        <div className="absolute inset-0 lg:hidden">
+          <Image src="/img/pneus-close.webp" alt="" fill sizes="100vw" className="object-cover" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(16_16_16/0.8)_0%,rgb(16_16_16/0.92)_40%,rgb(16_16_16/0.98)_100%)]" />
+        </div>
+
+        <Wrap className="relative">
           <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <Reveal>
               <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
@@ -150,14 +140,14 @@ export default function Home() {
               <QuoteForm />
             </Reveal>
 
-            <Reveal delay={0.12}>
+            <Reveal delay={0.12} className="hidden lg:block">
               <figure className="overflow-hidden rounded-md border border-line">
                 <Image
                   src="/img/pneus-close.webp"
                   alt="Pneus novos no estoque do Jura Auto Center"
                   width={1000}
                   height={850}
-                  sizes="(max-width: 1024px) 100vw, 45vw"
+                  sizes="45vw"
                   className="aspect-[4/3.4] w-full object-cover"
                 />
               </figure>
@@ -439,10 +429,6 @@ export default function Home() {
               <br />
               <span className="text-jura-title">Vem pro Jura.</span>
             </h2>
-            <p className="mt-4 max-w-lg leading-relaxed text-muted">
-              Manda a dúvida no WhatsApp, mesmo que seja só pra saber se vale a pena trocar agora.
-              Responder pergunta faz parte do serviço.
-            </p>
             <div className="mt-8 flex flex-wrap gap-3.5">
               <BtnWhats href={cta.whatsPrincipal} className="max-sm:w-full">
                 Chamar no WhatsApp

@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { useState } from "react";
+import { useReducedMotion } from "motion/react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ChevronIcon } from "./icons";
 
 const fotos = [
@@ -33,41 +33,87 @@ const fotos = [
   },
 ] as const;
 
-/** Carrossel simples de fotos da loja, usado na seção "Como chegar". */
+const INTERVALO_AUTOPLAY = 4500;
+
+/**
+ * Carrossel de fotos da loja, usado na seção "Como chegar".
+ * No touch, o dedo rola a trilha de verdade (scroll nativo com snap,
+ * não uma imitação em JS) — os botões e os pontinhos só levam pro
+ * mesmo lugar. Avança sozinho a cada poucos segundos, pausando
+ * enquanto a pessoa toca ou passa o mouse, e nunca se move sozinho
+ * pra quem pediu menos movimento no sistema.
+ */
 export function OndeEstamosCarrossel() {
   const [i, setI] = useState(0);
+  const trilhaRef = useRef<HTMLDivElement>(null);
+  const pausado = useRef(false);
   const reduce = useReducedMotion();
 
-  function ir(delta: number) {
-    setI((v) => (v + delta + fotos.length) % fotos.length);
-  }
+  const irPara = useCallback((idx: number) => {
+    const trilha = trilhaRef.current;
+    if (!trilha) return;
+    const alvo = (idx + fotos.length) % fotos.length;
+    trilha.scrollTo({ left: alvo * trilha.clientWidth, behavior: "smooth" });
+  }, []);
+
+  useEffect(() => {
+    if (reduce) return;
+    const id = setInterval(() => {
+      if (!pausado.current) irPara(i + 1);
+    }, INTERVALO_AUTOPLAY);
+    return () => clearInterval(id);
+  }, [i, irPara, reduce]);
+
+  /* Mantém pontinhos e botões sincronizados com o scroll de verdade,
+     inclusive quando a pessoa arrasta com o dedo. */
+  useEffect(() => {
+    const trilha = trilhaRef.current;
+    if (!trilha) return;
+    let frame = 0;
+    function aoRolar() {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        if (!trilha) return;
+        setI(Math.round(trilha.scrollLeft / trilha.clientWidth));
+      });
+    }
+    trilha.addEventListener("scroll", aoRolar, { passive: true });
+    return () => {
+      trilha.removeEventListener("scroll", aoRolar);
+      cancelAnimationFrame(frame);
+    };
+  }, []);
 
   return (
-    <div className="group relative overflow-hidden rounded-md border border-line">
-      <div className="relative aspect-[16/11] w-full overflow-hidden bg-surface">
-        <AnimatePresence initial={false} mode="wait">
-          <motion.div
-            key={fotos[i].src}
-            initial={reduce ? false : { opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0"
-          >
+    <div
+      className="group relative overflow-hidden rounded-md border border-line"
+      onPointerEnter={() => (pausado.current = true)}
+      onPointerLeave={() => (pausado.current = false)}
+      onTouchStart={() => (pausado.current = true)}
+      onTouchEnd={() => {
+        window.setTimeout(() => (pausado.current = false), 1500);
+      }}
+    >
+      <div
+        ref={trilhaRef}
+        className="no-scrollbar flex aspect-[16/11] w-full snap-x snap-mandatory overflow-x-auto bg-surface"
+      >
+        {fotos.map((f) => (
+          <div key={f.src} className="relative h-full w-full shrink-0 snap-center">
             <Image
-              src={fotos[i].src}
-              alt={fotos[i].alt}
+              src={f.src}
+              alt={f.alt}
               fill
               sizes="(max-width: 1024px) 100vw, 35vw"
-              className={`object-cover ${fotos[i].pos}`}
+              className={`object-cover ${f.pos}`}
             />
-          </motion.div>
-        </AnimatePresence>
+          </div>
+        ))}
       </div>
 
       <button
         type="button"
-        onClick={() => ir(-1)}
+        onClick={() => irPara(i - 1)}
         aria-label="Foto anterior"
         className="absolute top-1/2 left-2.5 grid size-9 -translate-y-1/2 place-items-center rounded-sm bg-ink/60 text-cream opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100 hover:bg-ink/85"
       >
@@ -75,7 +121,7 @@ export function OndeEstamosCarrossel() {
       </button>
       <button
         type="button"
-        onClick={() => ir(1)}
+        onClick={() => irPara(i + 1)}
         aria-label="Próxima foto"
         className="absolute top-1/2 right-2.5 grid size-9 -translate-y-1/2 place-items-center rounded-sm bg-ink/60 text-cream opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100 hover:bg-ink/85"
       >
@@ -87,7 +133,7 @@ export function OndeEstamosCarrossel() {
           <button
             key={f.src}
             type="button"
-            onClick={() => setI(idx)}
+            onClick={() => irPara(idx)}
             aria-label={`Ver foto ${idx + 1}`}
             aria-current={idx === i}
             className={`h-1.5 rounded-full transition-all duration-300 ease-jura ${

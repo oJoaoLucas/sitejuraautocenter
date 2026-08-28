@@ -78,56 +78,56 @@ export const servicos: readonly Servico[] = [
     icone: "/icons/pneus.png",
     titulo: "Pneus",
     texto:
-      "Nacional, importado e remold, do aro 13 ao 20. Montagem na hora, com o preço combinado antes e sem surpresa no fim da conversa.",
+      "Pneus nacionais, importados e remold, do aro 13 ao 20. Orçamento fechado antes da montagem, sem custo adicional depois.",
   },
   {
     slug: "alinhamento",
     icone: "/icons/alinhamento.png",
     titulo: "Alinhamento",
     texto:
-      "Carro puxando pro lado ou comendo pneu só de uma borda? Alinhamento com equipamento digital, feito no mesmo dia.",
+      "Alinhamento com equipamento digital, executado no mesmo dia. Essencial para o desgaste correto do pneu e a estabilidade do veículo.",
   },
   {
     slug: "balanceamento",
     icone: "/icons/balanceamento.png",
     titulo: "Balanceamento",
     texto:
-      "Volante tremendo depois dos 80 quase sempre é roda desbalanceada. Resolve rápido e para de acabar com o pneu novo.",
+      "Balanceamento de rodas para eliminar trepidação no volante e prolongar a vida útil do pneu.",
   },
   {
     slug: "freios",
     icone: "/icons/freios.png",
     titulo: "Freios",
     texto:
-      "Pastilha, disco, tambor e fluido. Freio fazendo barulho não espera: a gente abre, olha e te fala o que dá pra fazer.",
+      "Manutenção completa do sistema de freios — pastilhas, discos, tambor e fluido — com diagnóstico técnico antes de qualquer serviço.",
   },
   {
     slug: "suspensao",
     icone: "/icons/suspensao.png",
     titulo: "Suspensão",
     texto:
-      "Barulho em lombada, carro batendo forte no buraco. Diagnóstico honesto: se der pra esperar mais um mês, a gente fala.",
+      "Diagnóstico e reparo de suspensão, com avaliação honesta sobre a real necessidade de troca de cada peça.",
   },
   {
     slug: "amortecedores",
     icone: "/icons/amortecedores.png",
     titulo: "Amortecedores",
     texto:
-      "Troca sempre em par. Amortecedor gasto aumenta a distância de frenagem e come o pneu por dentro sem você ver.",
+      "Substituição sempre em par, conforme recomendação técnica, preservando a frenagem e o desgaste uniforme dos pneus.",
   },
   {
     slug: "troca-de-oleo",
     icone: "/icons/oleo.png",
     titulo: "Troca de óleo",
     texto:
-      "Óleo, filtro e a etiqueta com a data da próxima troca colada no vidro antes de você sair. Assim você não esquece.",
+      "Troca de óleo e filtro, com registro da próxima data de manutenção para o controle correto da revisão preventiva.",
   },
   {
     slug: "revisao",
     icone: "/icons/revisao.png",
     titulo: "Revisão completa",
     texto:
-      "Checagem geral antes da viagem ou depois de rodar muito. Você sai daqui sabendo o estado real do carro, item por item.",
+      "Revisão geral do veículo, item por item, com relatório do estado real de cada componente.",
   },
 ];
 
