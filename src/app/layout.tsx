@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import Script from "next/script";
 import { Bebas_Neue, Montserrat, Poppins } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -119,6 +120,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" className={`${bebas.variable} ${poppins.variable} ${montserrat.variable}`}>
       <body className="relative">
+        {/* Tag do Google Ads (conversão "Solicitar cotação", AW-18451927105).
+            O evento de conversão em si dispara no envio do QuoteForm. */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=AW-18451927105"
+          strategy="afterInteractive"
+        />
+        <Script id="google-ads-gtag" strategy="afterInteractive">
+          {`window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'AW-18451927105');`}
+        </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}

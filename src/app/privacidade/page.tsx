@@ -49,6 +49,13 @@ export default function Privacidade() {
                 próprios de acordo com a política de privacidade dele — o site não tem acesso a
                 esses dados. Por isso o aviso de cookies aparece na primeira vez que você visita.
               </p>
+              <p className={`mt-3 ${paragrafo}`}>
+                O site também usa a tag de conversão do Google Ads. Ela só é acionada quando você
+                envia o formulário de orçamento de pneu, e serve pra medir, de forma agregada,
+                quantas pessoas pedem orçamento depois de clicar num anúncio do {site.nome} — não
+                identifica quem você é nem lê o conteúdo que você digitou no formulário. Essa
+                medição segue a política de privacidade do Google.
+              </p>
             </div>
 
             <div>
@@ -65,9 +72,10 @@ export default function Privacidade() {
             <div>
               <h2 className={secao}>O que este site não faz</h2>
               <p className={paragrafo}>
-                Não usa Google Analytics, Meta Pixel, nem qualquer ferramenta de rastreamento ou
-                remarketing. Não pede login, não usa cookie de sessão, e não guarda histórico de
-                quem visita.
+                Não usa Google Analytics, Meta Pixel, nem ferramenta de remarketing. A única
+                exceção é a tag de conversão do Google Ads descrita acima, usada só para medir
+                orçamentos pedidos via anúncio. O site não pede login, não usa cookie de sessão, e
+                não guarda histórico de quem visita.
               </p>
             </div>
 

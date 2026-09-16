@@ -4,6 +4,12 @@ import { useState } from "react";
 import { whats } from "@/lib/site";
 import { WhatsAppIcon } from "./icons";
 
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
 /**
  * Form de 2 campos que monta a mensagem pronta do WhatsApp (brand book p.11).
  * Não envia nada pra lugar nenhum: só abre a conversa com o texto escrito.
@@ -28,6 +34,9 @@ export function QuoteForm() {
 
     setErro(null);
     const plural = qtd === "1" ? "1 pneu" : `${qtd} pneus`;
+    window.gtag?.("event", "conversion", {
+      send_to: "AW-18451927105/EPo2COjbkfkcEMGgyN5E",
+    });
     window.open(
       whats(`Olá! Vim pelo site e queria orçamento de ${plural} na medida ${limpa}.`),
       "_blank",
