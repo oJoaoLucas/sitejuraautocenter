@@ -31,7 +31,10 @@ export const site = {
     encodeURIComponent(
       "Jura Auto Center, Avenida Loreto, 889, Jardim das Flores, Araras - SP, 13607-200",
     ),
+  /** Abre o formulário de avaliação (não o perfil). */
   avaliarUrl: "https://g.page/r/CQqPUmEcujAVEAE/review",
+  /** Perfil público da empresa no Google Maps (mesmo CID do link de avaliação). */
+  perfilGoogleUrl: "https://www.google.com/maps?cid=1526924904733249290",
   mapsEmbed:
     "https://www.google.com/maps?q=" +
     encodeURIComponent("Avenida Loreto, 889, Jardim das Flores, Araras - SP, 13607-200") +
@@ -66,7 +69,44 @@ export const cta = {
     "Olá! Vim pelo site e queria fazer uma revisão no meu carro. Pode me passar como funciona?",
   ),
   whatsFila: whats("Olá! Vim pelo site. Como está o movimento aí hoje?"),
+  /** Botão flutuante e links soltos de pneu, sem medida informada. */
+  whatsPneus: whats("Olá! Vim pelo site e queria saber o preço de pneus pro meu carro."),
 } as const;
+
+/* ------------------------------------------------------------------ */
+
+/** Mensagem do orçamento de pneus, montada a partir do formulário. */
+export function mensagemPneus({
+  quantidade,
+  medida,
+}: {
+  quantidade: number;
+  /** Vazio = a pessoa não sabe a medida e vai mandar foto do pneu. */
+  medida: string;
+}): string {
+  const pneus = quantidade === 1 ? "1 pneu" : `${quantidade} pneus`;
+  const preco = "Podem me passar o valor à vista e parcelado?";
+
+  return medida
+    ? `Olá! Vim pelo site e queria orçamento de ${pneus} na medida ${medida}. ${preco}`
+    : `Olá! Vim pelo site e queria orçamento de ${pneus}, mas não sei a medida. Vou mandar uma foto do pneu. ${preco}`;
+}
+
+/** Página /pneus: os passos, na ordem em que acontecem. */
+export const pneusPassos = [
+  {
+    titulo: "Diz a medida do pneu",
+    texto: "Está escrita na lateral. Não achou? Marca “não sei a medida” e manda uma foto.",
+  },
+  {
+    titulo: "Recebe o preço no WhatsApp",
+    texto: "Com o valor à vista e o parcelado em até 10x no cartão.",
+  },
+  {
+    titulo: "Escolhe e passa na loja",
+    texto: "Avenida Loreto, 889, com estacionamento ao lado. Atendimento por ordem de chegada.",
+  },
+] as const;
 
 /* ------------------------------------------------------------------ */
 
@@ -87,7 +127,7 @@ export const servicos: readonly Servico[] = [
     icone: "/icons/pneus.png",
     titulo: "Pneus",
     texto:
-      "Pneus nacionais, importados e remold, do aro 13 ao 20. Orçamento fechado antes da montagem, sem custo adicional depois.",
+      "Pneus nacionais, importados e remold. Orçamento fechado antes da montagem, sem custo adicional depois.",
     whatsHref: whats("Olá! Vim pelo site e queria um orçamento de pneus."),
   },
   {
@@ -253,6 +293,10 @@ export const faq = [
     a: "Sim, além de nacionais e importados. A gente explica a diferença real entre eles pro seu tipo de uso e você escolhe com a informação na mão.",
   },
   {
+    q: "Não sei a medida do pneu. E agora?",
+    a: "Sem problema. A medida fica escrita na lateral do pneu, em relevo (algo como 185/65 R15). Se não achar, manda uma foto do pneu no WhatsApp que a gente descobre pra você.",
+  },
+  {
     q: "Fazem mecânica geral?",
     a: "Somos especializados em suspensão, freios e pneus, e fazemos também troca de óleo e revisão. Serviço fora disso a gente olha, te fala o que é, e te orienta.",
   },
@@ -261,3 +305,27 @@ export const faq = [
     a: "Sim, temos estacionamento próprio ao lado da loja, sem precisar disputar vaga na avenida.",
   },
 ];
+
+/** Dúvidas da página /pneus: só o que interessa a quem veio pedir preço de pneu. */
+export const faqPneus = [
+  {
+    q: "Dá pra parcelar os pneus?",
+    a: "Dá. Parcelamos em até 10x no cartão.",
+  },
+  {
+    q: "Não sei a medida do pneu. E agora?",
+    a: "Sem problema. A medida fica escrita na lateral do pneu, em relevo (algo como 185/65 R15). Se não achar, marca “não sei a medida” no formulário e manda uma foto do pneu no WhatsApp que a gente descobre pra você.",
+  },
+  {
+    q: "Vocês trabalham com pneu remold e importado?",
+    a: "Sim, além dos nacionais. A gente explica a diferença real entre eles pro seu tipo de uso e você escolhe com a informação na mão.",
+  },
+  {
+    q: "Precisa agendar horário?",
+    a: "Não. O atendimento é por ordem de chegada, de segunda a sexta das 7h30 às 17h30 e no sábado das 7h30 às 12h. Em dia de movimento, quanto mais cedo melhor.",
+  },
+  {
+    q: "Posso deixar o carro estacionado?",
+    a: "Sim, temos estacionamento próprio ao lado da loja, sem precisar disputar vaga na avenida.",
+  },
+] as const;

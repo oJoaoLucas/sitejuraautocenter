@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { ReactNode } from "react";
+import type { Evento } from "@/lib/rastreio";
 import { WhatsAppIcon } from "./icons";
 
 /* ---------------------------------------------------------------- */
@@ -33,27 +34,46 @@ type BtnProps = {
   variant?: keyof typeof variants;
   className?: string;
   external?: boolean;
+  /** Evento de medição desse botão (ver lib/rastreio). Sem isso, wa.me e tel: já são reconhecidos. */
+  evento?: Evento;
+  /** De onde o clique veio, pro relatório ("hero", "cta-final"...). Padrão: a seção. */
+  local?: string;
 };
 
-export function Btn({ href, children, variant = "red", className = "", external }: BtnProps) {
+export function Btn({
+  href,
+  children,
+  variant = "red",
+  className = "",
+  external,
+  evento,
+  local,
+}: BtnProps) {
   const cls = `${base} ${variants[variant]} ${className}`;
   if (external || href.startsWith("http")) {
     return (
-      <a href={href} className={cls} target="_blank" rel="noopener noreferrer">
+      <a
+        href={href}
+        className={cls}
+        target="_blank"
+        rel="noopener noreferrer"
+        data-evento={evento}
+        data-local={local}
+      >
         {children}
       </a>
     );
   }
   return (
-    <Link href={href} className={cls}>
+    <Link href={href} className={cls} data-evento={evento} data-local={local}>
       {children}
     </Link>
   );
 }
 
-export function BtnWhats({ href, children, className = "" }: Omit<BtnProps, "variant">) {
+export function BtnWhats({ href, children, className = "", evento, local }: Omit<BtnProps, "variant">) {
   return (
-    <Btn href={href} variant="whats" className={className} external>
+    <Btn href={href} variant="whats" className={className} external evento={evento} local={local}>
       <WhatsAppIcon className="size-5 shrink-0" />
       {children}
     </Btn>

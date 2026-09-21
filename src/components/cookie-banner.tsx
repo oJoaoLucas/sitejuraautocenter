@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
 
 const CHAVE = "jura-cookies-ok";
@@ -34,8 +34,27 @@ function jaAceitouNoServidor() {
 export function CookieBanner() {
   const aceitouAntes = useSyncExternalStore(semInscricao, jaAceitou, jaAceitouNoServidor);
   const [aceitouAgora, setAceitouAgora] = useState(false);
+  const faixa = useRef<HTMLDivElement>(null);
+  const visivel = !(aceitouAntes || aceitouAgora);
 
-  if (aceitouAntes || aceitouAgora) return null;
+  /* Publica a altura do aviso em --cookie-h: o botão flutuante do WhatsApp
+     (que agora é uma pílula larga, não um círculo no canto) sobe por cima
+     dele em vez de ficar escondido atrás. */
+  useEffect(() => {
+    const el = faixa.current;
+    if (!visivel || !el) return;
+    const raiz = document.documentElement;
+    const publicar = () => raiz.style.setProperty("--cookie-h", `${el.offsetHeight}px`);
+    publicar();
+    const ro = new ResizeObserver(publicar);
+    ro.observe(el);
+    return () => {
+      ro.disconnect();
+      raiz.style.removeProperty("--cookie-h");
+    };
+  }, [visivel]);
+
+  if (!visivel) return null;
 
   function aceitar() {
     setAceitouAgora(true);
@@ -48,17 +67,17 @@ export function CookieBanner() {
 
   return (
     <div
+      ref={faixa}
       role="region"
       aria-label="Aviso de cookies"
-      className="fixed inset-x-0 bottom-0 z-60 border-t border-line bg-ink-deep/95 py-4 pr-24 pl-5 backdrop-blur-sm sm:pr-28 sm:pl-8"
+      className="fixed inset-x-0 bottom-0 z-60 border-t border-line bg-ink-deep/95 px-5 py-4 backdrop-blur-sm sm:px-8"
     >
-      {/* z-60 (abaixo do botão flutuante do WhatsApp) e padding à direita
-          reservando o canto onde ele fica: o aviso nunca cobre o CTA
-          principal do site nem some atrás dele. */}
+      {/* z-60, abaixo do botão flutuante do WhatsApp (z-70), que sobe pela
+          altura do aviso via --cookie-h. */}
       <div className="mx-auto flex w-full max-w-[1280px] flex-wrap items-center justify-between gap-4">
         <p className="max-w-2xl text-[0.8125rem] leading-relaxed text-muted">
-          Este site usa um mapa incorporado do Google pra mostrar onde fica a loja, que pode
-          gravar cookie próprio do Google. Detalhes na{" "}
+          Este site usa um mapa incorporado do Google e a medição de anúncios do Google Ads, que
+          podem gravar cookies próprios do Google. Detalhes na{" "}
           <Link href="/privacidade" className="text-jura-title underline underline-offset-4">
             Política de Privacidade
           </Link>

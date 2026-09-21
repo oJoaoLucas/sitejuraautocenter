@@ -5,7 +5,9 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { WhatsFloat } from "@/components/whats-float";
 import { CookieBanner } from "@/components/cookie-banner";
-import { faq, site } from "@/lib/site";
+import { Rastreio } from "@/components/rastreio";
+import { ADS_ID } from "@/lib/rastreio";
+import { site } from "@/lib/site";
 import "./globals.css";
 
 /* Fontes do brand book (p.05), auto-hospedadas pelo next/font: zero request externo. */
@@ -104,41 +106,25 @@ const schema = {
   sameAs: [site.instagramUrl],
 };
 
-/* Schema FAQPage: as mesmas perguntas do bloco de dúvidas do site, pro
-   Google poder mostrar como rich result. */
-const schemaFaq = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faq.map((item) => ({
-    "@type": "Question",
-    name: item.q,
-    acceptedAnswer: { "@type": "Answer", text: item.a },
-  })),
-};
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="pt-BR" className={`${bebas.variable} ${poppins.variable} ${montserrat.variable}`}>
       <body className="relative">
-        {/* Tag do Google Ads (conversão "Solicitar cotação", AW-18451927105).
-            O evento de conversão em si dispara no envio do QuoteForm. */}
+        {/* Tag do Google Ads. Os eventos (orçamento enviado, cliques em WhatsApp,
+            telefone, rota e fila) saem de lib/rastreio; <Rastreio /> ouve os cliques. */}
         <Script
-          src="https://www.googletagmanager.com/gtag/js?id=AW-18451927105"
+          src={`https://www.googletagmanager.com/gtag/js?id=${ADS_ID}`}
           strategy="afterInteractive"
         />
         <Script id="google-ads-gtag" strategy="afterInteractive">
           {`window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
-          gtag('config', 'AW-18451927105');`}
+          gtag('config', '${ADS_ID}');`}
         </Script>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
-        />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaFaq) }}
         />
         <a
           href="#conteudo"
@@ -151,6 +137,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Footer />
         <WhatsFloat />
         <CookieBanner />
+        <Rastreio />
       </body>
     </html>
   );

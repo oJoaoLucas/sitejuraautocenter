@@ -4,12 +4,12 @@ import { useState } from "react";
 import { faq } from "@/lib/site";
 import { ChevronIcon } from "./icons";
 
-export function Faq() {
+export function Faq({ itens = faq }: { itens?: readonly { q: string; a: string }[] }) {
   const [aberto, setAberto] = useState<number | null>(0);
 
   return (
     <div className="mt-8 max-w-3xl">
-      {faq.map((item, i) => {
+      {itens.map((item, i) => {
         const ativo = aberto === i;
         return (
           <div key={item.q} className="border-t border-line last:border-b">

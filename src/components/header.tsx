@@ -8,8 +8,8 @@ import { cta, site } from "@/lib/site";
 import { WhatsAppIcon } from "./icons";
 
 const links = [
+  { href: "/pneus", label: "Pneus" },
   { href: "/#servicos", label: "Serviços" },
-  { href: "/#orcamento", label: "Orçamento" },
   { href: "/#por-que", label: "Por que o Jura" },
   { href: "/historia", label: "Nossa história" },
   { href: "/#onde-estamos", label: "Onde estamos" },

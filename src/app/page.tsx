@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { Diferenciais } from "@/components/diferenciais";
 import { Faq } from "@/components/faq";
+import { FaqSchema } from "@/components/faq-schema";
 import { Foto } from "@/components/foto";
 import { OndeEstamosCarrossel } from "@/components/carrossel";
 import { ArrowIcon, InstagramIcon, PhoneIcon, PinIcon, StarIcon, Stars, WhatsAppIcon } from "@/components/icons";
@@ -9,7 +10,7 @@ import { QuoteForm } from "@/components/quote-form";
 import { Reveal } from "@/components/reveal";
 import { Servicos } from "@/components/servicos";
 import { Btn, BtnWhats, Eyebrow, SpeedBars, Wrap } from "@/components/ui";
-import { avaliacoesGoogle, cta, site, telefoneFixoLink } from "@/lib/site";
+import { avaliacoesGoogle, cta, faq, site, telefoneFixoLink } from "@/lib/site";
 
 export const metadata: Metadata = {
   description:
@@ -19,6 +20,8 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <>
+      <FaqSchema itens={faq} />
+
       {/* ============================================================
           1. HERO
           Foto real do galpão com overlay. Conteúdo à esquerda, não
@@ -63,13 +66,16 @@ export default function Home() {
             </p>
 
             <div className="flex flex-wrap gap-3.5">
-              <BtnWhats href={cta.whatsPrincipal} className="max-sm:w-full">
+              <BtnWhats href={cta.whatsPrincipal} className="max-sm:w-full" local="hero">
                 Chamar no WhatsApp
               </BtnWhats>
-              <Btn href="#servicos" variant="ghost" className="max-sm:w-full">
-                Ver serviços
+              <Btn href="#orcamento" variant="ghost" className="max-sm:w-full">
+                Orçamento de pneus
               </Btn>
             </div>
+            <p className="mt-4 text-[0.875rem] text-muted">
+              Pagamento em até <b className="font-ui font-bold text-cream">10x no cartão</b>
+            </p>
 
             {/* Números discretos logo abaixo do CTA: o cliente já lê de cara,
                 sem precisar descer a página. */}
@@ -82,6 +88,62 @@ export default function Home() {
                 atendidos
               </span>
             </div>
+          </div>
+        </Wrap>
+      </section>
+
+      {/* ============================================================
+          2. ORÇAMENTO DE PNEU
+          Logo abaixo da apresentação: quem vem de anúncio de pneu vê o
+          formulário sem rolar por serviço nenhum. Abre o WhatsApp com a
+          mensagem pronta, o menor atrito entre dúvida e conversa.
+          ============================================================ */}
+      <section
+        id="orcamento"
+        className="relative scroll-mt-20 overflow-hidden border-b border-line py-14 lg:bg-ink-deep lg:py-20"
+      >
+        {/* Fundo só no mobile: a foto do pneu com degradê escuro por
+            trás do formulário, em vez de uma figura separada grande.
+            No desktop ela some daqui e volta como a foto ao lado. */}
+        <div className="absolute inset-0 lg:hidden">
+          <Foto src="/img/pneus-estoque.webp" alt="" fill sizes="100vw" className="object-cover" />
+          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(16_16_16/0.8)_0%,rgb(16_16_16/0.92)_40%,rgb(16_16_16/0.98)_100%)]" />
+        </div>
+
+        <Wrap className="relative">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+            <Reveal>
+              <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
+                Orçamento de pneus em <span className="text-jura-title">trinta segundos</span>
+              </h2>
+              <p className="mt-4 leading-relaxed text-muted">
+                Diz a medida que está escrita no seu pneu e quantos você precisa. A gente responde
+                com o preço à vista e o parcelado.
+              </p>
+              <QuoteForm local="home" botao="Ver preços no WhatsApp" enxuto />
+              <p className="mt-6 text-[0.875rem] text-soft">
+                Quer ver tudo sobre pneus?{" "}
+                <Link
+                  href="/pneus"
+                  className="text-muted underline underline-offset-4 transition-colors hover:text-jura-title"
+                >
+                  Página de pneus
+                </Link>
+              </p>
+            </Reveal>
+
+            <Reveal delay={0.12} className="hidden lg:block">
+              <figure className="overflow-hidden rounded-md border border-line">
+                <Foto
+                  src="/img/pneus-estoque.webp"
+                  alt="Pneus novos no estoque do Jura Auto Center"
+                  width={1000}
+                  height={850}
+                  sizes="45vw"
+                  className="aspect-[4/3.4] w-full object-cover"
+                />
+              </figure>
+            </Reveal>
           </div>
         </Wrap>
       </section>
@@ -106,52 +168,6 @@ export default function Home() {
           </Reveal>
 
           <Servicos />
-        </Wrap>
-      </section>
-
-      {/* ============================================================
-          4. ORÇAMENTO DE PNEU
-          Dois campos que abrem o WhatsApp com a mensagem pronta.
-          O menor atrito possível entre dúvida e conversa.
-          ============================================================ */}
-      <section
-        id="orcamento"
-        className="relative scroll-mt-20 overflow-hidden border-y border-line py-14 lg:bg-ink-deep lg:py-20"
-      >
-        {/* Fundo só no mobile: a foto do pneu com degradê escuro por
-            trás do formulário, em vez de uma figura separada grande.
-            No desktop ela some daqui e volta como a foto ao lado. */}
-        <div className="absolute inset-0 lg:hidden">
-          <Foto src="/img/pneus-estoque.webp" alt="" fill sizes="100vw" className="object-cover" />
-          <div className="absolute inset-0 bg-[linear-gradient(180deg,rgb(16_16_16/0.8)_0%,rgb(16_16_16/0.92)_40%,rgb(16_16_16/0.98)_100%)]" />
-        </div>
-
-        <Wrap className="relative">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
-            <Reveal>
-              <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
-                Orçamento de pneus em <span className="text-jura-title">trinta segundos</span>
-              </h2>
-              <p className="mt-4 leading-relaxed text-muted">
-                Diz a medida que está escrita no seu pneu e quantos você precisa. A gente responde
-                com o preço à vista e o parcelado.
-              </p>
-              <QuoteForm />
-            </Reveal>
-
-            <Reveal delay={0.12} className="hidden lg:block">
-              <figure className="overflow-hidden rounded-md border border-line">
-                <Foto
-                  src="/img/pneus-estoque.webp"
-                  alt="Pneus novos no estoque do Jura Auto Center"
-                  width={1000}
-                  height={850}
-                  sizes="45vw"
-                  className="aspect-[4/3.4] w-full object-cover"
-                />
-              </figure>
-            </Reveal>
-          </div>
         </Wrap>
       </section>
 
@@ -327,11 +343,11 @@ export default function Home() {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                <Btn href={site.mapsUrl} variant="red" external>
+                <Btn href={site.mapsUrl} variant="red" external evento="tracar_rota_click">
                   <PinIcon className="size-5" />
                   Traçar rota
                 </Btn>
-                <Btn href={cta.whatsFila} variant="quiet" external>
+                <Btn href={cta.whatsFila} variant="quiet" external evento="fila_click">
                   Ver como está a fila
                 </Btn>
               </div>
@@ -384,7 +400,7 @@ export default function Home() {
                   </span>
                 </a>
                 <a
-                  href={site.avaliarUrl}
+                  href={site.perfilGoogleUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 transition-colors hover:text-jura-title"
@@ -432,10 +448,17 @@ export default function Home() {
               <span className="text-jura-title">Vem pro Jura.</span>
             </h2>
             <div className="mt-8 flex flex-wrap gap-3.5">
-              <BtnWhats href={cta.whatsPrincipal} className="max-sm:w-full">
+              <BtnWhats href={cta.whatsPrincipal} className="max-sm:w-full" local="cta-final">
                 Chamar no WhatsApp
               </BtnWhats>
-              <Btn href={site.mapsUrl} variant="ghost" className="max-sm:w-full" external>
+              <Btn
+                href={site.mapsUrl}
+                variant="ghost"
+                className="max-sm:w-full"
+                external
+                evento="tracar_rota_click"
+                local="cta-final"
+              >
                 Traçar rota
               </Btn>
             </div>

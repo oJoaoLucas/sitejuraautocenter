@@ -8,6 +8,7 @@ const base = "https://juraautocenter.com.br";
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
     { url: base, priority: 1 },
+    { url: `${base}/pneus`, priority: 0.9 },
     { url: `${base}/historia`, priority: 0.7 },
     { url: `${base}/privacidade`, priority: 0.3 },
   ];

@@ -99,6 +99,7 @@ export function Footer() {
               Navegar
             </h2>
             <ul className="grid gap-2.5 text-sm text-muted">
+              <li><Link href="/pneus" className="transition-colors hover:text-jura-title">Pneus</Link></li>
               <li><Link href="/#servicos" className="transition-colors hover:text-jura-title">Serviços</Link></li>
               <li><Link href="/historia" className="transition-colors hover:text-jura-title">Nossa história</Link></li>
               <li><Link href="/#duvidas" className="transition-colors hover:text-jura-title">Dúvidas frequentes</Link></li>
