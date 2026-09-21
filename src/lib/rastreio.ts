@@ -3,9 +3,8 @@
  *
  * Todo evento sai como `gtag('event', nome)`. Pra o Google Ads *aprender* com
  * uma ação (e não só contar visita), ela precisa virar uma "ação de conversão"
- * lá dentro: crie a conversão no Google Ads, copie o rótulo
- * (`AW-18451927105/xxxx`) e cole abaixo em CONVERSOES. Evento sem rótulo
- * continua sendo enviado, só não entra como conversão.
+ * lá dentro. Cada evento tem o seu rótulo (`AW-18451927105/xxxx`) em CONVERSOES.
+ * Evento novo: crie a conversão no Google Ads e acrescente o rótulo aqui.
  */
 
 export const ADS_ID = "AW-18451927105";
@@ -17,13 +16,13 @@ export type Evento =
   | "tracar_rota_click" // clicou em "Traçar rota"
   | "fila_click"; // clicou em "Ver como está a fila"
 
-/** Rótulo de conversão do Google Ads por evento. Só o orçamento está criado. */
-const CONVERSOES: Partial<Record<Evento, string>> = {
+/** Rótulo de conversão do Google Ads por evento (só o trecho depois do "AW-…/"). */
+const CONVERSOES: Record<Evento, string> = {
   orcamento_pneus: `${ADS_ID}/EPo2COjbkfkcEMGgyN5E`,
-  // whatsapp_click: `${ADS_ID}/COLE_O_ROTULO_AQUI`,
-  // telefone_click: `${ADS_ID}/COLE_O_ROTULO_AQUI`,
-  // tracar_rota_click: `${ADS_ID}/COLE_O_ROTULO_AQUI`,
-  // fila_click: `${ADS_ID}/COLE_O_ROTULO_AQUI`,
+  whatsapp_click: `${ADS_ID}/-sxgCNm3uf8cEMGgyN5E`,
+  telefone_click: `${ADS_ID}/N3UeCNy3uf8cEMGgyN5E`,
+  tracar_rota_click: `${ADS_ID}/D3ZSCN-3uf8cEMGgyN5E`,
+  fila_click: `${ADS_ID}/XH8VCOK3uf8cEMGgyN5E`,
 };
 
 declare global {
@@ -38,8 +37,7 @@ export function rastrear(evento: Evento, params: Record<string, string | number 
 
   gtag("event", evento, { ...params, pagina: window.location.pathname });
 
-  const rotulo = CONVERSOES[evento];
-  if (rotulo) gtag("event", "conversion", { send_to: rotulo });
+  gtag("event", "conversion", { send_to: CONVERSOES[evento] });
 }
 
 export function eventoValido(valor: string | undefined): valor is Evento {
