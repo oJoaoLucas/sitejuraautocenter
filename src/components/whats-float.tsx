@@ -14,21 +14,22 @@ import { WhatsAppIcon } from "./icons";
 export function WhatsFloat() {
   const pathname = usePathname();
   const deIPneu = pathname === "/" || pathname === "/pneus";
+  // Guarda de qual página é a última leitura: ao trocar de página o valor
+  // antigo deixa de valer sozinho, sem precisar zerar o estado no efeito.
   // Em /pneus o formulário já está na primeira tela: começa escondido pra o
   // botão não piscar por um instante antes do observador confirmar.
-  const [sobreFormulario, setSobreFormulario] = useState(pathname === "/pneus");
+  const [leitura, setLeitura] = useState({ caminho: pathname, sobre: pathname === "/pneus" });
+  const sobreFormulario = leitura.caminho === pathname && leitura.sobre;
 
   /* Enquanto o formulário de orçamento está na tela, o botão só atrapalha:
      cobriria justamente o campo e o botão de envio. Some e volta depois. */
   useEffect(() => {
     const form = document.getElementById("orcamento");
-    if (!form) {
-      setSobreFormulario(false);
-      return;
-    }
-    const io = new IntersectionObserver(([e]) => setSobreFormulario(e.isIntersecting), {
-      threshold: 0.15,
-    });
+    if (!form) return;
+    const io = new IntersectionObserver(
+      ([e]) => setLeitura({ caminho: pathname, sobre: e.isIntersecting }),
+      { threshold: 0.15 },
+    );
     io.observe(form);
     return () => io.disconnect();
   }, [pathname]);
