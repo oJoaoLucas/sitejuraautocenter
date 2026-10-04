@@ -1,49 +1,46 @@
 "use client";
 
-import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
+import { salvarConsentimento } from "@/lib/consentimento";
+import { revogarRastreio } from "@/lib/rastreio";
+import { useConsentimento } from "./use-consentimento";
 
-const CHAVE = "jura-cookies-ok";
+const ABRIR = "jura-abrir-privacidade";
+const botao = "min-h-11 rounded-sm border border-cream/50 px-5 py-2 font-ui text-sm font-semibold text-cream transition-colors hover:bg-cream/10";
 
-function semInscricao() {
-  return () => {};
+/** Reabre o mesmo aviso de duas opções para mudar a decisão. */
+export function PreferenciasCookies({ className = "" }: { className?: string }) {
+  return <button type="button" onClick={() => window.dispatchEvent(new Event(ABRIR))} className={`js-only min-h-11 text-left underline underline-offset-4 ${className}`}>Cookies</button>;
 }
 
-/** Lido só no client (useSyncExternalStore evita mismatch de hidratação:
- *  no servidor sempre "aceito", no client lê o valor real do localStorage). */
-function jaAceitou() {
-  try {
-    return localStorage.getItem(CHAVE) === "1";
-  } catch {
-    // Sem acesso ao storage: melhor não mostrar aviso que não persiste.
-    return true;
-  }
-}
-
-function jaAceitouNoServidor() {
-  return true;
-}
-
-/**
- * Aviso de cookies (LGPD): o site carrega um mapa embutido do Google
- * já na primeira visita, que pode gravar cookie próprio do Google.
- * Isso não é rastreamento nem publicidade — é só o mapa funcionando —
- * mas o aviso garante transparência sobre o que roda na página.
- * Não bloqueia nada: só informa e some depois que a pessoa confirma.
- */
 export function CookieBanner() {
-  const aceitouAntes = useSyncExternalStore(semInscricao, jaAceitou, jaAceitouNoServidor);
-  const [aceitouAgora, setAceitouAgora] = useState(false);
+  const escolha = useConsentimento();
+  const [aberto, setAberto] = useState(false);
+  const [aviso, setAviso] = useState("");
   const faixa = useRef<HTMLDivElement>(null);
-  const visivel = !(aceitouAntes || aceitouAgora);
+  const primeiroBotao = useRef<HTMLButtonElement>(null);
+  const origem = useRef<HTMLElement | null>(null);
+  const visivel = escolha === null || aberto;
 
-  /* Publica a altura do aviso em --cookie-h: o botão flutuante do WhatsApp
-     (que agora é uma pílula larga, não um círculo no canto) sobe por cima
-     dele em vez de ficar escondido atrás. */
+  useEffect(() => {
+    function abrir() {
+      origem.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+      setAberto(true);
+    }
+    window.addEventListener(ABRIR, abrir);
+    return () => window.removeEventListener(ABRIR, abrir);
+  }, []);
+
+  useEffect(() => {
+    if (aberto) primeiroBotao.current?.focus();
+  }, [aberto]);
+
   useEffect(() => {
     const el = faixa.current;
     if (!visivel || !el) return;
     const raiz = document.documentElement;
+    raiz.dataset.avisoCookies = "true";
     const publicar = () => raiz.style.setProperty("--cookie-h", `${el.offsetHeight}px`);
     publicar();
     const ro = new ResizeObserver(publicar);
@@ -51,46 +48,35 @@ export function CookieBanner() {
     return () => {
       ro.disconnect();
       raiz.style.removeProperty("--cookie-h");
+      delete raiz.dataset.avisoCookies;
     };
   }, [visivel]);
 
-  if (!visivel) return null;
-
-  function aceitar() {
-    setAceitouAgora(true);
-    try {
-      localStorage.setItem(CHAVE, "1");
-    } catch {
-      // sem persistência, o aviso só volta a aparecer na próxima visita
-    }
+  function salvar(aceitar: boolean) {
+    const persistiu = salvarConsentimento({ anuncios: aceitar, mapa: aceitar });
+    setAviso(persistiu ? "Escolha salva." : "Escolha aplicada nesta visita. Seu navegador não permitiu salvar para a próxima.");
+    setAberto(false);
+    if (aberto && origem.current?.isConnected) origem.current.focus();
+    // Negar e recarregar interrompe a medição que já tenha sido carregada.
+    if (!aceitar) revogarRastreio();
   }
 
   return (
-    <div
-      ref={faixa}
-      role="region"
-      aria-label="Aviso de cookies"
-      className="fixed inset-x-0 bottom-0 z-60 border-t border-line bg-ink-deep/95 px-5 py-4 backdrop-blur-sm sm:px-8"
-    >
-      {/* z-60, abaixo do botão flutuante do WhatsApp (z-70), que sobe pela
-          altura do aviso via --cookie-h. */}
-      <div className="mx-auto flex w-full max-w-[1280px] flex-wrap items-center justify-between gap-4">
-        <p className="max-w-2xl text-[0.8125rem] leading-relaxed text-muted">
-          Este site usa um mapa incorporado do Google e a medição de anúncios do Google Ads, que
-          podem gravar cookies próprios do Google. Detalhes na{" "}
-          <Link href="/privacidade" className="text-jura-title underline underline-offset-4">
-            Política de Privacidade
-          </Link>
-          .
-        </p>
-        <button
-          type="button"
-          onClick={aceitar}
-          className="h-10 shrink-0 rounded-sm bg-jura px-5 font-ui text-[0.8125rem] font-bold uppercase tracking-[0.05em] text-white transition-colors duration-200 hover:bg-jura-strong"
-        >
-          Entendi
-        </button>
-      </div>
-    </div>
+    <>
+      {visivel && <div ref={faixa} role="region" aria-label="Aviso de cookies" className="js-only fixed inset-x-0 bottom-0 z-60 max-h-[70dvh] overflow-y-auto border-t border-line bg-ink-deep/95 px-5 py-4 backdrop-blur-sm sm:px-8">
+        <div className="mx-auto grid w-full max-w-[1280px] gap-3 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-6">
+          <p className="max-w-2xl text-sm leading-relaxed text-muted">
+            Usamos cookies para o mapa e a medição de anúncios. Você pode aceitar ou recusar. <Link href="/privacidade" className="text-cream underline underline-offset-4">Política de Privacidade</Link>.
+          </p>
+          <div className="flex gap-2">
+            <button ref={primeiroBotao} type="button" onClick={() => salvar(true)} className={botao}>Aceitar</button>
+            <button type="button" onClick={() => salvar(false)} className={botao}>Recusar</button>
+          </div>
+        </div>
+
+      </div>}
+      <noscript><p className="border-t border-line px-5 py-4 text-sm text-muted">Sem JavaScript, mapa e medição permanecem desativados. Você pode usar os links de contato. <a href="/privacidade" className="text-cream underline underline-offset-4">Política de Privacidade</a>.</p></noscript>
+      <p role="status" className="sr-only">{aviso}</p>
+    </>
   );
 }

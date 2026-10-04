@@ -1,0 +1,139 @@
+{
+  "/img/fachada-hero.webp": {
+    "largura": 2000,
+    "altura": 1440,
+    "prefixo": "/img/otimizadas/fachada-hero",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800,
+      2000
+    ]
+  },
+  "/img/fachada.webp": {
+    "largura": 1600,
+    "altura": 1587,
+    "prefixo": "/img/otimizadas/fachada",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1600
+    ]
+  },
+  "/img/pneus-estoque.webp": {
+    "largura": 1800,
+    "altura": 1800,
+    "prefixo": "/img/otimizadas/pneus-estoque",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800
+    ]
+  },
+  "/img/pneus-prateleira.webp": {
+    "largura": 2000,
+    "altura": 2000,
+    "prefixo": "/img/otimizadas/pneus-prateleira",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800,
+      2000
+    ]
+  },
+  "/img/oficina-elevadores.webp": {
+    "largura": 2000,
+    "altura": 2000,
+    "prefixo": "/img/otimizadas/oficina-elevadores",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800,
+      2000
+    ]
+  },
+  "/img/oficina-interior.webp": {
+    "largura": 2000,
+    "altura": 2000,
+    "prefixo": "/img/otimizadas/oficina-interior",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800,
+      2000
+    ]
+  },
+  "/img/estacionamento.webp": {
+    "largura": 2000,
+    "altura": 1500,
+    "prefixo": "/img/otimizadas/estacionamento",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800,
+      2000
+    ]
+  },
+  "/img/oficina-galpao-alto.webp": {
+    "largura": 2000,
+    "altura": 2000,
+    "prefixo": "/img/otimizadas/oficina-galpao-alto",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800,
+      2000
+    ]
+  },
+  "/img/oficina-galpao-amplo.webp": {
+    "largura": 1600,
+    "altura": 1600,
+    "prefixo": "/img/otimizadas/oficina-galpao-amplo",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1600
+    ]
+  },
+  "/img/loja-antiga-2019.webp": {
+    "largura": 2000,
+    "altura": 1124,
+    "prefixo": "/img/otimizadas/loja-antiga-2019",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800,
+      2000
+    ]
+  },
+  "/img/jura-mecanico.webp": {
+    "largura": 1200,
+    "altura": 1500,
+    "prefixo": "/img/otimizadas/jura-mecanico",
+    "larguras": [
+      400,
+      800,
+      1200
+    ]
+  },
+  "/logo/jura-branco.png": {
+    "largura": 1167,
+    "altura": 511,
+    "prefixo": "/logo/otimizadas/jura-branco",
+    "larguras": [
+      160,
+      320,
+      480
+    ]
+  }
+}

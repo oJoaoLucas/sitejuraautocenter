@@ -1,4 +1,5 @@
-import Image from "next/image";
+import { PreferenciasCookies } from "./cookie-banner";
+import { Foto } from "./foto";
 import Link from "next/link";
 import { cta, site, telefoneFixoLink } from "@/lib/site";
 import { InstagramIcon, WhatsAppIcon } from "./icons";
@@ -10,11 +11,12 @@ export function Footer() {
       <Wrap>
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <Image
+            <Foto
               src="/logo/jura-branco.png"
               alt={site.nome}
               width={1167}
               height={511}
+              sizes="101px"
               className="mb-4 h-11 w-auto"
             />
             <p className="font-display text-2xl tracking-[0.02em] text-jura-title">
@@ -52,18 +54,18 @@ export function Footer() {
             <ul className="grid gap-2.5 text-sm text-muted">
               <li>
                 <a href={cta.whatsPrincipal} target="_blank" rel="noopener noreferrer"
-                   className="transition-colors hover:text-jura-title">
+                   className="transition-colors hover:text-jura-text">
                   WhatsApp {site.whatsappExibicao}
                 </a>
               </li>
               <li>
-                <a href={telefoneFixoLink} className="transition-colors hover:text-jura-title">
+                <a href={telefoneFixoLink} className="transition-colors hover:text-jura-text">
                   Fixo {site.telefoneFixo}
                 </a>
               </li>
               <li>
                 <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer"
-                   className="transition-colors hover:text-jura-title">
+                   className="transition-colors hover:text-jura-text">
                   @{site.instagram}
                 </a>
               </li>
@@ -99,10 +101,10 @@ export function Footer() {
               Navegar
             </h2>
             <ul className="grid gap-2.5 text-sm text-muted">
-              <li><Link href="/pneus" className="transition-colors hover:text-jura-title">Pneus</Link></li>
-              <li><Link href="/#servicos" className="transition-colors hover:text-jura-title">Serviços</Link></li>
-              <li><Link href="/historia" className="transition-colors hover:text-jura-title">Nossa história</Link></li>
-              <li><Link href="/#duvidas" className="transition-colors hover:text-jura-title">Dúvidas frequentes</Link></li>
+              <li><Link href="/pneus" className="transition-colors hover:text-jura-text">Pneus</Link></li>
+              <li><Link href="/#servicos" className="transition-colors hover:text-jura-text">Serviços</Link></li>
+              <li><Link href="/historia" className="transition-colors hover:text-jura-text">Nossa história</Link></li>
+              <li><Link href="/#duvidas" className="transition-colors hover:text-jura-text">Dúvidas frequentes</Link></li>
             </ul>
           </div>
         </div>
@@ -115,9 +117,10 @@ export function Footer() {
           </p>
           <p>
             &copy; {new Date().getFullYear()} {site.nome}. Todos os direitos reservados. -{" "}
-            <Link href="/privacidade" className="underline underline-offset-4 transition-colors hover:text-jura-title">
+            <Link href="/privacidade" className="underline underline-offset-4 transition-colors hover:text-jura-text">
               Política de Privacidade
             </Link>
+            {" · "}<PreferenciasCookies className="hover:text-cream" />
           </p>
         </div>
       </Wrap>

@@ -23,7 +23,7 @@ export function Servicos() {
           target="_blank"
           rel="noopener noreferrer"
           delay={i * 0.05}
-          className="group relative isolate flex flex-col overflow-hidden rounded-md border border-line bg-surface px-3.5 pt-4 pb-5 transition-[transform,border-color,background-color] duration-300 ease-jura hover:-translate-y-1.5 hover:border-jura-title hover:bg-[#232323] sm:px-5 sm:pt-5 sm:pb-6"
+          className="group relative isolate flex flex-col overflow-hidden rounded-md border border-line bg-surface px-3.5 pt-4 pb-5 transition-[transform,border-color,background-color] duration-300 ease-jura hover:border-jura-title hover:bg-[#232323] sm:px-5 sm:pt-5 sm:pb-6"
         >
           <div className="mb-3 grid size-10 place-items-center rounded-md border border-line bg-[#171717] transition-[transform,border-color] duration-300 ease-jura group-hover:-translate-y-1 group-hover:scale-110 group-hover:border-jura-title sm:mb-3.5 sm:size-11">
             <Image src={s.icone} alt="" width={512} height={512} className="size-5 sm:size-6" />
@@ -32,7 +32,7 @@ export function Servicos() {
             {s.titulo}
           </h3>
           <p className="text-[0.78rem] leading-relaxed text-soft sm:text-[0.84rem]">{s.texto}</p>
-          <span className="mt-auto flex items-center gap-1.5 pt-3 font-ui text-[0.68rem] font-bold tracking-[0.06em] text-jura-title uppercase sm:text-[0.72rem]">
+          <span className="mt-auto flex items-center gap-1.5 pt-3 font-ui text-[0.68rem] font-bold tracking-[0.06em] text-jura-text uppercase sm:text-[0.72rem]">
             <WhatsAppIcon className="size-3.5 shrink-0" />
             Pedir no WhatsApp
           </span>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { diferenciais } from "@/lib/site";
 import { Btn } from "./ui";
 import { ArrowIcon, ChevronIcon } from "./icons";
@@ -13,9 +14,22 @@ import { Reveal } from "./reveal";
  */
 export function Diferenciais() {
   const [aberto, setAberto] = useState<number | null>(null);
+  const reduce = useReducedMotion();
 
   return (
-    <ul className="mt-8 lg:mt-10">
+    <>
+    <noscript>
+      <ul className="mt-8 lg:mt-10">
+        {diferenciais.map((d) => (
+          <li key={d.slug} className="border-t border-line py-5 last:border-b">
+            <h3 className="font-ui text-[1.4rem] leading-tight font-bold">{d.titulo}</h3>
+            <p className="mt-3 text-[0.975rem] leading-relaxed text-muted">{d.textoExpandido}</p>
+            {d.ctaHref && d.ctaLabel && <a href={d.ctaHref} className="mt-3 inline-flex min-h-11 items-center text-jura-text underline underline-offset-4">{d.ctaLabel}</a>}
+          </li>
+        ))}
+      </ul>
+    </noscript>
+    <ul className="js-only mt-8 lg:mt-10">
       {diferenciais.map((d, i) => {
         const ativo = aberto === i;
         return (
@@ -53,11 +67,14 @@ export function Diferenciais() {
               />
             </button>
 
-            <div
+            <motion.div
               id={`dif-${d.slug}`}
-              className={`grid transition-[grid-template-rows] duration-350 ease-jura sm:pl-[7.5rem] ${
-                ativo ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-              }`}
+              initial={false}
+              animate={{ height: ativo ? "auto" : 0, opacity: ativo ? 1 : 0 }}
+              transition={{ duration: reduce ? 0 : 0.3, ease: [0.16, 1, 0.3, 1] }}
+              inert={!ativo}
+              aria-hidden={!ativo}
+              className="overflow-hidden sm:pl-[7.5rem]"
             >
               <div className="overflow-hidden">
                 <div className="max-w-[58ch] pb-8">
@@ -72,10 +89,11 @@ export function Diferenciais() {
                   )}
                 </div>
               </div>
-            </div>
+            </motion.div>
           </Reveal>
         );
       })}
     </ul>
+    </>
   );
 }

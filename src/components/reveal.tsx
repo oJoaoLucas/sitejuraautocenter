@@ -1,7 +1,7 @@
 "use client";
 
-import { motion, useReducedMotion } from "motion/react";
-import type { ReactNode } from "react";
+import { motion, useAnimate, useInView, useReducedMotion } from "motion/react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 /**
  * Revelação na entrada em viewport.
@@ -18,6 +18,7 @@ export function Reveal({
   href,
   target,
   rel,
+  entrada = false,
 }: {
   children: ReactNode;
   delay?: number;
@@ -28,20 +29,41 @@ export function Reveal({
   href?: string;
   target?: string;
   rel?: string;
+  /** Entrada imediata para o hero; as demais seções aguardam a rolagem. */
+  entrada?: boolean;
 }) {
   const reduce = useReducedMotion();
+  const [scope, animate] = useAnimate();
+  const visivel = useInView(scope, { once: true, amount: 0.12, margin: "0px 0px -24px 0px" });
+  const animado = useRef(false);
   const M = motion[as];
+
+  // O HTML nasce visível. Sem JS ou antes da hidratação, o conteúdo continua
+  // legível; a animação só começa depois que a página está interativa.
+  useEffect(() => {
+    if ((!entrada && !visivel) || !scope.current || reduce === null) return;
+    if (reduce) {
+      animate(scope.current, { opacity: 1, y: 0 }, { duration: 0 });
+      return;
+    }
+    if (animado.current) return;
+    animado.current = true;
+    animate(scope.current, { opacity: [0, 1], y: [y, 0] }, {
+      duration: 0.55, delay, ease: [0.16, 1, 0.3, 1],
+    });
+  }, [animate, delay, entrada, reduce, scope, visivel, y]);
 
   return (
     <M
+      ref={scope}
       href={href}
       target={target}
       rel={rel}
       className={className}
-      initial={reduce ? false : { opacity: 0, y }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.25, margin: "0px 0px -60px 0px" }}
-      transition={{ duration: 0.65, delay, ease: [0.16, 1, 0.3, 1] }}
+      initial={false}
+      whileHover={as === "a" && !reduce ? { scale: 1.015 } : undefined}
+      whileTap={as === "a" && !reduce ? { scale: 0.985 } : undefined}
+      transition={{ duration: 0.2, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}
     </M>

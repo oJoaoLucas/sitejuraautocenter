@@ -3,6 +3,7 @@
 import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
 import { useRef } from "react";
 import { Foto } from "./foto";
+import { Reveal } from "./reveal";
 
 /**
  * Linha do tempo com a linha vermelha se desenhando conforme a leitura.
@@ -86,13 +87,8 @@ export function Timeline() {
             className="absolute top-1.5 -left-10 size-5 rounded-full border-2 lg:-left-13 lg:size-7"
           />
 
-          <motion.div
-            initial={reduce ? false : { opacity: 0, y: 22 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.6, delay: i * 0.04, ease: [0.16, 1, 0.3, 1] }}
-          >
-            <span className="mb-2 block font-ui text-[0.78rem] font-extrabold tracking-[0.12em] text-jura-title uppercase">
+          <Reveal y={22} delay={i * 0.04}>
+            <span className="mb-2 block font-ui text-[0.78rem] font-extrabold tracking-[0.12em] text-jura-text uppercase">
               {m.data}
             </span>
             <h3 className="mb-2.5 font-display text-[1.75rem] tracking-[0.02em] uppercase">
@@ -112,7 +108,7 @@ export function Timeline() {
                 />
               </figure>
             )}
-          </motion.div>
+          </Reveal>
         </li>
       ))}
     </ol>

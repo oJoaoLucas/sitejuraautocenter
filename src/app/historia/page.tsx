@@ -115,7 +115,7 @@ export default function Historia() {
             </Reveal>
 
             <Reveal delay={0.12}>
-              <span className="mb-3.5 block font-ui text-[0.7rem] font-bold tracking-[0.22em] text-jura-title uppercase">
+              <span className="mb-3.5 block font-ui text-[0.7rem] font-bold tracking-[0.22em] text-jura-text uppercase">
                 Quem é o Jura
               </span>
               <h2 className="mb-5 text-[clamp(2rem,5vw,2.75rem)]">

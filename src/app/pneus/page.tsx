@@ -74,7 +74,7 @@ export default function Pneus() {
               </h1>
 
               <p className="mt-4 max-w-md text-[1.025rem] leading-relaxed text-[#e4e4e4] lg:mt-5 lg:text-[1.075rem]">
-                Informe a medida e receba o preço pelo WhatsApp.
+                Informe a medida e prepare seu pedido de orçamento pelo WhatsApp.
               </p>
 
               {/* Só no desktop: no celular o formulário já traz isso colado no botão. */}
@@ -97,7 +97,7 @@ export default function Pneus() {
               </h2>
               <QuoteForm
                 local="pneus"
-                botao="Receber preço no WhatsApp"
+                botao="Continuar no WhatsApp"
                 className="mt-5 max-w-none"
               />
             </div>

@@ -1,12 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { Bebas_Neue, Montserrat, Poppins } from "next/font/google";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 import { WhatsFloat } from "@/components/whats-float";
 import { CookieBanner } from "@/components/cookie-banner";
 import { Rastreio } from "@/components/rastreio";
-import { ADS_ID } from "@/lib/rastreio";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -110,18 +108,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="pt-BR" className={`${bebas.variable} ${poppins.variable} ${montserrat.variable}`}>
       <body className="relative">
-        {/* Tag do Google Ads. Os eventos (orçamento enviado, cliques em WhatsApp,
-            telefone, rota e fila) saem de lib/rastreio; <Rastreio /> ouve os cliques. */}
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${ADS_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-ads-gtag" strategy="afterInteractive">
-          {`window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-          gtag('config', '${ADS_ID}');`}
-        </Script>
+        <noscript><style>{".js-only { display: none !important; }"}</style></noscript>
+        {/* Rastreio inicializa a tag somente fora da prévia local. */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
@@ -133,7 +121,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           Pular para o conteúdo
         </a>
         <Header />
-        <main id="conteudo">{children}</main>
+        <main id="conteudo" tabIndex={-1}>{children}</main>
         <Footer />
         <WhatsFloat />
         <CookieBanner />

@@ -8,11 +8,11 @@ import { WhatsAppIcon } from "./icons";
 /* ---------------------------------------------------------------- */
 
 const base =
-  "inline-flex items-center justify-center gap-2.5 whitespace-nowrap rounded-sm " +
+  "inline-flex items-center justify-center gap-2.5 max-w-full whitespace-normal rounded-sm text-center " +
   "font-ui text-[0.9375rem] font-bold uppercase tracking-[0.05em] " +
   "border-2 border-transparent transition-[transform,background-color,border-color,color] " +
   "duration-200 ease-jura hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.985] " +
-  "h-[52px] px-6";
+  "min-h-[52px] px-6 py-3";
 
 const variants = {
   // Verde: o CTA número 1, só WhatsApp. Contraste 7:1 sobre o verde.
@@ -108,7 +108,7 @@ export function Wrap({ children, className = "" }: { children: ReactNode; classN
 
 export function Eyebrow({ children }: { children: ReactNode }) {
   return (
-    <span className="mb-3.5 block font-ui text-[0.7rem] font-bold uppercase tracking-[0.22em] text-jura-title">
+    <span className="mb-3.5 block font-ui text-[0.7rem] font-bold uppercase tracking-[0.22em] text-jura-text">
       {children}
     </span>
   );

@@ -47,22 +47,29 @@ export function OndeEstamosCarrossel() {
   const [i, setI] = useState(0);
   const trilhaRef = useRef<HTMLDivElement>(null);
   const pausado = useRef(false);
+  const comFoco = useRef(false);
+  const [pausaManual, setPausaManual] = useState(false);
   const reduce = useReducedMotion();
 
   const irPara = useCallback((idx: number) => {
     const trilha = trilhaRef.current;
     if (!trilha) return;
     const alvo = (idx + fotos.length) % fotos.length;
-    trilha.scrollTo({ left: alvo * trilha.clientWidth, behavior: "smooth" });
-  }, []);
+    trilha.scrollTo({ left: alvo * trilha.clientWidth, behavior: reduce ? "instant" : "smooth" });
+  }, [reduce]);
+
+  function navegar(idx: number) {
+    setPausaManual(true);
+    irPara(idx);
+  }
 
   useEffect(() => {
-    if (reduce) return;
+    if (reduce !== false || pausaManual) return;
     const id = setInterval(() => {
-      if (!pausado.current) irPara(i + 1);
+      if (!pausado.current && !comFoco.current && !document.hidden) irPara(i + 1);
     }, INTERVALO_AUTOPLAY);
     return () => clearInterval(id);
-  }, [i, irPara, reduce]);
+  }, [i, irPara, reduce, pausaManual]);
 
   /* Mantém pontinhos e botões sincronizados com o scroll de verdade,
      inclusive quando a pessoa arrasta com o dedo. */
@@ -87,24 +94,26 @@ export function OndeEstamosCarrossel() {
   return (
     <div
       className="group relative overflow-hidden rounded-md border border-line"
+      role="region"
+      aria-label="Fotos da oficina"
+      aria-roledescription="carrossel"
+      onFocusCapture={() => { comFoco.current = true; }}
+      onBlurCapture={(e) => { if (!e.currentTarget.contains(e.relatedTarget)) comFoco.current = false; }}
       onPointerEnter={() => (pausado.current = true)}
       onPointerLeave={() => (pausado.current = false)}
-      onTouchStart={() => (pausado.current = true)}
-      onTouchEnd={() => {
-        window.setTimeout(() => (pausado.current = false), 1500);
-      }}
+      onTouchStart={() => setPausaManual(true)}
     >
       <div
         ref={trilhaRef}
         className="no-scrollbar flex aspect-[16/11] w-full snap-x snap-mandatory overflow-x-auto bg-surface"
       >
         {fotos.map((f) => (
-          <div key={f.src} className="relative h-full w-full shrink-0 snap-center">
+          <div key={f.src} className="relative h-full w-full shrink-0 snap-center" role="group" aria-roledescription="slide" aria-label={`${fotos.indexOf(f) + 1} de ${fotos.length}`}>
             <Foto
               src={f.src}
               alt={f.alt}
               fill
-              sizes="(max-width: 1024px) 100vw, 35vw"
+              sizes="(max-width: 1023px) calc(100vw - 40px), (max-width: 1280px) 52vw, 640px"
               className={`object-cover ${f.pos}`}
             />
           </div>
@@ -113,34 +122,44 @@ export function OndeEstamosCarrossel() {
 
       <button
         type="button"
-        onClick={() => irPara(i - 1)}
+        onClick={() => navegar(i - 1)}
         aria-label="Foto anterior"
-        className="absolute top-1/2 left-2.5 grid size-9 -translate-y-1/2 place-items-center rounded-sm bg-ink/60 text-cream opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100 hover:bg-ink/85"
+        className="js-only absolute top-1/2 left-2.5 grid size-11 -translate-y-1/2 place-items-center rounded-sm border border-white/15 bg-ink/80 text-cream backdrop-blur-sm transition-colors duration-200 hover:bg-ink"
       >
         <ChevronIcon className="size-5 rotate-90" />
       </button>
       <button
         type="button"
-        onClick={() => irPara(i + 1)}
+        onClick={() => navegar(i + 1)}
         aria-label="Próxima foto"
-        className="absolute top-1/2 right-2.5 grid size-9 -translate-y-1/2 place-items-center rounded-sm bg-ink/60 text-cream opacity-0 backdrop-blur-sm transition-opacity duration-200 group-hover:opacity-100 hover:bg-ink/85"
+        className="js-only absolute top-1/2 right-2.5 grid size-11 -translate-y-1/2 place-items-center rounded-sm border border-white/15 bg-ink/80 text-cream backdrop-blur-sm transition-colors duration-200 hover:bg-ink"
       >
         <ChevronIcon className="size-5 -rotate-90" />
       </button>
 
-      <div className="absolute inset-x-0 bottom-0 flex justify-center gap-1.5 bg-[linear-gradient(0deg,rgb(16_16_16/0.75),transparent)] pt-6 pb-3">
+      <div className="js-only absolute inset-x-0 bottom-0 flex flex-wrap items-center justify-center gap-x-1 bg-[linear-gradient(0deg,rgb(16_16_16/0.9),transparent)] px-2 pt-6 pb-1">
         {fotos.map((f, idx) => (
           <button
             key={f.src}
             type="button"
-            onClick={() => irPara(idx)}
+            onClick={() => navegar(idx)}
             aria-label={`Ver foto ${idx + 1}`}
             aria-current={idx === i}
-            className={`h-1.5 rounded-full transition-all duration-300 ease-jura ${
+            className="grid size-11 place-items-center rounded-sm"
+          >
+            <span aria-hidden="true" className={`h-1.5 rounded-full transition-all duration-300 ease-jura ${
               idx === i ? "w-5 bg-jura-title" : "w-1.5 bg-cream/40 hover:bg-cream/70"
-            }`}
-          />
+            }`} />
+          </button>
         ))}
+        <button
+            type="button"
+            onClick={() => setPausaManual((v) => !v)}
+            aria-label={pausaManual ? "Retomar apresentação automática" : "Pausar apresentação automática"}
+            className="controle-autoplay min-h-11 rounded-sm px-3 font-ui text-xs font-bold text-cream transition-colors hover:text-jura-text"
+          >
+            {pausaManual ? "Retomar" : "Pausar"}
+        </button>
       </div>
     </div>
   );

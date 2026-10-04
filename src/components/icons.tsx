@@ -77,7 +77,7 @@ export function ArrowIcon({ className }: P) {
 /** Nota do Google em estrelas cheias. */
 export function Stars({ className = "size-4" }: P) {
   return (
-    <span className="inline-flex gap-[2px] text-offer" aria-label="5 estrelas">
+    <span role="img" className="inline-flex gap-[2px] text-offer" aria-label="5 estrelas">
       {[0, 1, 2, 3, 4].map((i) => (
         <StarIcon key={i} className={className} />
       ))}

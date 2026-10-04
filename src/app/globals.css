@@ -15,6 +15,7 @@
   /* Marca */
   --color-jura: #c8102e;         /* SO fundo de botao e faixas */
   --color-jura-strong: #8e1120;  /* hover e bordo */
+  --color-jura-text: #ff667d;    /* destaque legível em textos pequenos */
   --color-jura-title: #e5304c;   /* titulo sobre preto, 5,4:1 */
   --color-offer: #ffc400;        /* SO preco, selo e estrela */
   --color-whats: #25d366;
@@ -41,6 +42,7 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 84px;
+    scroll-padding-bottom: calc(var(--cookie-h, 0px) + 24px);
   }
   body {
     background-color: var(--color-ink);
@@ -48,6 +50,7 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
+    padding-bottom: var(--cookie-h, 0px);
   }
   h1, h2, .display {
     font-family: var(--font-display);
@@ -88,10 +91,28 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .controle-autoplay { display: none; }
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+/* O menu ocupa a interação no celular: nenhum CTA ou aviso flutuante
+   deve atravessar a navegação nem continuar disponível ao teclado. */
+html[data-menu-aberto="true"] .whats-float,
+html[data-menu-aberto="true"] [aria-label="Aviso de cookies"] {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* No celular, o aviso já ocupa a parte inferior da tela. O contato continua
+   acessível nos CTAs da página, sem acrescentar uma segunda faixa fixa. */
+@media (max-width: 639px) {
+  html[data-aviso-cookies="true"] .whats-float {
+    visibility: hidden;
+    pointer-events: none;
   }
 }

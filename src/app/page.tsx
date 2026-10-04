@@ -1,3 +1,4 @@
+import { MapaConsentido } from "@/components/mapa-consentido";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { Diferenciais } from "@/components/diferenciais";
@@ -47,32 +48,36 @@ export default function Home() {
         <Wrap className="relative pb-14 sm:pb-20 lg:pb-24">
           <div className="max-w-3xl">
             {/* Único elemento pequeno do hero: a prova social que o brand book pede acima da dobra */}
-            <div className="mb-6 inline-flex items-center gap-2.5 rounded-sm border border-line bg-surface/80 px-3.5 py-2 text-[0.8125rem] text-muted backdrop-blur-sm">
+            <Reveal entrada delay={0.04} y={12} className="mb-6 inline-flex items-center gap-2.5 rounded-sm border border-line bg-surface/80 px-3.5 py-2 text-[0.8125rem] text-muted backdrop-blur-sm">
               <Stars className="size-[15px]" />
               <span>
                 <b className="font-ui font-extrabold text-cream">{site.prova.nota}</b> no Google,
                 mais de {site.prova.avaliacoes} avaliações
               </span>
-            </div>
+            </Reveal>
 
-            <h1 className="mb-4 text-[clamp(2.75rem,7.5vw,4.5rem)] [text-shadow:0_2px_24px_rgb(0_0_0/0.6)]">
-              <span className="block">Pneu, freio e suspensão</span>
-              <span className="block text-jura-title">é no Jura.</span>
-            </h1>
+            <Reveal entrada delay={0.1} y={18}>
+              <h1 className="mb-4 text-[clamp(2.75rem,7.5vw,4.5rem)] [text-shadow:0_2px_24px_rgb(0_0_0/0.6)]">
+                <span className="block">Pneu, freio e suspensão</span>
+                <span className="block text-jura-title">é no Jura.</span>
+              </h1>
+            </Reveal>
 
-            <p className="mb-8 max-w-lg text-[1.075rem] leading-relaxed text-[#e4e4e4]">
-              Em Araras desde 2019, cuidando de quem depende do carro todo dia.
-              Orçamento na hora, pelo WhatsApp.
-            </p>
+            <Reveal entrada delay={0.18} y={14}>
+              <p className="mb-8 max-w-lg text-[1.075rem] leading-relaxed text-[#e4e4e4]">
+                Em Araras desde 2019, cuidando de quem depende do carro todo dia.
+                Peça seu orçamento pelo WhatsApp.
+              </p>
+            </Reveal>
 
-            <div className="flex flex-wrap gap-3.5">
+            <Reveal entrada delay={0.25} y={12} className="flex flex-wrap gap-3.5">
               <BtnWhats href={cta.whatsPrincipal} className="max-sm:w-full" local="hero">
                 Chamar no WhatsApp
               </BtnWhats>
               <Btn href="#orcamento" variant="ghost" className="max-sm:w-full">
                 Orçamento de pneus
               </Btn>
-            </div>
+            </Reveal>
             <p className="mt-4 text-[0.875rem] text-muted">
               Pagamento em até <b className="font-ui font-bold text-cream">10x no cartão</b>
             </p>
@@ -114,18 +119,18 @@ export default function Home() {
           <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <Reveal>
               <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
-                Orçamento de pneus em <span className="text-jura-title">trinta segundos</span>
+                Peça seu orçamento de pneus <span className="text-jura-title">pelo WhatsApp</span>
               </h2>
               <p className="mt-4 leading-relaxed text-muted">
                 Diz a medida que está escrita no seu pneu e quantos você precisa. A gente responde
                 com o preço à vista e o parcelado.
               </p>
-              <QuoteForm local="home" botao="Ver preços no WhatsApp" enxuto />
+              <QuoteForm local="home" enxuto />
               <p className="mt-6 text-[0.875rem] text-soft">
                 Quer ver tudo sobre pneus?{" "}
                 <Link
                   href="/pneus"
-                  className="text-muted underline underline-offset-4 transition-colors hover:text-jura-title"
+                  className="text-muted underline underline-offset-4 transition-colors hover:text-jura-text"
                 >
                   Página de pneus
                 </Link>
@@ -307,13 +312,7 @@ export default function Home() {
           <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr]">
             <Reveal className="grid content-start gap-6">
               <div className="h-[220px] overflow-hidden rounded-md border border-line bg-surface">
-                <iframe
-                  src={site.mapsEmbed}
-                  title={`Mapa com a localização do ${site.nome}`}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  className="h-full w-full border-0 grayscale-[0.35] contrast-[1.05]"
-                />
+                <MapaConsentido />
               </div>
 
               <div className="border-l-[3px] border-jura pl-4.5">
@@ -363,7 +362,7 @@ export default function Home() {
                   href={cta.whatsPrincipal}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 transition-colors hover:text-jura-title"
+                  className="flex items-center gap-3 transition-colors hover:text-jura-text"
                 >
                   <WhatsAppIcon className="size-5 shrink-0 text-whats" />
                   <span>
@@ -375,7 +374,7 @@ export default function Home() {
                 </a>
                 <a
                   href={telefoneFixoLink}
-                  className="flex items-center gap-3 transition-colors hover:text-jura-title"
+                  className="flex items-center gap-3 transition-colors hover:text-jura-text"
                 >
                   <PhoneIcon className="size-5 shrink-0 text-jura-title" />
                   <span>
@@ -389,7 +388,7 @@ export default function Home() {
                   href={site.instagramUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 transition-colors hover:text-jura-title"
+                  className="flex items-center gap-3 transition-colors hover:text-jura-text"
                 >
                   <InstagramIcon className="size-5 shrink-0" />
                   <span>
@@ -403,7 +402,7 @@ export default function Home() {
                   href={site.perfilGoogleUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-3 transition-colors hover:text-jura-title"
+                  className="flex items-center gap-3 transition-colors hover:text-jura-text"
                 >
                   <StarIcon className="size-5 shrink-0 text-offer" />
                   <span>
@@ -464,7 +463,7 @@ export default function Home() {
             </div>
             <p className="mt-6 text-[0.875rem] text-soft">
               Ou passa na{" "}
-              <Link href="#onde-estamos" className="text-muted underline underline-offset-4 transition-colors hover:text-jura-title">
+              <Link href="#onde-estamos" className="text-muted underline underline-offset-4 transition-colors hover:text-jura-text">
                 Avenida Loreto, 889
               </Link>
               , de segunda a sábado.

@@ -12,7 +12,8 @@ import { WhatsAppIcon } from "./icons";
  * demais, continua genérico.
  */
 export function WhatsFloat() {
-  const pathname = usePathname();
+  // O export pode ser aberto com barra final; mantém a mesma rota na hidratação.
+  const pathname = usePathname().replace(/\/+$/, "") || "/";
   const deIPneu = pathname === "/" || pathname === "/pneus";
   // Guarda de qual página é a última leitura: ao trocar de página o valor
   // antigo deixa de valer sozinho, sem precisar zerar o estado no efeito.
@@ -20,15 +21,26 @@ export function WhatsFloat() {
   // botão não piscar por um instante antes do observador confirmar.
   const [leitura, setLeitura] = useState({ caminho: pathname, sobre: pathname === "/pneus" });
   const sobreFormulario = leitura.caminho === pathname && leitura.sobre;
+  const [leituraRodape, setLeituraRodape] = useState({ caminho: pathname, sobre: false });
+  const escondido = sobreFormulario || (leituraRodape.caminho === pathname && leituraRodape.sobre);
+
+  // No rodapé já há contatos; o flutuante cobriria a política e as preferências.
+  useEffect(() => {
+    const rodape = document.querySelector("footer");
+    if (!rodape) return;
+    const io = new IntersectionObserver(([e]) => setLeituraRodape({ caminho: pathname, sobre: e.isIntersecting }));
+    io.observe(rodape);
+    return () => io.disconnect();
+  }, [pathname]);
 
   /* Enquanto o formulário de orçamento está na tela, o botão só atrapalha:
      cobriria justamente o campo e o botão de envio. Some e volta depois. */
   useEffect(() => {
-    const form = document.getElementById("orcamento");
+    const form = document.querySelector("#orcamento form");
     if (!form) return;
     const io = new IntersectionObserver(
       ([e]) => setLeitura({ caminho: pathname, sobre: e.isIntersecting }),
-      { threshold: 0.15 },
+      { threshold: 0, rootMargin: "0px 0px 80px 0px" },
     );
     io.observe(form);
     return () => io.disconnect();
@@ -40,16 +52,12 @@ export function WhatsFloat() {
       target="_blank"
       rel="noopener noreferrer"
       data-local="flutuante"
-      tabIndex={sobreFormulario ? -1 : undefined}
-      aria-hidden={sobreFormulario ? true : undefined}
-      className={`group fixed right-4 bottom-[calc(1rem+var(--cookie-h,0px))] z-70 flex h-[54px] items-center gap-2.5 rounded-full bg-whats pr-5 pl-4 font-ui text-[0.8125rem] font-extrabold tracking-[0.04em] text-whats-ink uppercase shadow-[0_10px_30px_rgb(0_0_0/0.45)] transition-[transform,bottom,opacity] duration-200 ease-jura hover:scale-105 sm:right-6 sm:bottom-[calc(1.5rem+var(--cookie-h,0px))] ${
-        sobreFormulario ? "pointer-events-none translate-y-4 opacity-0" : ""
+      tabIndex={escondido ? -1 : undefined}
+      aria-hidden={escondido ? true : undefined}
+      className={`js-only whats-float group fixed right-4 bottom-[calc(1rem+var(--cookie-h,0px))] z-70 flex h-12 items-center gap-2 rounded-full bg-whats pr-4 pl-3 font-ui text-[0.75rem] font-extrabold tracking-[0.04em] text-whats-ink uppercase shadow-[0_10px_30px_rgb(0_0_0/0.45)] transition-[transform,opacity] duration-200 ease-jura hover:scale-105 sm:right-6 sm:bottom-[calc(1.5rem+var(--cookie-h,0px))] sm:h-[54px] sm:gap-2.5 sm:pr-5 sm:pl-4 sm:text-[0.8125rem] ${
+        escondido ? "pointer-events-none translate-y-4 opacity-0" : ""
       }`}
     >
-      <span
-        aria-hidden="true"
-        className="absolute inset-0 -z-10 animate-ping rounded-full bg-whats opacity-40 [animation-duration:2.8s] motion-reduce:hidden"
-      />
       <WhatsAppIcon className="size-[26px] shrink-0" />
       {deIPneu ? "Pedir preço do pneu" : "Chamar no WhatsApp"}
     </a>

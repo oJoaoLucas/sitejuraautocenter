@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect } from "react";
-import { eventoValido, rastrear, type Evento } from "@/lib/rastreio";
+import { ADS_ID, eventoValido, iniciarRastreio, previaLocal, rastrear, revogarRastreio, type Evento } from "@/lib/rastreio";
+
+import { useConsentimento } from "./use-consentimento";
 
 /**
  * Um único ouvinte de clique pro site inteiro, em vez de onClick espalhado
@@ -11,15 +13,32 @@ import { eventoValido, rastrear, type Evento } from "@/lib/rastreio";
  * `data-local` diz de onde veio o clique; sem ele, usa a seção em que o link está.
  */
 export function Rastreio() {
+  const escolha = useConsentimento();
+  useEffect(() => {
+    if (!escolha?.anuncios) { revogarRastreio(); return; }
+    if (!iniciarRastreio()) return;
+    // Modo básico: sem autorização, nem o script externo é solicitado.
+    const script = document.createElement("script");
+    script.id = "google-ads-gtag";
+    script.src = `https://www.googletagmanager.com/gtag/js?id=${ADS_ID}`;
+    script.async = true;
+    document.head.appendChild(script);
+    return () => { script.remove(); };
+  }, [escolha?.anuncios]);
   useEffect(() => {
     function aoClicar(e: MouseEvent) {
+      if (e.defaultPrevented) return;
       const alvo = e.target;
       if (!(alvo instanceof Element)) return;
       const link = alvo.closest<HTMLAnchorElement>("a[href]");
       if (!link) return;
 
       const evento = eventoDoLink(link);
-      if (evento) rastrear(evento, { local: localDoLink(link) });
+      if (evento) {
+        // Exercita o clique no teste local sem abrir contatos/rotas externas.
+        if (previaLocal()) e.preventDefault();
+        rastrear(evento, { local: localDoLink(link) });
+      }
     }
 
     document.addEventListener("click", aoClicar);

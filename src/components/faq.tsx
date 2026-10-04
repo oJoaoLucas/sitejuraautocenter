@@ -1,14 +1,27 @@
 "use client";
 
 import { useState } from "react";
+import { motion, useReducedMotion } from "motion/react";
 import { faq } from "@/lib/site";
 import { ChevronIcon } from "./icons";
 
 export function Faq({ itens = faq }: { itens?: readonly { q: string; a: string }[] }) {
   const [aberto, setAberto] = useState<number | null>(0);
+  const reduce = useReducedMotion();
 
   return (
-    <div className="mt-8 max-w-3xl">
+    <>
+    <noscript>
+      <div className="mt-8 max-w-3xl">
+        {itens.map((item) => (
+          <div key={item.q} className="border-t border-line py-5 last:border-b">
+            <h3 className="font-ui text-[1.05rem] font-bold">{item.q}</h3>
+            <p className="mt-3 text-[0.975rem] leading-relaxed text-muted">{item.a}</p>
+          </div>
+        ))}
+      </div>
+    </noscript>
+    <div className="js-only mt-8 max-w-3xl">
       {itens.map((item, i) => {
         const ativo = aberto === i;
         return (
@@ -19,7 +32,7 @@ export function Faq({ itens = faq }: { itens?: readonly { q: string; a: string }
                 onClick={() => setAberto(ativo ? null : i)}
                 aria-expanded={ativo}
                 aria-controls={`faq-${i}`}
-                className="flex w-full items-center justify-between gap-5 py-5.5 text-left font-ui text-[1.05rem] font-bold transition-colors duration-200 hover:text-jura-title"
+                className="flex w-full items-center justify-between gap-5 py-5.5 text-left font-ui text-[1.05rem] font-bold transition-colors duration-200 hover:text-jura-text"
               >
                 {item.q}
                 <ChevronIcon
@@ -29,21 +42,25 @@ export function Faq({ itens = faq }: { itens?: readonly { q: string; a: string }
                 />
               </button>
             </h3>
-            <div
+            <motion.div
               id={`faq-${i}`}
-              className={`grid transition-[grid-template-rows] duration-350 ease-jura ${
-                ativo ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-              }`}
+              initial={false}
+              animate={{ height: ativo ? "auto" : 0, opacity: ativo ? 1 : 0 }}
+              transition={{ duration: reduce ? 0 : 0.28, ease: [0.16, 1, 0.3, 1] }}
+              inert={!ativo}
+              aria-hidden={!ativo}
+              className="overflow-hidden"
             >
               <div className="overflow-hidden">
                 <p className="max-w-[62ch] pb-6 text-[0.975rem] leading-relaxed text-muted">
                   {item.a}
                 </p>
               </div>
-            </div>
+            </motion.div>
           </div>
         );
       })}
     </div>
+    </>
   );
 }
