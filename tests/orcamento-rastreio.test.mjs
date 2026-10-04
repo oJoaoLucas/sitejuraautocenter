@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { afterEach, test } from "node:test";
-import { normalizarMedidaPneu, quantidadePneusValida } from "../src/lib/medida-pneu.ts";
+import { mascararMedidaPneu, normalizarMedidaPneu, quantidadePneusValida } from "../src/lib/medida-pneu.ts";
 import { eventoValido, hostLocal, iniciarRastreio, rastrear } from "../src/lib/rastreio.ts";
 
 const consentimentoAceito = () => JSON.stringify({ versao: 1, anuncios: true, mapa: false, atualizadoEm: Date.now() });
@@ -30,6 +30,15 @@ test("rejeita texto, medidas incompletas, zeros e conteúdo extra", () => {
   for (const valor of ["", " ", "abcdef", "123456", "185/65", "185/65 R", "185//65 R15", "000/00 R00", "185/65 R00", "185/65 R15 promoção", "<script>", "1".repeat(41)]) {
     assert.equal(normalizarMedidaPneu(valor), null, valor);
   }
+});
+
+test("máscara monta a medida a partir de até sete números", () => {
+  for (const [entrada, esperado] of [
+    ["", ""], ["185", "185"], ["1856", "185/6"], ["18565", "185/65"], ["185651", "185/65 R1"],
+    ["1856515", "185/65 R15"], ["185651599", "185/65 R15"], ["185/65 R1", "185/65 R1"], ["185/65 R", "185/65"],
+    ["205/55 ZR16 91V", "205/55 R16"], ["abc", ""],
+  ]) assert.equal(mascararMedidaPneu(entrada), esperado, entrada);
+  assert.equal(normalizarMedidaPneu(mascararMedidaPneu("1856515")), "185/65 R15");
 });
 
 test("aceita somente as quantidades previstas no formulário", () => {

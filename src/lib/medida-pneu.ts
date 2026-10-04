@@ -30,6 +30,12 @@ export function normalizarMedidaPneu(valor: string): string | null {
   return null;
 }
 
+/** Máscara do campo: a pessoa digita só os sete números e o campo monta "185/65 R15". */
+export function mascararMedidaPneu(valor: string): string {
+  const d = valor.replace(/\D/g, "").slice(0, 7);
+  return d.slice(0, 3) + (d.length > 3 ? `/${d.slice(3, 5)}` : "") + (d.length > 5 ? ` R${d.slice(5)}` : "");
+}
+
 export function quantidadePneusValida(valor: string): boolean {
   return ["1", "2", "3", "4"].includes(valor);
 }

@@ -3,7 +3,7 @@
 import { useId, useRef, useState, useSyncExternalStore } from "react";
 import { mensagemPneus, site, whats } from "@/lib/site";
 import { previaLocal, rastrear } from "@/lib/rastreio";
-import { normalizarMedidaPneu, quantidadePneusValida } from "@/lib/medida-pneu";
+import { mascararMedidaPneu, normalizarMedidaPneu, quantidadePneusValida } from "@/lib/medida-pneu";
 import { Stars, WhatsAppIcon } from "./icons";
 
 function semInscricao() { return () => {}; }
@@ -95,13 +95,13 @@ export function QuoteForm({
           value={medida}
           disabled={semMedida || !interativo}
           onChange={(e) => {
-            setMedida(e.target.value);
+            setMedida(mascararMedidaPneu(e.target.value));
             if (erro) setErro(null);
             setPedido(null);
           }}
           placeholder="185/65 R15"
+          inputMode="numeric"
           autoComplete="off"
-          autoCapitalize="characters"
           spellCheck={false}
           maxLength={40}
           aria-invalid={erro ? true : undefined}
@@ -116,7 +116,7 @@ export function QuoteForm({
           <p id={`${id}-dica`} className="text-[0.78rem] text-soft">
             {semMedida
               ? "Sem problema. Depois de abrir o WhatsApp, é só mandar uma foto do pneu."
-              : "Procure na lateral do pneu: 185 é a largura, 65 é o perfil e R15 indica o aro."}
+              : "Digite só os números da lateral do pneu: 1856515 vira 185/65 R15."}
           </p>
         )}
 

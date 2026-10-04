@@ -36,19 +36,32 @@ export function Reveal({
   const [scope, animate] = useAnimate();
   const visivel = useInView(scope, { once: true, amount: 0.12, margin: "0px 0px -24px 0px" });
   const animado = useRef(false);
+  const oculto = useRef(false);
   const M = motion[as];
 
   // O HTML nasce visível. Sem JS ou antes da hidratação, o conteúdo continua
   // legível; a animação só começa depois que a página está interativa.
   useEffect(() => {
-    if ((!entrada && !visivel) || !scope.current || reduce === null) return;
+    const el: HTMLElement | null = scope.current;
+    if (!el || reduce === null) return;
     if (reduce) {
-      animate(scope.current, { opacity: 1, y: 0 }, { duration: 0 });
+      if (oculto.current) animate(el, { opacity: 1, y: 0 }, { duration: 0 });
+      oculto.current = false;
       return;
     }
     if (animado.current) return;
+    if (!entrada && !visivel) {
+      // Esconde só o que ainda está abaixo da tela. O que a pessoa já viu
+      // fica como está: sumir e voltar daria uma piscada.
+      if (!oculto.current && el.getBoundingClientRect().top >= window.innerHeight) {
+        animate(el, { opacity: 0 }, { duration: 0 });
+        oculto.current = true;
+      }
+      return;
+    }
     animado.current = true;
-    animate(scope.current, { opacity: [0, 1], y: [y, 0] }, {
+    if (!entrada && !oculto.current) return;
+    animate(el, { opacity: [0, 1], y: [y, 0] }, {
       duration: 0.55, delay, ease: [0.16, 1, 0.3, 1],
     });
   }, [animate, delay, entrada, reduce, scope, visivel, y]);
