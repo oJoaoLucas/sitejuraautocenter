@@ -38,6 +38,12 @@ export function lerConsentimento(): Consentimento | null {
   return cache;
 }
 
+/** Medição de anúncios vale desde a primeira visita; só uma recusa explícita a desliga. */
+export function medicaoPermitida(): boolean {
+  const escolha = lerConsentimento();
+  return escolha === null || escolha.anuncios;
+}
+
 /** Retorna se foi possível guardar a escolha entre visitas. */
 export function salvarConsentimento(opcoes: Pick<Consentimento, "anuncios" | "mapa">): boolean {
   escolhaDaVisita = { versao: 1, anuncios: opcoes.anuncios, mapa: opcoes.mapa, atualizadoEm: Date.now() };

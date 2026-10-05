@@ -14,17 +14,20 @@ import { useConsentimento } from "./use-consentimento";
  */
 export function Rastreio() {
   const escolha = useConsentimento();
+  // undefined = o navegador ainda não leu a escolha; null = sem escolha (mede); false = recusou.
+  const estado = escolha === undefined ? "lendo" : escolha === null || escolha.anuncios ? "medir" : "recusado";
   useEffect(() => {
-    if (!escolha?.anuncios) { revogarRastreio(); return; }
+    if (estado === "lendo") return;
+    if (estado === "recusado") { revogarRastreio(); return; }
     if (!iniciarRastreio()) return;
-    // Modo básico: sem autorização, nem o script externo é solicitado.
+    // Quem recusou nunca chega aqui: o script externo nem é solicitado.
     const script = document.createElement("script");
     script.id = "google-ads-gtag";
     script.src = `https://www.googletagmanager.com/gtag/js?id=${ADS_ID}`;
     script.async = true;
     document.head.appendChild(script);
     return () => { script.remove(); };
-  }, [escolha?.anuncios]);
+  }, [estado]);
   useEffect(() => {
     function aoClicar(e: MouseEvent) {
       if (e.defaultPrevented) return;

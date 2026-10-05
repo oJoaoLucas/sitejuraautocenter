@@ -63,16 +63,18 @@ original conserva seu hash. Não muda enquadramento, cores ou conteúdo das foto
 
 ## Privacidade e validação local
 
-Mapa e Google Ads começam desativados. O aviso tem somente Aceitar e Recusar:
-aceitar libera ambos; recusar bloqueia ambos. O link Cookies no rodapé reabre
+A medição do Google Ads vale desde a primeira visita; o mapa começa desativado.
+O aviso tem somente Aceitar e Recusar: aceitar libera o mapa e mantém a medição;
+recusar bloqueia os dois. O aviso fica visível em toda visita e só some
+depois de recusar; Aceitar não o fecha. O link Cookies no rodapé reabre
 o mesmo aviso, sem painel de personalização. Escolhas antigas são preservadas
 até a pessoa decidir novamente.
 A preferência `jura-privacidade-v1` expira após 180 dias. O aviso antigo não autoriza
 os recursos novos. Se o armazenamento falhar, a escolha vale só na visita.
 
-O Ads usa consentimento básico: script e eventos bloqueados até autorização,
-personalização negada e nenhuma recuperação de eventos anteriores ao aceite.
-Revogar uma tag já carregada nega os usos, tenta remover cookies `_gcl_`
+O Ads mede desde a primeira visita, com personalização sempre negada. Quem
+recusa não carrega o script nem tem eventos medidos ou guardados para depois.
+Recusar com a tag já carregada nega os usos, tenta remover cookies `_gcl_`
 acessíveis no domínio e recarrega a página. Cookies de outros domínios não
 podem ser apagados pelo site. Configuração real e recebimento no Ads ainda
 precisam ser conferidos após uma publicação autorizada.

@@ -108,11 +108,5 @@ html[data-menu-aberto="true"] [aria-label="Aviso de cookies"] {
   pointer-events: none;
 }
 
-/* No celular, o aviso já ocupa a parte inferior da tela. O contato continua
-   acessível nos CTAs da página, sem acrescentar uma segunda faixa fixa. */
-@media (max-width: 639px) {
-  html[data-aviso-cookies="true"] .whats-float {
-    visibility: hidden;
-    pointer-events: none;
-  }
-}
+/* O aviso é permanente e compacto no celular; o botão flutuante sobe pela
+   altura dele (--cookie-h) e continua visível acima da faixa. */

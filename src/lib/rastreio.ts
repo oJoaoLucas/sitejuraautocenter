@@ -1,4 +1,4 @@
-import { lerConsentimento } from "./consentimento.ts";
+import { medicaoPermitida } from "./consentimento.ts";
 
 /**
  * Medição das ações que importam, cada uma separada das outras.
@@ -7,6 +7,10 @@ import { lerConsentimento } from "./consentimento.ts";
  * Cada acionamento emite um evento descritivo e uma conversão Ads, com
  * rótulos já existentes. O evento descritivo não cria sozinho um relatório.
  * Na prévia local, apenas registra no console; nenhuma conversão é enviada.
+ *
+ * A medição vale desde a primeira visita, sem esperar o aceite, com
+ * personalização de anúncios sempre negada. Recusar no aviso a desliga e
+ * descarta os eventos; eventos feitos após recusar nunca são reenviados.
  */
 
 export const ADS_ID = "AW-18451927105";
@@ -53,7 +57,7 @@ function enfileirar() {
 const NEGADO = { ad_storage: "denied", ad_user_data: "denied", ad_personalization: "denied", analytics_storage: "denied" };
 
 export function iniciarRastreio(): boolean {
-  if (previaLocal() || !lerConsentimento()?.anuncios) return false;
+  if (previaLocal() || !medicaoPermitida()) return false;
   if (window.juraAdsIniciado) return true;
   window.dataLayer ??= [];
   window.gtag ??= enfileirar;
@@ -90,8 +94,8 @@ export function rastrear(evento: Evento, params: Record<string, string | number 
     return;
   }
 
-  // Nenhum evento anterior à autorização é guardado ou reenviado.
-  if (!lerConsentimento()?.anuncios) return;
+  // Quem recusou não é medido, e nada é guardado para enviar depois.
+  if (!medicaoPermitida()) return;
   iniciarRastreio();
 
   // Mantém eventos autorizados na fila se o script externo ainda estiver carregando.

@@ -7,7 +7,7 @@ import { revogarRastreio } from "@/lib/rastreio";
 import { useConsentimento } from "./use-consentimento";
 
 const ABRIR = "jura-abrir-privacidade";
-const botao = "min-h-11 rounded-sm border border-cream/50 px-5 py-2 font-ui text-sm font-semibold text-cream transition-colors hover:bg-cream/10";
+const botao = "min-h-11 flex-1 rounded-sm border border-cream/50 px-5 py-2 font-ui text-sm font-semibold text-cream transition-colors hover:bg-cream/10 lg:flex-none";
 
 /** Reabre o mesmo aviso de duas opções para mudar a decisão. */
 export function PreferenciasCookies({ className = "" }: { className?: string }) {
@@ -21,7 +21,8 @@ export function CookieBanner() {
   const faixa = useRef<HTMLDivElement>(null);
   const primeiroBotao = useRef<HTMLButtonElement>(null);
   const origem = useRef<HTMLElement | null>(null);
-  const visivel = escolha === null || aberto;
+  // O aviso fica na tela até a pessoa recusar. undefined = ainda lendo a escolha (não pisca no HTML).
+  const visivel = (escolha !== undefined && escolha?.anuncios !== false) || aberto;
 
   useEffect(() => {
     function abrir() {
@@ -63,10 +64,11 @@ export function CookieBanner() {
 
   return (
     <>
-      {visivel && <div ref={faixa} role="region" aria-label="Aviso de cookies" className="js-only fixed inset-x-0 bottom-0 z-60 max-h-[70dvh] overflow-y-auto border-t border-line bg-ink-deep/95 px-5 py-4 backdrop-blur-sm sm:px-8">
-        <div className="mx-auto grid w-full max-w-[1280px] gap-3 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-6">
-          <p className="max-w-2xl text-sm leading-relaxed text-muted">
-            Usamos cookies para o mapa e a medição de anúncios. Você pode aceitar ou recusar. <Link href="/privacidade" className="text-cream underline underline-offset-4">Política de Privacidade</Link>.
+      {visivel && <div ref={faixa} role="region" aria-label="Aviso de cookies" className="js-only fixed inset-x-0 bottom-0 z-60 max-h-[70dvh] overflow-y-auto border-t border-line bg-ink-deep/95 px-4 py-2.5 backdrop-blur-sm sm:px-8 sm:py-4">
+        <div className="mx-auto grid w-full max-w-[1280px] gap-2 sm:gap-3 lg:grid-cols-[1fr_auto] lg:items-center lg:gap-6">
+          <p className="max-w-2xl text-xs leading-snug text-muted sm:text-sm sm:leading-relaxed">
+            <span className="sm:hidden">Medimos os cliques dos anúncios; o mapa só com seu aceite. Recusar desativa os dois. </span>
+            <span className="hidden sm:inline">Medimos os cliques de contato dos anúncios com o Google Ads e só mostramos o mapa se você aceitar. Recusar desativa a medição e o mapa. </span><Link href="/privacidade" className="text-cream underline underline-offset-4">Política de Privacidade</Link>.
           </p>
           <div className="flex gap-2">
             <button ref={primeiroBotao} type="button" onClick={() => salvar(true)} className={botao}>Aceitar</button>

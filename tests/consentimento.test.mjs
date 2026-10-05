@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { afterEach, test } from "node:test";
-import { CHAVE_CONSENTIMENTO, VALIDADE_CONSENTIMENTO, interpretarConsentimento, lerConsentimento, salvarConsentimento, acompanharConsentimento } from "../src/lib/consentimento.ts";
+import { CHAVE_CONSENTIMENTO, VALIDADE_CONSENTIMENTO, interpretarConsentimento, lerConsentimento, medicaoPermitida, salvarConsentimento, acompanharConsentimento } from "../src/lib/consentimento.ts";
 import { iniciarRastreio, rastrear, revogarRastreio } from "../src/lib/rastreio.ts";
 
 const anterior = { window: globalThis.window, document: globalThis.document };
@@ -19,15 +19,15 @@ function navegador(raw = null) {
   return { win, storage, recargas: () => recargas };
 }
 
-test("storage bloqueado não autoriza sozinho e permite escolha só nesta visita", () => {
+test("storage bloqueado não autoriza o mapa e a recusa vale nesta visita", () => {
   navegador();
   window.localStorage.getItem = () => { throw new Error("bloqueado"); };
   window.localStorage.setItem = () => { throw new Error("bloqueado"); };
   assert.equal(lerConsentimento(), null);
+  assert.equal(medicaoPermitida(), true);
+  assert.equal(salvarConsentimento({ anuncios: false, mapa: false }), false);
+  assert.equal(medicaoPermitida(), false);
   assert.equal(iniciarRastreio(), false);
-  assert.equal(salvarConsentimento({ anuncios: false, mapa: true }), false);
-  assert.equal(lerConsentimento().mapa, true);
-  assert.equal(lerConsentimento().anuncios, false);
 });
 
 test("ausente, corrompido, aviso antigo ou formato incorreto nunca autoriza", () => {
@@ -72,13 +72,25 @@ test("mudança de preferência em outra aba é notificada, outras chaves são ig
   sair();
 });
 
-test("sem escolha, recusado, expirado ou somente mapa não inicia Ads nem fila", () => {
-  for (const raw of [null, "1", criarRegistro(), criarRegistro({ mapa: true }), criarRegistro({ anuncios: true, atualizadoEm: Date.now() - VALIDADE_CONSENTIMENTO })]) {
+test("recusa explícita não inicia Ads nem fila, com ou sem mapa", () => {
+  for (const raw of [criarRegistro(), criarRegistro({ mapa: true })]) {
     navegador(raw);
+    assert.equal(medicaoPermitida(), false);
     assert.equal(iniciarRastreio(), false);
     rastrear("orcamento_pneus");
     assert.equal(window.dataLayer, undefined);
     assert.equal(window.gtag, undefined);
+  }
+});
+
+test("sem escolha, aviso antigo, inválido ou expirado mede, sem personalização", () => {
+  for (const raw of [null, "1", "{", criarRegistro({ versao: 2 }), criarRegistro({ atualizadoEm: Date.now() - VALIDADE_CONSENTIMENTO })]) {
+    navegador(raw);
+    assert.equal(medicaoPermitida(), true, String(raw));
+    assert.equal(iniciarRastreio(), true, String(raw));
+    assert.equal(window.dataLayer[1][2].ad_personalization, "denied");
+    rastrear("whatsapp_click");
+    assert.equal(window.dataLayer.some((c) => c[0] === "event" && c[1] === "whatsapp_click"), true);
   }
 });
 
@@ -97,10 +109,12 @@ test("consentimento negado precede config; personalização permanece negada", (
   assert.equal(window.dataLayer.length, 4);
 });
 
-test("eventos antes de aceitar são descartados, não recuperados depois", () => {
+test("eventos após recusar são descartados, não recuperados se aceitar depois", () => {
   navegador();
+  salvarConsentimento({ anuncios: false, mapa: false });
   rastrear("whatsapp_click");
-  salvarConsentimento({ anuncios: true, mapa: false });
+  assert.equal(window.dataLayer, undefined);
+  salvarConsentimento({ anuncios: true, mapa: true });
   iniciarRastreio();
   assert.equal(window.dataLayer.length, 4);
   assert.equal(window.dataLayer.some((c) => c[0] === "event"), false);
