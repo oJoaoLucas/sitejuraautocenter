@@ -59,6 +59,9 @@ export const site = {
 /** Telefone fixo em formato de link (tel:), pra funcionar com um toque no celular. */
 export const telefoneFixoLink = `tel:+55${site.telefoneFixo.replace(/\D/g, "")}`;
 
+/** Celular da oficina (o mesmo do WhatsApp) em formato de link (tel:), pro botão "Ligar agora". */
+export const celularLink = `tel:+55${site.whatsappExibicao.replace(/\D/g, "")}`;
+
 /* ------------------------------------------------------------------ */
 
 export const cta = {

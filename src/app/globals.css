@@ -108,5 +108,5 @@ html[data-menu-aberto="true"] [aria-label="Aviso de cookies"] {
   pointer-events: none;
 }
 
-/* O aviso é permanente e compacto no celular; o botão flutuante sobe pela
+/* O aviso é compacto no celular; enquanto aparece, o botão flutuante sobe pela
    altura dele (--cookie-h) e continua visível acima da faixa. */

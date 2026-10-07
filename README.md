@@ -65,8 +65,8 @@ original conserva seu hash. Não muda enquadramento, cores ou conteúdo das foto
 
 A medição do Google Ads vale desde a primeira visita; o mapa começa desativado.
 O aviso tem somente Aceitar e Recusar: aceitar libera o mapa e mantém a medição;
-recusar bloqueia os dois. O aviso fica visível em toda visita e só some
-depois de recusar; Aceitar não o fecha. O link Cookies no rodapé reabre
+recusar bloqueia os dois. O aviso fica visível até a pessoa escolher; Aceitar
+e Recusar o fecham. O link Cookies no rodapé reabre
 o mesmo aviso, sem painel de personalização. Escolhas antigas são preservadas
 até a pessoa decidir novamente.
 A preferência `jura-privacidade-v1` expira após 180 dias. O aviso antigo não autoriza

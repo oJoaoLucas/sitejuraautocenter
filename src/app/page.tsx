@@ -11,7 +11,7 @@ import { QuoteForm } from "@/components/quote-form";
 import { Reveal } from "@/components/reveal";
 import { Servicos } from "@/components/servicos";
 import { Btn, BtnWhats, Eyebrow, SpeedBars, Wrap } from "@/components/ui";
-import { avaliacoesGoogle, cta, faq, site, telefoneFixoLink } from "@/lib/site";
+import { avaliacoesGoogle, celularLink, cta, faq, site, telefoneFixoLink } from "@/lib/site";
 
 export const metadata: Metadata = {
   description:
@@ -74,8 +74,8 @@ export default function Home() {
               <BtnWhats href={cta.whatsPrincipal} className="max-sm:w-full" local="hero">
                 Chamar no WhatsApp
               </BtnWhats>
-              <Btn href="#orcamento" variant="ghost" className="max-sm:w-full">
-                Orçamento de pneus
+              <Btn href={celularLink} variant="ghost" className="max-sm:w-full" local="hero">
+                Ligar agora
               </Btn>
             </Reveal>
             <p className="mt-4 text-[0.875rem] text-muted">

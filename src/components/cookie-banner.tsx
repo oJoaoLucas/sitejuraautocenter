@@ -21,8 +21,8 @@ export function CookieBanner() {
   const faixa = useRef<HTMLDivElement>(null);
   const primeiroBotao = useRef<HTMLButtonElement>(null);
   const origem = useRef<HTMLElement | null>(null);
-  // O aviso fica na tela até a pessoa recusar. undefined = ainda lendo a escolha (não pisca no HTML).
-  const visivel = (escolha !== undefined && escolha?.anuncios !== false) || aberto;
+  // O aviso fica na tela até a pessoa escolher. undefined = ainda lendo a escolha (não pisca no HTML).
+  const visivel = escolha === null || aberto;
 
   useEffect(() => {
     function abrir() {

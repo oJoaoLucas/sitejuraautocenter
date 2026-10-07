@@ -18,7 +18,7 @@ export const ADS_ID = "AW-18451927105";
 export type Evento =
   | "orcamento_pneus" // preparou um pedido para iniciar contato no WhatsApp
   | "whatsapp_click" // clicou em qualquer botão/link de WhatsApp
-  | "telefone_click" // clicou no telefone fixo
+  | "telefone_click" // clicou em ligar (fixo ou celular)
   | "tracar_rota_click" // clicou em "Traçar rota"
   | "fila_click"; // clicou em "Ver como está a fila"
 
