@@ -178,129 +178,13 @@ export default function Home() {
       </section>
 
       {/* ============================================================
-          5. POR QUE O JURA
-          Pilha numerada sem cards, sobre a textura de pneu da marca.
-          ============================================================ */}
-      <section id="por-que" className="tread-bg relative scroll-mt-20 overflow-hidden py-14 lg:py-20">
-        <Wrap className="relative">
-          <Reveal className="max-w-2xl">
-            <Eyebrow>Por que escolher o Jura</Eyebrow>
-            <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
-              Por que o povo volta <span className="text-jura-title">pro Jura</span>
-            </h2>
-          </Reveal>
-
-          <Diferenciais />
-        </Wrap>
-      </section>
-
-      {/* ============================================================
-          6. AVALIAÇÕES DO GOOGLE
-          Depoimentos reais, copiados do perfil do Jura no Google
-          (prints em /avaliacoes). Nunca inventar depoimento.
-          ============================================================ */}
-      <section id="avaliacoes" className="scroll-mt-20 border-y border-line bg-ink-deep py-14 lg:py-20">
-        <Wrap>
-          <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-6">
-            <div className="max-w-xl">
-              <Eyebrow>Quem já passou por aqui</Eyebrow>
-              <h2 className="text-[clamp(2rem,5vw,2.75rem)]">O que dizem no Google</h2>
-              <p className="mt-4 leading-relaxed text-muted">
-                Mais de trezentas pessoas de Araras e região já avaliaram o Jura. A nota é essa,
-                e ela é pública.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-4 rounded-md border border-line bg-surface px-5 py-4">
-              <span className="font-display text-5xl leading-[0.85] text-offer">
-                {site.prova.nota}
-              </span>
-              <span className="text-[0.8125rem] text-soft">
-                <Stars className="mb-1 size-4" />
-                <br />
-                mais de {site.prova.avaliacoes} avaliações
-              </span>
-            </div>
-          </Reveal>
-
-          <div className="no-scrollbar -mx-5 grid snap-x snap-mandatory grid-flow-col auto-cols-[minmax(292px,1fr)] gap-3.5 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
-            {avaliacoesGoogle.map((a) => (
-              <figure
-                key={a.nome}
-                className="flex snap-start flex-col gap-3.5 rounded-md border border-line bg-surface p-6"
-              >
-                <Stars className="size-[17px]" />
-                <p className="line-clamp-6 text-[0.9rem] leading-relaxed text-soft">{a.texto}</p>
-                <figcaption className="mt-auto border-t border-line pt-3.5">
-                  <b className="block font-ui text-[0.9rem] font-bold text-cream">{a.nome}</b>
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-
-          <Reveal delay={0.1} className="mt-8 flex justify-center">
-            <Btn href={site.avaliarUrl} variant="ghost" external>
-              <Stars className="size-4" />
-              Deixar uma avaliação
-            </Btn>
-          </Reveal>
-        </Wrap>
-      </section>
-
-      {/* ============================================================
-          7. PRÉVIA DA HISTÓRIA
-          ============================================================ */}
-      <section className="py-14 lg:py-20">
-        <Wrap>
-          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-18">
-            <Reveal>
-              <figure className="relative overflow-hidden rounded-md border border-line">
-                <Foto
-                  src="/img/loja-antiga-2019.webp"
-                  alt="A primeira loja do Jura Auto Center em Araras, antes da mudança"
-                  width={1200}
-                  height={750}
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="aspect-[16/10] w-full object-cover saturate-[0.85] contrast-[1.05]"
-                />
-                <span className="absolute top-4 left-4 skew-jura rounded-sm bg-jura px-3 py-1.5">
-                  <span className="unskew-jura block font-ui text-[0.72rem] font-extrabold tracking-[0.08em] text-white uppercase">
-                    A loja de 2019
-                  </span>
-                </span>
-              </figure>
-            </Reveal>
-
-            <Reveal delay={0.12}>
-              <Eyebrow>De onde a gente veio</Eyebrow>
-              <h2 className="mb-4 text-[clamp(2rem,5vw,2.75rem)]">
-                Tudo começou em <span className="text-jura-title">um lugar bem menor</span>
-              </h2>
-              <p className="leading-relaxed text-muted">
-                Em 15 de junho de 2019 o Jura abriu a porta pela primeira vez, num ponto pequeno,
-                com muito menos ferramenta e nenhum cliente na agenda. Cinco anos depois veio o
-                auto center novo, os elevadores e o paredão de pneus que você vê hoje.
-              </p>
-              <p className="mt-4 leading-relaxed text-muted">
-                Quem mudou de endereço foi a loja. O jeito de atender continuou igual.
-              </p>
-              <Btn href="/historia" variant="ghost" className="mt-7">
-                Conheça a história
-                <ArrowIcon className="size-5" />
-              </Btn>
-            </Reveal>
-          </div>
-        </Wrap>
-      </section>
-
-      {/* ============================================================
-          8. ONDE ESTAMOS
+          4. ONDE ESTAMOS
           Mapa + endereço + a fachada, pra pessoa reconhecer o lugar
           quando chegar na rua.
           ============================================================ */}
       <section
         id="onde-estamos"
-        className="scroll-mt-20 border-t border-line bg-ink-deep py-14 lg:py-20"
+        className="scroll-mt-20 border-y border-line bg-ink-deep py-14 lg:py-20"
       >
         <Wrap>
           <Reveal className="mb-10 max-w-2xl">
@@ -420,9 +304,125 @@ export default function Home() {
       </section>
 
       {/* ============================================================
-          9. DÚVIDAS
+          5. POR QUE O JURA
+          Pilha numerada sem cards, sobre a textura de pneu da marca.
           ============================================================ */}
-      <section id="duvidas" className="scroll-mt-20 py-14 lg:py-20">
+      <section id="por-que" className="tread-bg relative scroll-mt-20 overflow-hidden py-14 lg:py-20">
+        <Wrap className="relative">
+          <Reveal className="max-w-2xl">
+            <Eyebrow>Por que escolher o Jura</Eyebrow>
+            <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
+              Por que o povo volta <span className="text-jura-title">pro Jura</span>
+            </h2>
+          </Reveal>
+
+          <Diferenciais />
+        </Wrap>
+      </section>
+
+      {/* ============================================================
+          6. AVALIAÇÕES DO GOOGLE
+          Depoimentos reais, copiados do perfil do Jura no Google
+          (prints em /avaliacoes). Nunca inventar depoimento.
+          ============================================================ */}
+      <section id="avaliacoes" className="scroll-mt-20 border-y border-line bg-ink-deep py-14 lg:py-20">
+        <Wrap>
+          <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-6">
+            <div className="max-w-xl">
+              <Eyebrow>Quem já passou por aqui</Eyebrow>
+              <h2 className="text-[clamp(2rem,5vw,2.75rem)]">O que dizem no Google</h2>
+              <p className="mt-4 leading-relaxed text-muted">
+                Mais de trezentas pessoas de Araras e região já avaliaram o Jura. A nota é essa,
+                e ela é pública.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-4 rounded-md border border-line bg-surface px-5 py-4">
+              <span className="font-display text-5xl leading-[0.85] text-offer">
+                {site.prova.nota}
+              </span>
+              <span className="text-[0.8125rem] text-soft">
+                <Stars className="mb-1 size-4" />
+                <br />
+                mais de {site.prova.avaliacoes} avaliações
+              </span>
+            </div>
+          </Reveal>
+
+          <div className="no-scrollbar -mx-5 grid snap-x snap-mandatory grid-flow-col auto-cols-[minmax(292px,1fr)] gap-3.5 overflow-x-auto px-5 pb-4 sm:-mx-8 sm:px-8 lg:-mx-12 lg:px-12">
+            {avaliacoesGoogle.map((a) => (
+              <figure
+                key={a.nome}
+                className="flex snap-start flex-col gap-3.5 rounded-md border border-line bg-surface p-6"
+              >
+                <Stars className="size-[17px]" />
+                <p className="line-clamp-6 text-[0.9rem] leading-relaxed text-soft">{a.texto}</p>
+                <figcaption className="mt-auto border-t border-line pt-3.5">
+                  <b className="block font-ui text-[0.9rem] font-bold text-cream">{a.nome}</b>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+
+          <Reveal delay={0.1} className="mt-8 flex justify-center">
+            <Btn href={site.avaliarUrl} variant="ghost" external>
+              <Stars className="size-4" />
+              Deixar uma avaliação
+            </Btn>
+          </Reveal>
+        </Wrap>
+      </section>
+
+      {/* ============================================================
+          7. PRÉVIA DA HISTÓRIA
+          ============================================================ */}
+      <section className="py-14 lg:py-20">
+        <Wrap>
+          <div className="grid items-center gap-10 lg:grid-cols-2 lg:gap-18">
+            <Reveal>
+              <figure className="relative overflow-hidden rounded-md border border-line">
+                <Foto
+                  src="/img/loja-antiga-2019.webp"
+                  alt="A primeira loja do Jura Auto Center em Araras, antes da mudança"
+                  width={1200}
+                  height={750}
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="aspect-[16/10] w-full object-cover saturate-[0.85] contrast-[1.05]"
+                />
+                <span className="absolute top-4 left-4 skew-jura rounded-sm bg-jura px-3 py-1.5">
+                  <span className="unskew-jura block font-ui text-[0.72rem] font-extrabold tracking-[0.08em] text-white uppercase">
+                    A loja de 2019
+                  </span>
+                </span>
+              </figure>
+            </Reveal>
+
+            <Reveal delay={0.12}>
+              <Eyebrow>De onde a gente veio</Eyebrow>
+              <h2 className="mb-4 text-[clamp(2rem,5vw,2.75rem)]">
+                Tudo começou em <span className="text-jura-title">um lugar bem menor</span>
+              </h2>
+              <p className="leading-relaxed text-muted">
+                Em 15 de junho de 2019 o Jura abriu a porta pela primeira vez, num ponto pequeno,
+                com muito menos ferramenta e nenhum cliente na agenda. Cinco anos depois veio o
+                auto center novo, os elevadores e o paredão de pneus que você vê hoje.
+              </p>
+              <p className="mt-4 leading-relaxed text-muted">
+                Quem mudou de endereço foi a loja. O jeito de atender continuou igual.
+              </p>
+              <Btn href="/historia" variant="ghost" className="mt-7">
+                Conheça a história
+                <ArrowIcon className="size-5" />
+              </Btn>
+            </Reveal>
+          </div>
+        </Wrap>
+      </section>
+
+      {/* ============================================================
+          8. DÚVIDAS
+          ============================================================ */}
+      <section id="duvidas" className="scroll-mt-20 border-t border-line py-14 lg:py-20">
         <Wrap>
           <Reveal className="max-w-2xl">
             <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
@@ -436,7 +436,7 @@ export default function Home() {
       </section>
 
       {/* ============================================================
-          10. CTA FINAL
+          9. CTA FINAL
           ============================================================ */}
       <section className="relative overflow-hidden bg-[linear-gradient(120deg,#1a0d11_0%,var(--color-ink)_55%)] py-14 lg:py-20">
         <Wrap className="relative">
