@@ -74,7 +74,7 @@ export default function Home() {
               <BtnWhats href={cta.whatsPrincipal} className="max-sm:w-full" local="hero">
                 Chamar no WhatsApp
               </BtnWhats>
-              <Btn href={celularLink} variant="red" className="max-sm:w-full" local="hero">
+              <Btn href={celularLink} variant="red" className="max-sm:w-full" evento="ligar_agora_click" local="hero">
                 <PhoneIcon className="size-5 shrink-0" />
                 Ligar agora
               </Btn>

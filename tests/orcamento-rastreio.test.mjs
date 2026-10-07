@@ -72,10 +72,10 @@ test("cada ação pública gera um evento descritivo e uma conversão distinta",
   globalThis.window = { location: { hostname: "www.juraautocenter.com.br", pathname: "/pneus" }, localStorage: { getItem: consentimentoAceito }, gtag: (...args) => chamadas.push(args) };
   iniciarRastreio();
   chamadas.length = 0;
-  const eventos = ["orcamento_pneus", "whatsapp_click", "telefone_click", "tracar_rota_click", "fila_click"];
+  const eventos = ["orcamento_pneus", "whatsapp_click", "telefone_click", "ligar_agora_click", "tracar_rota_click", "fila_click"];
   for (const evento of eventos) rastrear(evento, { local: "teste" });
-  assert.equal(chamadas.length, 10);
-  assert.equal(new Set(chamadas.filter((c) => c[1] === "conversion").map((c) => c[2].send_to)).size, 5);
+  assert.equal(chamadas.length, 12);
+  assert.equal(new Set(chamadas.filter((c) => c[1] === "conversion").map((c) => c[2].send_to)).size, 6);
   eventos.forEach((evento, i) => {
     assert.equal(chamadas[i * 2][1], evento);
     assert.equal(chamadas[i * 2][2].pagina, "/pneus");

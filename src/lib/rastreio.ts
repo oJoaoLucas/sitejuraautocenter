@@ -18,7 +18,8 @@ export const ADS_ID = "AW-18451927105";
 export type Evento =
   | "orcamento_pneus" // preparou um pedido para iniciar contato no WhatsApp
   | "whatsapp_click" // clicou em qualquer botão/link de WhatsApp
-  | "telefone_click" // clicou em ligar (fixo ou celular)
+  | "telefone_click" // clicou no telefone fixo
+  | "ligar_agora_click" // clicou em "Ligar agora" (celular)
   | "tracar_rota_click" // clicou em "Traçar rota"
   | "fila_click"; // clicou em "Ver como está a fila"
 
@@ -27,6 +28,7 @@ const CONVERSOES: Record<Evento, string> = {
   orcamento_pneus: `${ADS_ID}/EPo2COjbkfkcEMGgyN5E`,
   whatsapp_click: `${ADS_ID}/-sxgCNm3uf8cEMGgyN5E`,
   telefone_click: `${ADS_ID}/N3UeCNy3uf8cEMGgyN5E`,
+  ligar_agora_click: `${ADS_ID}/4PwQCL-PwJQdEMGgyN5E`,
   tracar_rota_click: `${ADS_ID}/D3ZSCN-3uf8cEMGgyN5E`,
   fila_click: `${ADS_ID}/XH8VCOK3uf8cEMGgyN5E`,
 };
@@ -114,6 +116,7 @@ export function eventoValido(valor: string | undefined): valor is Evento {
     valor === "orcamento_pneus" ||
     valor === "whatsapp_click" ||
     valor === "telefone_click" ||
+    valor === "ligar_agora_click" ||
     valor === "tracar_rota_click" ||
     valor === "fila_click"
   );
