@@ -9,11 +9,13 @@ import { cta, site } from "@/lib/site";
 import { WhatsAppIcon } from "./icons";
 
 const links = [
-  { href: "/pneus", label: "Pneus" },
   { href: "/#servicos", label: "Serviços" },
   { href: "/#onde-estamos", label: "Onde estamos" },
   { href: "/#por-que", label: "Por que o Jura" },
   { href: "/historia", label: "Nossa história" },
+  { href: "/pneus", label: "Pneus" },
+  { href: "/freios", label: "Freios" },
+  { href: "/suspensao", label: "Suspensão" },
 ];
 
 export function Header() {
@@ -93,7 +95,7 @@ export function Header() {
             : "h-[76px] border-transparent bg-transparent"
         }`}
       >
-        <div className="mx-auto flex w-full max-w-[1280px] items-center gap-6 px-5 sm:px-8 lg:px-12">
+        <div className="mx-auto flex w-full max-w-[1280px] items-center gap-4 px-5 sm:px-8 lg:px-8 xl:gap-6 xl:px-12">
           <Link href="/" aria-label={`${site.nome}, ir para o início`} onClick={() => setAberto(false)} className="shrink-0">
             {/* Logo branco (só silhueta) o tempo todo: fica limpo tanto sobre
                 a foto do hero quanto sobre o fundo sólido do header preso. */}
@@ -110,13 +112,13 @@ export function Header() {
             />
           </Link>
 
-          <nav className="ml-auto hidden items-center gap-7 lg:flex">
+          <nav className="ml-auto hidden items-center gap-5 xl:gap-7 lg:flex">
             {links.map((l) => (
               <Link
                 key={l.href}
                 href={l.href}
                 aria-current={pathname === l.href ? "page" : undefined}
-                className="group relative py-1 text-sm font-medium text-muted transition-colors hover:text-cream aria-[current=page]:text-cream"
+                className="group relative py-1 text-sm font-medium whitespace-nowrap text-muted transition-colors hover:text-cream aria-[current=page]:text-cream"
               >
                 {l.label}
                 <span className="absolute inset-x-0 bottom-0 h-0.5 origin-left skew-jura scale-x-0 bg-jura transition-transform duration-300 ease-jura group-hover:scale-x-100 group-aria-[current=page]:scale-x-100" />
@@ -124,15 +126,6 @@ export function Header() {
             ))}
           </nav>
 
-          <a
-            href={cta.whatsPrincipal}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-2 hidden h-11 items-center gap-2 rounded-sm bg-whats px-4 font-ui text-[0.8125rem] font-bold uppercase tracking-[0.05em] text-whats-ink transition-all duration-200 ease-jura hover:-translate-y-0.5 hover:bg-[#2ee878] lg:inline-flex"
-          >
-            <WhatsAppIcon className="size-[18px]" />
-            WhatsApp
-          </a>
 
           <button
             ref={botaoMenu}
