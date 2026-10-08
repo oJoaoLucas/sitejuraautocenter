@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { paginasServico } from "@/lib/servicos-paginas";
 import { cta } from "@/lib/site";
 import { WhatsAppIcon } from "./icons";
 
@@ -15,6 +16,8 @@ export function WhatsFloat() {
   // O export pode ser aberto com barra final; mantém a mesma rota na hidratação.
   const pathname = usePathname().replace(/\/+$/, "") || "/";
   const deIPneu = pathname === "/" || pathname === "/pneus";
+  // Nas páginas de freios e suspensão a conversa já abre falando do serviço.
+  const paginaServico = paginasServico.find((p) => p.rota === pathname);
   // Guarda de qual página é a última leitura: ao trocar de página o valor
   // antigo deixa de valer sozinho, sem precisar zerar o estado no efeito.
   // Em /pneus o formulário já está na primeira tela: começa escondido pra o
@@ -48,7 +51,7 @@ export function WhatsFloat() {
 
   return (
     <a
-      href={deIPneu ? cta.whatsPneus : cta.whatsPrincipal}
+      href={paginaServico ? paginaServico.whatsHref : deIPneu ? cta.whatsPneus : cta.whatsPrincipal}
       target="_blank"
       rel="noopener noreferrer"
       data-local="flutuante"

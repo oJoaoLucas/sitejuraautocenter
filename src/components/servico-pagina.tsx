@@ -1,67 +1,39 @@
-import type { Metadata } from "next";
+import Image from "next/image";
 import { Faq } from "@/components/faq";
 import { FaqSchema } from "@/components/faq-schema";
 import { Foto } from "@/components/foto";
 import { PhoneIcon, PinIcon, Stars } from "@/components/icons";
-import { QuoteForm } from "@/components/quote-form";
 import { Reveal } from "@/components/reveal";
 import { Btn, BtnWhats, SpeedBars, Wrap } from "@/components/ui";
-import {
-  avaliacoesGoogle,
-  celularLink,
-  cta,
-  faqPneus,
-  pneusPassos,
-  site,
-} from "@/lib/site";
+import { avaliacoesGoogle, celularLink, cta, site } from "@/lib/site";
+import { passosServico, type PaginaServico } from "@/lib/servicos-paginas";
 
-const titulo = "Pneus em Araras: nacionais, importados e remold";
-const descricao =
-  "Pneus nacionais, importados e remold em Araras/SP. Informe a medida e receba o preço pelo WhatsApp. Até 10x no cartão. Nota 4,9 no Google.";
+/**
+ * Molde das páginas de serviço (freios, suspensão). Mesma ordem da /pneus,
+ * trocando o formulário pelos sinais que a pessoa reconhece no carro:
+ * 1. primeira tela (título, WhatsApp, Ligar agora, nota) 2. o que fazemos
+ * 3. como funciona 4. avaliações 5. dúvidas 6. chamada final + endereço.
+ */
+export function ServicoPagina({ d }: { d: PaginaServico }) {
+  const depoimentos = d.depoimentos
+    .map((nome) => avaliacoesGoogle.find((a) => a.nome === nome))
+    .filter((a) => a !== undefined);
 
-export const metadata: Metadata = {
-  title: titulo,
-  description: descricao,
-  alternates: { canonical: "/pneus" },
-  openGraph: {
-    type: "website",
-    locale: "pt_BR",
-    siteName: site.nome,
-    title: `${titulo} | ${site.nome}`,
-    description: descricao,
-    url: "/pneus",
-    images: [{ url: "/img/og.jpg", width: 1200, height: 630, alt: "Fachada do Jura Auto Center" }],
-  },
-};
-
-/** Avaliações que falam de pneu ou de atendimento, na ordem em que aparecem. */
-const depoimentos = ["Gedaias Oliveira", "Renato Curtolo", "Gabriela Chinalia de Sena"]
-  .map((nome) => avaliacoesGoogle.find((a) => a.nome === nome))
-  .filter((a) => a !== undefined);
-
-export default function Pneus() {
   return (
     <>
-      <FaqSchema itens={faqPneus} />
+      <FaqSchema itens={d.faq} />
 
       {/* ============================================================
           1. PRIMEIRA TELA
-          Quem clicou no anúncio de pneu já vê o formulário aqui, sem
-          rolar. No celular: título, uma frase e o formulário.
+          Quem veio do anúncio reconhece o problema (sinais) e já tem
+          os dois caminhos de contato sem rolar.
           ============================================================ */}
-      <section id="orcamento" className="relative overflow-hidden pt-[92px] pb-12 sm:pt-[110px] lg:pb-20">
+      <section id="inicio" className="relative overflow-hidden pt-[92px] pb-12 sm:pt-[110px] lg:pb-20">
         <div className="absolute inset-0">
-          <Foto
-            src="/img/pneus-prateleira.webp"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[50%_40%]"
-          />
+          <Foto src={d.fotoHero} alt="" fill priority sizes="100vw" className="object-cover object-[50%_60%]" />
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-[linear-gradient(180deg,rgb(20_20_20/0.78)_0%,rgb(20_20_20/0.58)_45%,rgb(20_20_20/0.96)_100%),linear-gradient(92deg,rgb(20_20_20/0.88)_0%,rgb(20_20_20/0.3)_75%)]"
+            className="absolute inset-0 bg-[linear-gradient(180deg,rgb(20_20_20/0.82)_0%,rgb(20_20_20/0.66)_45%,rgb(20_20_20/0.96)_100%),linear-gradient(92deg,rgb(20_20_20/0.9)_0%,rgb(20_20_20/0.35)_75%)]"
           />
         </div>
 
@@ -69,79 +41,109 @@ export default function Pneus() {
           <div className="grid items-start gap-7 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <div className="lg:pt-6">
               <h1 className="text-[clamp(2.25rem,7vw,4.25rem)] [text-shadow:0_2px_24px_rgb(0_0_0/0.6)]">
-                <span className="block">Pneus nacionais,</span>
-                <span className="block text-jura-title">importados e remold</span>
-                <span className="block">em Araras</span>
+                <span className="block">{d.h1[0]}</span>
+                <span className="block text-jura-title">{d.h1[1]}</span>
+                <span className="block">{d.h1[2]}</span>
               </h1>
 
-              <p className="mt-4 max-w-md text-[1.025rem] leading-relaxed text-[#e4e4e4] lg:mt-5 lg:text-[1.075rem]">
-                Informe a medida e prepare seu pedido de orçamento pelo WhatsApp.
+              <p className="mt-4 max-w-lg text-[1.025rem] leading-relaxed text-[#e4e4e4] lg:mt-5 lg:text-[1.075rem]">
+                {d.lead}
               </p>
 
-              {/* Só no desktop: no celular o formulário já traz isso colado no botão. */}
-              <ul className="mt-8 hidden gap-3 lg:grid">
-                {[
-                  "Pagamento em até 10x no cartão",
-                  "Orçamento fechado antes da montagem",
-                ].map((item) => (
-                  <li key={item} className="flex items-center gap-3 text-[0.95rem] text-muted">
-                    <i className="block h-2 w-5 shrink-0 skew-jura rounded-[2px] bg-jura" aria-hidden="true" />
-                    {item}
+              <div className="mt-7 flex flex-wrap gap-3.5">
+                <BtnWhats href={d.whatsHref} className="max-sm:w-full" local="hero">
+                  Pedir no WhatsApp
+                </BtnWhats>
+                <Btn href={celularLink} variant="red" className="max-sm:w-full" evento="ligar_agora_click" local="hero">
+                  <PhoneIcon className="size-5 shrink-0" />
+                  Ligar agora
+                </Btn>
+              </div>
+
+              <p className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[0.875rem] text-muted">
+                <span className="flex items-center gap-2">
+                  <Stars className="size-4" />
+                  <b className="font-ui font-bold text-cream">{site.prova.nota}</b> no Google
+                </span>
+                <span>
+                  Pagamento em até <b className="font-ui font-bold text-cream">10x no cartão</b>
+                </span>
+              </p>
+            </div>
+
+            <div className="rounded-md border border-line bg-surface/95 p-5 shadow-[0_24px_60px_rgb(0_0_0/0.45)] backdrop-blur-sm sm:p-7">
+              <h2 className="text-[1.75rem] leading-none sm:text-[2rem]">
+                Reconhece algum <span className="text-jura-title">desses sinais?</span>
+              </h2>
+              <ul className="mt-5 grid gap-3">
+                {d.sinais.map((s) => (
+                  <li key={s} className="flex items-start gap-3 text-[0.95rem] text-muted">
+                    <i className="mt-2 block h-2 w-5 shrink-0 skew-jura rounded-[2px] bg-jura" aria-hidden="true" />
+                    {s}
                   </li>
                 ))}
               </ul>
-            </div>
-
-            <div>
-              <div className="rounded-md border border-line bg-surface/95 p-5 shadow-[0_24px_60px_rgb(0_0_0/0.45)] backdrop-blur-sm sm:p-7">
-                <h2 className="text-[1.75rem] leading-none sm:text-[2rem]">
-                  Peça o preço <span className="text-jura-title">pelo WhatsApp</span>
-                </h2>
-                <QuoteForm
-                  local="pneus"
-                  botao="Continuar no WhatsApp"
-                  className="mt-5 max-w-none"
-                />
-              </div>
-              <Btn href={celularLink} variant="red" className="mt-3.5 w-full" evento="ligar_agora_click" local="pneus-form">
-                <PhoneIcon className="size-5 shrink-0" />
-                Ligar agora
-              </Btn>
+              <p className="mt-5 border-t border-line pt-4 text-[0.875rem] leading-relaxed text-soft">
+                {d.sinaisNota}
+              </p>
             </div>
           </div>
         </Wrap>
       </section>
 
       {/* ============================================================
-          2. COMO FUNCIONA + FOTO DO ESTOQUE
+          2. O QUE FAZEMOS
           ============================================================ */}
-      <section className="py-14 lg:py-20">
+      <section id="servico" className="scroll-mt-20 py-14 lg:py-20">
+        <Wrap>
+          <Reveal className="mb-10 max-w-2xl lg:mb-12">
+            <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
+              O que a gente <span className="text-jura-title">faz</span>
+            </h2>
+            <SpeedBars className="mt-6" />
+          </Reveal>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {d.faz.map((f, i) => (
+              <Reveal key={f.titulo} delay={i * 0.05} className="rounded-md border border-line bg-surface px-5 pt-5 pb-6">
+                <div className="mb-3.5 grid size-11 place-items-center rounded-md border border-line bg-[#171717]">
+                  <Image src={f.icone} alt="" width={512} height={512} className="size-6" />
+                </div>
+                <h3 className="mb-1.5 font-ui text-[1.1rem] leading-tight font-bold">{f.titulo}</h3>
+                <p className="text-[0.875rem] leading-relaxed text-soft">{f.texto}</p>
+              </Reveal>
+            ))}
+          </div>
+        </Wrap>
+      </section>
+
+      {/* ============================================================
+          3. COMO FUNCIONA + FOTO DA OFICINA
+          ============================================================ */}
+      <section id="como-funciona" className="scroll-mt-20 border-y border-line bg-ink-deep py-14 lg:py-20">
         <Wrap>
           <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
             <Reveal>
               <figure className="overflow-hidden rounded-md border border-line">
                 <Foto
-                  src="/img/pneus-estoque.webp"
-                  alt="Pneus novos no estoque do Jura Auto Center"
+                  src={d.fotoPasso}
+                  alt={d.altPasso}
                   width={1000}
                   height={1000}
                   sizes="(max-width: 1024px) 100vw, 45vw"
-                  className="aspect-[4/3.4] w-full object-cover"
+                  className="aspect-square w-full object-cover"
                 />
               </figure>
             </Reveal>
 
             <Reveal delay={0.1}>
               <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
-                Do pedido à montagem, <span className="text-jura-title">sem complicação</span>
+                Do diagnóstico ao serviço, <span className="text-jura-title">sem surpresa</span>
               </h2>
               <ol className="mt-8 grid gap-6">
-                {pneusPassos.map((p, i) => (
+                {passosServico.map((p, i) => (
                   <li key={p.titulo} className="flex gap-4">
                     <span className="grid size-10 shrink-0 skew-jura place-items-center rounded-sm bg-jura">
-                      <b className="unskew-jura font-ui text-[0.95rem] font-extrabold text-white">
-                        {i + 1}
-                      </b>
+                      <b className="unskew-jura font-ui text-[0.95rem] font-extrabold text-white">{i + 1}</b>
                     </span>
                     <div>
                       <h3 className="font-ui text-[1.05rem] font-bold">{p.titulo}</h3>
@@ -150,8 +152,8 @@ export default function Pneus() {
                   </li>
                 ))}
               </ol>
-              <BtnWhats href={cta.whatsPneus} className="mt-9 max-sm:w-full" local="como-funciona">
-                Pedir preço do pneu
+              <BtnWhats href={d.whatsHref} className="mt-9 max-sm:w-full" local="como-funciona">
+                Pedir no WhatsApp
               </BtnWhats>
             </Reveal>
           </div>
@@ -159,23 +161,20 @@ export default function Pneus() {
       </section>
 
       {/* ============================================================
-          3. AVALIAÇÕES
-          Depoimentos reais do Google (mesmos da home).
+          4. AVALIAÇÕES
+          Depoimentos reais do Google (os mesmos da home).
           ============================================================ */}
-      <section id="avaliacoes" className="scroll-mt-20 border-y border-line bg-ink-deep py-14 lg:py-20">
+      <section id="avaliacoes" className="scroll-mt-20 py-14 lg:py-20">
         <Wrap>
           <Reveal className="mb-8 flex flex-wrap items-end justify-between gap-6">
             <div className="max-w-xl">
               <h2 className="text-[clamp(2rem,5vw,2.75rem)]">O que dizem no Google</h2>
               <p className="mt-4 leading-relaxed text-muted">
-                Mais de trezentas pessoas de Araras e região já avaliaram o Jura. A nota é essa,
-                e ela é pública.
+                Mais de trezentas pessoas de Araras e região já avaliaram o Jura. A nota é essa, e ela é pública.
               </p>
             </div>
             <div className="flex items-center gap-4 rounded-md border border-line bg-surface px-5 py-4">
-              <span className="font-display text-5xl leading-[0.85] text-offer">
-                {site.prova.nota}
-              </span>
+              <span className="font-display text-5xl leading-[0.85] text-offer">{site.prova.nota}</span>
               <span className="text-[0.8125rem] text-soft">
                 <Stars className="mb-1 size-4" />
                 <br />
@@ -186,10 +185,7 @@ export default function Pneus() {
 
           <div className="grid gap-3.5 md:grid-cols-3">
             {depoimentos.map((a) => (
-              <figure
-                key={a.nome}
-                className="flex flex-col gap-3.5 rounded-md border border-line bg-surface p-6"
-              >
+              <figure key={a.nome} className="flex flex-col gap-3.5 rounded-md border border-line bg-surface p-6">
                 <Stars className="size-[17px]" />
                 <p className="text-[0.9rem] leading-relaxed text-soft">{a.texto}</p>
                 <figcaption className="mt-auto border-t border-line pt-3.5">
@@ -211,23 +207,23 @@ export default function Pneus() {
       </section>
 
       {/* ============================================================
-          4. DÚVIDAS
+          5. DÚVIDAS
           ============================================================ */}
-      <section id="duvidas" className="scroll-mt-20 py-14 lg:py-20">
+      <section id="duvidas" className="scroll-mt-20 border-t border-line py-14 lg:py-20">
         <Wrap>
           <Reveal className="max-w-2xl">
             <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
-              Dúvidas sobre <span className="text-jura-title">pneus</span>
+              {d.duvidasTitulo[0]} <span className="text-jura-title">{d.duvidasTitulo[1]}</span>
             </h2>
           </Reveal>
           <Reveal delay={0.08}>
-            <Faq itens={faqPneus} />
+            <Faq itens={d.faq} />
           </Reveal>
         </Wrap>
       </section>
 
       {/* ============================================================
-          5. ONDE ESTAMOS + CTA FINAL
+          6. CHAMADA FINAL + ONDE ESTAMOS
           ============================================================ */}
       <section
         id="onde-estamos"
@@ -238,15 +234,12 @@ export default function Pneus() {
             <Reveal>
               <SpeedBars className="mb-6" />
               <h2 className="text-[clamp(2.25rem,6vw,3.5rem)]">
-                Pneu novo pro seu carro?
+                {d.ctaFinal[0]}
                 <br />
-                <span className="text-jura-title">Vem pro Jura.</span>
+                <span className="text-jura-title">{d.ctaFinal[1]}</span>
               </h2>
               <div className="mt-8 flex flex-wrap gap-3.5">
-                <Btn href="#orcamento" variant="red" className="max-sm:w-full">
-                  Pedir orçamento
-                </Btn>
-                <BtnWhats href={cta.whatsPneus} className="max-sm:w-full" local="cta-final">
+                <BtnWhats href={d.whatsHref} className="max-sm:w-full" local="cta-final">
                   Falar no WhatsApp
                 </BtnWhats>
                 <Btn href={celularLink} variant="red" className="max-sm:w-full" evento="ligar_agora_click" local="cta-final">
@@ -274,11 +267,11 @@ export default function Pneus() {
                 ))}
               </ul>
               <div className="flex flex-wrap gap-3">
-                <Btn href={site.mapsUrl} variant="red" external evento="tracar_rota_click" local="pneus">
+                <Btn href={site.mapsUrl} variant="red" external evento="tracar_rota_click" local={d.rota.slice(1)}>
                   <PinIcon className="size-5" />
                   Traçar rota
                 </Btn>
-                <Btn href={cta.whatsFila} variant="quiet" external evento="fila_click" local="pneus">
+                <Btn href={cta.whatsFila} variant="quiet" external evento="fila_click" local={d.rota.slice(1)}>
                   Ver como está a fila
                 </Btn>
               </div>

@@ -4,7 +4,7 @@ import { test } from "node:test";
 
 // Integração com o HTML real do build. Rodar npm run build antes desta suíte.
 test("export nasce sem terceiros opcionais e com contato seguro sem JavaScript", () => {
-  for (const pagina of ["index", "pneus", "historia", "privacidade"]) {
+  for (const pagina of ["index", "pneus", "freios", "suspensao", "historia", "privacidade"]) {
     const html = readFileSync(new URL(`../out/${pagina}.html`, import.meta.url), "utf8");
     assert.equal(/<iframe\b/i.test(html), false, `${pagina}: mapa antes de autorizar`);
     assert.equal(/<script\b[^>]*src="https?:\/\/[^\"]*(googletagmanager|googleadservices)/i.test(html), false, `${pagina}: tag antes de autorizar`);

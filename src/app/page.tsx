@@ -174,6 +174,13 @@ export default function Home() {
           </Reveal>
 
           <Servicos />
+
+          <p className="mt-6 text-[0.9rem] text-muted">
+            Quer mais detalhes? Veja a página de{" "}
+            <Link href="/pneus" className="text-cream underline underline-offset-4">pneus</Link>, de{" "}
+            <Link href="/freios" className="text-cream underline underline-offset-4">freios</Link> ou de{" "}
+            <Link href="/suspensao" className="text-cream underline underline-offset-4">suspensão e amortecedores</Link>.
+          </p>
         </Wrap>
       </section>
 

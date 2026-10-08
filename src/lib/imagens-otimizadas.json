@@ -126,6 +126,28 @@
       1200
     ]
   },
+  "/img/servico-freios.webp": {
+    "largura": 1800,
+    "altura": 1800,
+    "prefixo": "/img/otimizadas/servico-freios",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800
+    ]
+  },
+  "/img/servico-suspensao.webp": {
+    "largura": 1800,
+    "altura": 1800,
+    "prefixo": "/img/otimizadas/servico-suspensao",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800
+    ]
+  },
   "/logo/jura-branco.png": {
     "largura": 1167,
     "altura": 511,
