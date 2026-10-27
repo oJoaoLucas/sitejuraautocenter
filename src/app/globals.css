@@ -15,8 +15,8 @@
   /* Marca */
   --color-jura: #c8102e;         /* SO fundo de botao e faixas */
   --color-jura-strong: #8e1120;  /* hover e bordo */
-  --color-jura-text: #ff667d;    /* destaque legível em textos pequenos */
-  --color-jura-title: #e5304c;   /* titulo sobre preto, 5,4:1 */
+  --color-jura-text: #ff6b81;    /* destaque legível em textos pequenos */
+  --color-jura-title: #e5304c;   /* SO titulo grande sobre preto (4,3:1, Brand Book v2) */
   --color-offer: #ffc400;        /* SO preco, selo e estrela */
   --color-whats: #25d366;
   --color-whats-ink: #0b2e1a;

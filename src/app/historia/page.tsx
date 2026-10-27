@@ -10,6 +10,15 @@ export const metadata: Metadata = {
   description:
     "Da loja pequena no 829 da Avenida Loreto, em 2019, ao auto center no 889 hoje: a trajetória do Jura Auto Center em Araras, contada em datas reais.",
   alternates: { canonical: "/historia" },
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Jura Auto Center",
+    title: "Nossa história | Jura Auto Center",
+    description: "Da loja pequena no 829 da Avenida Loreto, em 2019, ao auto center no 889 hoje: a trajetória do Jura Auto Center em Araras, contada em datas reais.",
+    url: "/historia",
+    images: [{ url: "/img/og.jpg", width: 1200, height: 630, alt: "Fachada do Jura Auto Center" }],
+  },
 };
 
 export default function Historia() {

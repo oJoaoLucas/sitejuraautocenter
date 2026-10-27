@@ -45,6 +45,7 @@ export const metadata: Metadata = {
     type: "website",
     locale: "pt_BR",
     siteName: site.nome,
+    url: "/",
     title: "Jura Auto Center - Pneus, Suspensão e Freios em Araras/SP",
     description:
       "Em Araras desde 2019, cuidando de quem depende do carro todo dia. Nota 4,9 no Google. Vem pro Jura!",
@@ -101,7 +102,9 @@ const schema = {
       closes: "12:00",
     },
   ],
-  sameAs: [site.instagramUrl],
+  hasMap: site.perfilGoogleUrl,
+  areaServed: { "@type": "City", name: "Araras" },
+  sameAs: [site.instagramUrl, "https://www.facebook.com/juraautocenter"],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

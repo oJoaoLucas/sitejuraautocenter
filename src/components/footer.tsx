@@ -14,8 +14,8 @@ export function Footer() {
             <Foto
               src="/logo/jura-branco.png"
               alt={site.nome}
-              width={1167}
-              height={511}
+              width={1200}
+              height={521}
               sizes="101px"
               className="mb-4 h-11 w-auto"
             />

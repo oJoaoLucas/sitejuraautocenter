@@ -102,8 +102,8 @@ export function Header() {
             <Foto
               src="/logo/jura-branco.png"
               alt={site.nome}
-              width={1167}
-              height={511}
+              width={1200}
+              height={521}
               sizes="101px"
               priority
               className={`w-auto transition-all duration-300 ease-jura ${

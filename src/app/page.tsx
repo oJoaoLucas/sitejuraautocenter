@@ -48,7 +48,7 @@ export default function Home() {
         <Wrap className="relative pb-14 sm:pb-20 lg:pb-24">
           <div className="max-w-3xl">
             {/* Único elemento pequeno do hero: a prova social que o brand book pede acima da dobra */}
-            <Reveal entrada delay={0.04} y={12} className="mb-6 inline-flex items-center gap-2.5 rounded-sm border border-line bg-surface/80 px-3.5 py-2 text-[0.8125rem] text-muted backdrop-blur-sm">
+            <Reveal className="mb-6 inline-flex items-center gap-2.5 rounded-sm border border-line bg-surface/80 px-3.5 py-2 text-[0.8125rem] text-muted backdrop-blur-sm">
               <Stars className="size-[15px]" />
               <span>
                 <b className="font-ui font-extrabold text-cream">{site.prova.nota}</b> no Google,
@@ -56,21 +56,21 @@ export default function Home() {
               </span>
             </Reveal>
 
-            <Reveal entrada delay={0.1} y={18}>
+            <Reveal>
               <h1 className="mb-4 text-[clamp(2.75rem,7.5vw,4.5rem)] [text-shadow:0_2px_24px_rgb(0_0_0/0.6)]">
                 <span className="block">Pneu, freio e suspensão</span>
                 <span className="block text-jura-title">é no Jura.</span>
               </h1>
             </Reveal>
 
-            <Reveal entrada delay={0.18} y={14}>
+            <Reveal>
               <p className="mb-8 max-w-lg text-[1.075rem] leading-relaxed text-[#e4e4e4]">
                 Em Araras desde 2019, cuidando de quem depende do carro todo dia.
                 Peça seu orçamento pelo WhatsApp.
               </p>
             </Reveal>
 
-            <Reveal entrada delay={0.25} y={12} className="flex flex-wrap gap-3.5">
+            <Reveal className="flex flex-wrap gap-3.5">
               <BtnWhats href={cta.whatsPrincipal} className="max-sm:w-full" local="hero">
                 Chamar no WhatsApp
               </BtnWhats>
@@ -197,7 +197,7 @@ export default function Home() {
           <Reveal className="mb-10 max-w-2xl">
             <h2 className="text-[clamp(2rem,5vw,2.75rem)]">Como chegar no Jura</h2>
             <p className="mt-4 leading-relaxed text-muted">
-              Avenida Loreto, 889, no Jardim das Flores, com estacionamento próprio ao lado da loja.
+              Avenida Loreto, 889, no Campinho, com estacionamento próprio ao lado da loja.
             </p>
           </Reveal>
 

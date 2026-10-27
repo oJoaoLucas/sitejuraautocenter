@@ -20,16 +20,16 @@ export const site = {
   instagramUrl: "https://instagram.com/juraautocenter",
   endereco: {
     rua: "Avenida Loreto, 889",
-    bairro: "Jardim das Flores",
+    bairro: "Campinho",
     cidade: "Araras",
     uf: "SP",
     cep: "13607-200",
-    completo: "Avenida Loreto, 889 - Jardim das Flores, Araras/SP, 13607-200",
+    completo: "Avenida Loreto, 889 - Campinho, Araras/SP, 13607-200",
   },
   mapsUrl:
     "https://www.google.com/maps/dir/?api=1&destination=" +
     encodeURIComponent(
-      "Jura Auto Center, Avenida Loreto, 889, Jardim das Flores, Araras - SP, 13607-200",
+      "Jura Auto Center, Avenida Loreto, 889, Campinho, Araras - SP, 13607-200",
     ),
   /** Abre o formulário de avaliação (não o perfil). */
   avaliarUrl: "https://g.page/r/CQqPUmEcujAVEAE/review",
@@ -37,7 +37,7 @@ export const site = {
   perfilGoogleUrl: "https://www.google.com/maps?cid=1526924904733249290",
   mapsEmbed:
     "https://www.google.com/maps?q=" +
-    encodeURIComponent("Avenida Loreto, 889, Jardim das Flores, Araras - SP, 13607-200") +
+    encodeURIComponent("Avenida Loreto, 889, Campinho, Araras - SP, 13607-200") +
     "&output=embed",
   horario: [
     { dia: "Segunda a sexta", hora: "7h30 às 17h30" },

@@ -7,6 +7,15 @@ export const metadata: Metadata = {
   title: "Política de Privacidade",
   description: "Como o Jura Auto Center utiliza dados, cookies opcionais e informações de contato, e como mudar suas preferências.",
   alternates: { canonical: "/privacidade" },
+  openGraph: {
+    type: "website",
+    locale: "pt_BR",
+    siteName: "Jura Auto Center",
+    title: "Política de Privacidade | Jura Auto Center",
+    description: "Como o Jura Auto Center utiliza dados, cookies opcionais e informações de contato, e como mudar suas preferências.",
+    url: "/privacidade",
+    images: [{ url: "/img/og.jpg", width: 1200, height: 630, alt: "Fachada do Jura Auto Center" }],
+  },
   robots: { index: true, follow: true },
 };
 const secao = "mb-2 font-ui text-[1.05rem] font-bold text-cream";
