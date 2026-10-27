@@ -11,14 +11,17 @@ export function Footer() {
       <Wrap>
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr]">
           <div>
-            <Foto
-              src="/logo/jura-branco.png"
-              alt={site.nome}
-              width={1200}
-              height={521}
-              sizes="101px"
-              className="mb-4 h-11 w-auto"
-            />
+            {/* Logo "fachada" do Brand Book v2: igual à fachada da loja, sempre sobre o vermelho do logo. */}
+            <div className="mb-4 inline-block rounded-sm bg-[#d01911] px-4 py-3">
+              <Foto
+                src="/logo/jura-fachada.png"
+                alt={site.nome}
+                width={1200}
+                height={521}
+                sizes="120px"
+                className="h-12 w-auto"
+              />
+            </div>
             <p className="font-display text-2xl tracking-[0.02em] text-jura-title">
               {site.assinatura}
             </p>

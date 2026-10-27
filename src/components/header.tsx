@@ -97,10 +97,10 @@ export function Header() {
       >
         <div className="mx-auto flex w-full max-w-[1280px] items-center gap-4 px-5 sm:px-8 lg:px-8 xl:gap-6 xl:px-12">
           <Link href="/" aria-label={`${site.nome}, ir para o início`} onClick={() => setAberto(false)} className="shrink-0">
-            {/* Logo branco (só silhueta) o tempo todo: fica limpo tanto sobre
-                a foto do hero quanto sobre o fundo sólido do header preso. */}
+            {/* Logo "uniforme" do Brand Book v2 (pneu branco, JURA vermelho):
+                feito pra fundo escuro, vale sobre a foto e no header preso. */}
             <Foto
-              src="/logo/jura-branco.png"
+              src="/logo/jura-uniforme.png"
               alt={site.nome}
               width={1200}
               height={521}

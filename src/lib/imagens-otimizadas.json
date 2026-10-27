@@ -157,5 +157,25 @@
       320,
       480
     ]
+  },
+  "/logo/jura-uniforme.png": {
+    "largura": 1200,
+    "altura": 521,
+    "prefixo": "/logo/otimizadas/jura-uniforme",
+    "larguras": [
+      160,
+      320,
+      480
+    ]
+  },
+  "/logo/jura-fachada.png": {
+    "largura": 1200,
+    "altura": 521,
+    "prefixo": "/logo/otimizadas/jura-fachada",
+    "larguras": [
+      160,
+      320,
+      480
+    ]
   }
 }
