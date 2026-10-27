@@ -39,9 +39,11 @@ export default function Home() {
             sizes="100vw"
             className="object-cover object-[58%_42%]"
           />
+          {/* No computador a camada clareia à direita pra fachada aparecer; o texto
+              fica sobre a parte escura da esquerda. */}
           <div
             aria-hidden="true"
-            className="absolute inset-0 bg-[linear-gradient(178deg,rgb(20_20_20/0.82)_0%,rgb(20_20_20/0.5)_34%,rgb(20_20_20/0.97)_92%),linear-gradient(92deg,rgb(20_20_20/0.92)_0%,rgb(20_20_20/0.28)_62%)]"
+            className="absolute inset-0 bg-[linear-gradient(178deg,rgb(20_20_20/0.82)_0%,rgb(20_20_20/0.5)_34%,rgb(20_20_20/0.97)_92%),linear-gradient(92deg,rgb(20_20_20/0.92)_0%,rgb(20_20_20/0.28)_62%)] lg:bg-[linear-gradient(180deg,rgb(20_20_20/0.55)_0%,rgb(20_20_20/0.12)_38%,rgb(20_20_20/0.9)_94%),linear-gradient(90deg,rgb(20_20_20/0.94)_0%,rgb(20_20_20/0.7)_38%,rgb(20_20_20/0.05)_72%)]"
           />
         </div>
 

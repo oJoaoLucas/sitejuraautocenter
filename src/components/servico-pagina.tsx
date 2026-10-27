@@ -106,7 +106,7 @@ export function ServicoPagina({ d }: { d: PaginaServico }) {
             {d.faz.map((f, i) => (
               <Reveal key={f.titulo} delay={i * 0.05} className="rounded-md border border-line bg-surface px-5 pt-5 pb-6">
                 <div className="mb-3.5 grid size-11 place-items-center rounded-md border border-line bg-[#171717]">
-                  <Image src={f.icone} alt="" width={512} height={512} className="size-6" />
+                  <Image src={f.icone} alt="" width={96} height={96} className="size-6" />
                 </div>
                 <h3 className="mb-1.5 font-ui text-[1.1rem] leading-tight font-bold">{f.titulo}</h3>
                 <p className="text-[0.875rem] leading-relaxed text-soft">{f.texto}</p>

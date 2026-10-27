@@ -25,7 +25,22 @@ export function WhatsFloat() {
   const [leitura, setLeitura] = useState({ caminho: pathname, sobre: pathname === "/pneus" });
   const sobreFormulario = leitura.caminho === pathname && leitura.sobre;
   const [leituraRodape, setLeituraRodape] = useState({ caminho: pathname, sobre: false });
-  const escondido = sobreFormulario || (leituraRodape.caminho === pathname && leituraRodape.sobre);
+  // A capa da home e das páginas de serviço já tem WhatsApp e Ligar: o botão
+  // começa escondido e só aparece quando eles saem da tela (não duplica nem
+  // cobre a capa). /pneus já se esconde pelo formulário.
+  const comCapa = pathname === "/" || paginaServico !== undefined;
+  const [leituraCapa, setLeituraCapa] = useState({ caminho: pathname, sobre: comCapa });
+  const sobreCapa = comCapa && (leituraCapa.caminho === pathname ? leituraCapa.sobre : true);
+  const escondido = sobreFormulario || sobreCapa || (leituraRodape.caminho === pathname && leituraRodape.sobre);
+
+  useEffect(() => {
+    if (!comCapa) return;
+    const capa = document.querySelector('[data-local="hero"]');
+    if (!capa) return;
+    const io = new IntersectionObserver(([e]) => setLeituraCapa({ caminho: pathname, sobre: e.isIntersecting }));
+    io.observe(capa);
+    return () => io.disconnect();
+  }, [pathname, comCapa]);
 
   // No rodapé já há contatos; o flutuante cobriria a política e as preferências.
   useEffect(() => {
