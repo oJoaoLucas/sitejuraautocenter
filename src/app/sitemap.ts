@@ -11,6 +11,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/pneus`, priority: 0.9 },
     { url: `${base}/freios`, priority: 0.8 },
     { url: `${base}/suspensao`, priority: 0.8 },
+    { url: `${base}/alinhamento-e-balanceamento`, priority: 0.9 },
     { url: `${base}/historia`, priority: 0.7 },
     { url: `${base}/privacidade`, priority: 0.3 },
   ];

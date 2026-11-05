@@ -196,4 +196,69 @@ export const suspensao: PaginaServico = {
   ctaFinal: ["Suspensão fazendo barulho?", "Vem pro Jura."],
 };
 
-export const paginasServico = [freios, suspensao] as const;
+/** Alinhamento e balanceamento (dono, 05/11/2026: o serviço mais procurado no Google não tinha página). */
+export const alinhamento: PaginaServico = {
+  rota: "/alinhamento-e-balanceamento",
+  titulo: "Alinhamento e balanceamento em Araras",
+  descricao:
+    "Alinhamento e balanceamento em Araras/SP com equipamento digital. Carro puxando, volante torto ou tremendo? Atendimento por ordem de chegada, sem hora marcada. Nota 4,9 no Google.",
+  h1: ["Alinhamento e", "balanceamento", "em Araras"],
+  lead: "Carro puxando, volante torto ou tremendo na estrada? A gente alinha e balanceia com equipamento digital, por ordem de chegada, e você sai com o carro andando reto.",
+  whatsHref: whats("Olá! Vim pelo site e queria fazer alinhamento e balanceamento no meu carro."),
+  fotoHero: "/img/oficina-elevadores.webp",
+  fotoPasso: "/img/oficina-galpao-alto.webp",
+  altPasso: "Elevadores da oficina do Jura Auto Center, onde é feito o alinhamento e o balanceamento",
+  sinais: [
+    "Carro puxando para um lado em reta",
+    "Volante torto com o carro andando reto",
+    "Volante tremendo em velocidade",
+    "Pneu gastando só por dentro ou só por fora",
+    "Depois de bater forte em buraco ou guia",
+    "Depois de trocar pneu ou mexer na suspensão",
+  ],
+  sinaisNota: "Carro desalinhado gasta pneu mais rápido. Alinhar sai bem mais barato que trocar pneu antes da hora.",
+  faz: [
+    {
+      icone: "/icons/alinhamento.png",
+      titulo: "Alinhamento digital",
+      texto: "Acertamos a geometria das rodas com equipamento digital, pra o carro andar reto e o pneu gastar por igual.",
+    },
+    {
+      icone: "/icons/balanceamento.png",
+      titulo: "Balanceamento das rodas",
+      texto: "Roda balanceada acaba com a tremedeira no volante e poupa a suspensão.",
+    },
+    {
+      icone: "/icons/pneus.png",
+      titulo: "Olhada nos pneus",
+      texto: "Com o carro no elevador, a gente olha o desgaste dos pneus e te avisa se tiver algo.",
+    },
+    {
+      icone: "/icons/suspensao.png",
+      titulo: "Suspensão em dia",
+      texto: "Peça da suspensão folgada não deixa o alinhamento segurar. Se tiver, a gente mostra antes de fazer.",
+    },
+  ],
+  depoimentos: ["Renato Curtolo", "Gedaias Oliveira", "Gabriela Chinalia de Sena"],
+  duvidasTitulo: ["Dúvidas sobre", "alinhamento"],
+  faq: [
+    {
+      q: "Qual a diferença entre alinhamento e balanceamento?",
+      a: "O alinhamento acerta o ângulo das rodas: é o que resolve carro puxando e volante torto. O balanceamento acerta o peso de cada roda: é o que resolve volante tremendo. Os dois juntos deixam o carro firme e o pneu durando mais.",
+    },
+    {
+      q: "De quanto em quanto tempo alinhar o carro?",
+      a: "Sempre que trocar pneu, mexer na suspensão ou bater forte em buraco, e também quando sentir o carro puxando ou o volante torto. Fora isso, vale conferir a cada 10 mil km.",
+    },
+    {
+      q: "Quanto tempo demora?",
+      a: "É um serviço rápido. Como o atendimento é por ordem de chegada, a espera depende do movimento: chama no WhatsApp antes que a gente te fala como está a fila.",
+    },
+    duvidasComuns.agendar,
+    duvidasComuns.parcelar,
+    duvidasComuns.estacionar,
+  ],
+  ctaFinal: ["Carro puxando?", "Vem pro Jura."],
+};
+
+export const paginasServico = [freios, suspensao, alinhamento] as const;

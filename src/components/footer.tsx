@@ -107,6 +107,7 @@ export function Footer() {
               <li><Link href="/pneus" className="transition-colors hover:text-jura-text">Pneus</Link></li>
               <li><Link href="/freios" className="transition-colors hover:text-jura-text">Freios</Link></li>
               <li><Link href="/suspensao" className="transition-colors hover:text-jura-text">Suspensão</Link></li>
+              <li><Link href="/alinhamento-e-balanceamento" className="transition-colors hover:text-jura-text">Alinhamento e balanceamento</Link></li>
               <li><Link href="/#servicos" className="transition-colors hover:text-jura-text">Serviços</Link></li>
               <li><Link href="/historia" className="transition-colors hover:text-jura-text">Nossa história</Link></li>
               <li><Link href="/#duvidas" className="transition-colors hover:text-jura-text">Dúvidas frequentes</Link></li>

@@ -16,6 +16,7 @@ const links = [
   { href: "/pneus", label: "Pneus" },
   { href: "/freios", label: "Freios" },
   { href: "/suspensao", label: "Suspensão" },
+  { href: "/alinhamento-e-balanceamento", label: "Alinhamento" },
 ];
 
 export function Header() {
