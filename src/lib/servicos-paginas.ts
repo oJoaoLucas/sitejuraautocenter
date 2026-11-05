@@ -167,7 +167,7 @@ export const suspensao: PaginaServico = {
     {
       icone: "/icons/alinhamento.png",
       titulo: "Alinhamento e balanceamento",
-      texto: "Depois de mexer na suspensão, vale alinhar o carro. Fazemos aqui mesmo, com equipamento digital.",
+      texto: "Depois de mexer na suspensão, vale alinhar o carro. Fazemos aqui mesmo.",
     },
   ],
   depoimentos: ["Gedaias Oliveira", "Renato Curtolo", "Alex Carciragui"],
@@ -187,7 +187,7 @@ export const suspensao: PaginaServico = {
     },
     {
       q: "Depois de mexer na suspensão precisa alinhar?",
-      a: "Quando se mexe na suspensão, vale alinhar o carro. A gente faz o alinhamento aqui mesmo, com equipamento digital.",
+      a: "Quando se mexe na suspensão, vale alinhar o carro. A gente faz o alinhamento aqui mesmo.",
     },
     duvidasComuns.extra,
     duvidasComuns.agendar,
@@ -201,9 +201,9 @@ export const alinhamento: PaginaServico = {
   rota: "/alinhamento-e-balanceamento",
   titulo: "Alinhamento e balanceamento em Araras",
   descricao:
-    "Alinhamento e balanceamento em Araras/SP com equipamento digital. Carro puxando, volante torto ou tremendo? Atendimento por ordem de chegada, sem hora marcada. Nota 4,9 no Google.",
+    "Alinhamento e balanceamento em Araras/SP. Carro puxando, volante torto ou tremendo? Atendimento por ordem de chegada, sem hora marcada. Nota 4,9 no Google.",
   h1: ["Alinhamento e", "balanceamento", "em Araras"],
-  lead: "Carro puxando, volante torto ou tremendo na estrada? A gente alinha e balanceia com equipamento digital, por ordem de chegada, e você sai com o carro andando reto.",
+  lead: "Carro puxando, volante torto ou tremendo na estrada? A gente alinha e balanceia por ordem de chegada, e você sai com o carro andando reto.",
   whatsHref: whats("Olá! Vim pelo site e queria fazer alinhamento e balanceamento no meu carro."),
   fotoHero: "/img/oficina-elevadores.webp",
   fotoPasso: "/img/oficina-galpao-alto.webp",
@@ -220,8 +220,8 @@ export const alinhamento: PaginaServico = {
   faz: [
     {
       icone: "/icons/alinhamento.png",
-      titulo: "Alinhamento digital",
-      texto: "Acertamos a geometria das rodas com equipamento digital, pra o carro andar reto e o pneu gastar por igual.",
+      titulo: "Alinhamento",
+      texto: "Acertamos a geometria das rodas pra o carro andar reto e o pneu gastar por igual.",
     },
     {
       icone: "/icons/balanceamento.png",

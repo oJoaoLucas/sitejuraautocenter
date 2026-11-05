@@ -71,7 +71,7 @@ export default function Historia() {
           <Reveal className="mb-8 max-w-2xl">
             <h2 className="text-[clamp(1.75rem,4.5vw,2.5rem)]">A oficina hoje</h2>
             <p className="mt-3.5 leading-relaxed text-muted">
-              Quatro elevadores, alinhamento digital e o paredão de pneus que virou cenário
+              Quatro elevadores, alinhamento e o paredão de pneus que virou cenário
               de quase toda foto do Instagram.
             </p>
           </Reveal>

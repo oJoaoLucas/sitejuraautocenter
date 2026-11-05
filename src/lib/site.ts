@@ -138,7 +138,7 @@ export const servicos: readonly Servico[] = [
     icone: "/icons/alinhamento.png",
     titulo: "Alinhamento",
     texto:
-      "Alinhamento com equipamento digital. Essencial para o desgaste correto do pneu e a estabilidade do veículo.",
+      "Alinhamento das rodas. Essencial para o desgaste correto do pneu e a estabilidade do veículo.",
     whatsHref: whats("Olá! Vim pelo site e queria fazer alinhamento no meu carro."),
   },
   {
