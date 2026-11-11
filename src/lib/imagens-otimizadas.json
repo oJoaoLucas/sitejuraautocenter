@@ -148,6 +148,16 @@
       1800
     ]
   },
+  "/img/black-november.webp": {
+    "largura": 1080,
+    "altura": 1350,
+    "prefixo": "/img/otimizadas/black-november",
+    "larguras": [
+      400,
+      800,
+      1080
+    ]
+  },
   "/logo/jura-branco.png": {
     "largura": 1200,
     "altura": 521,

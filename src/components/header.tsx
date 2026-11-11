@@ -90,7 +90,7 @@ export function Header() {
       <div ref={sentinela} className="absolute top-0 h-px w-full" aria-hidden="true" />
 
       <header
-        className={`fixed inset-x-0 top-0 z-60 flex items-center border-b transition-all duration-300 ease-jura ${
+        className={`fixed inset-x-0 top-(--faixa) z-60 flex items-center border-b transition-all duration-300 ease-jura ${
           preso || aberto
             ? "h-16 border-line bg-ink/95 shadow-[0_10px_30px_rgb(0_0_0/0.4)] backdrop-blur-md"
             : "h-[76px] border-transparent bg-transparent"
@@ -173,7 +173,7 @@ export function Header() {
         initial={false}
         animate={{ opacity: aberto ? 1 : 0, y: aberto ? 0 : -12 }}
         transition={{ duration: reduce ? 0 : 0.25, ease: [0.16, 1, 0.3, 1] }}
-        className="fixed inset-x-0 top-16 z-55 max-h-[calc(100dvh-4rem)] overflow-y-auto overscroll-contain border-b border-line bg-ink px-5 pb-6 sm:px-8 lg:hidden"
+        className="fixed inset-x-0 top-[calc(4rem+var(--faixa))] z-55 max-h-[calc(100dvh-4rem-var(--faixa))] overflow-y-auto overscroll-contain border-b border-line bg-ink px-5 pb-6 sm:px-8 lg:hidden"
       >
         <nav className="flex flex-col">
           {links.map((l) => (

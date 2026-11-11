@@ -3,6 +3,8 @@ import { Faq } from "@/components/faq";
 import { FaqSchema } from "@/components/faq-schema";
 import { Foto } from "@/components/foto";
 import { PhoneIcon, PinIcon, Stars } from "@/components/icons";
+import { ResumoBlack, SeloBlack } from "@/components/black-november";
+import { SoNaPromo } from "@/components/promo";
 import { QuoteForm } from "@/components/quote-form";
 import { Reveal } from "@/components/reveal";
 import { Btn, BtnWhats, SpeedBars, Wrap } from "@/components/ui";
@@ -94,9 +96,19 @@ export default function Pneus() {
 
             <div>
               <div className="rounded-md border border-line bg-surface/95 p-5 shadow-[0_24px_60px_rgb(0_0_0/0.45)] backdrop-blur-sm sm:p-7">
-                <h2 className="text-[1.75rem] leading-none sm:text-[2rem]">
-                  Peça o preço <span className="text-jura-title">pelo WhatsApp</span>
-                </h2>
+                <SoNaPromo
+                  fallback={
+                    <h2 className="text-[1.75rem] leading-none sm:text-[2rem]">
+                      Peça o preço <span className="text-jura-title">pelo WhatsApp</span>
+                    </h2>
+                  }
+                >
+                  <SeloBlack />
+                  <h2 className="text-[1.75rem] leading-none sm:text-[2rem]">
+                    Peça o <span className="text-jura-title">preço de Black</span> pelo WhatsApp
+                  </h2>
+                  <ResumoBlack className="mt-3" />
+                </SoNaPromo>
                 <QuoteForm
                   local="pneus"
                   botao="Continuar no WhatsApp"

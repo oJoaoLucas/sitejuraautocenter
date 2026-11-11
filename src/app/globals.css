@@ -38,10 +38,14 @@
   --ease-jura: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Altura da tarja da promoção acima do menu. Sem promoção é zero e nada sai do lugar. */
+:root { --faixa: 0px; }
+html[data-promo] { --faixa: 2.75rem; }
+
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 84px;
+    scroll-padding-top: calc(84px + var(--faixa));
     scroll-padding-bottom: calc(var(--cookie-h, 0px) + 24px);
   }
   body {

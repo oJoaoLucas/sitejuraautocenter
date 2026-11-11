@@ -82,13 +82,18 @@ export const cta = {
 export function mensagemPneus({
   quantidade,
   medida,
+  promo,
 }: {
   quantidade: number;
   /** Vazio = a pessoa não sabe a medida e vai mandar foto do pneu. */
   medida: string;
+  /** Nome da promoção valendo ("Black November"): entra na mensagem pro atendimento saber de onde veio. */
+  promo?: string;
 }): string {
   const pneus = quantidade === 1 ? "1 pneu" : `${quantidade} pneus`;
-  const preco = "Podem me passar o valor à vista e parcelado?";
+  const preco = promo
+    ? `Podem me passar o preço da ${promo}, à vista e parcelado?`
+    : "Podem me passar o valor à vista e parcelado?";
 
   return medida
     ? `Olá! Vim pelo site e queria orçamento de ${pneus} na medida ${medida}. ${preco}`

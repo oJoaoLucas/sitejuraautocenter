@@ -7,6 +7,8 @@ import { FaqSchema } from "@/components/faq-schema";
 import { Foto } from "@/components/foto";
 import { OndeEstamosCarrossel } from "@/components/carrossel";
 import { ArrowIcon, InstagramIcon, PhoneIcon, PinIcon, StarIcon, Stars, WhatsAppIcon } from "@/components/icons";
+import { ListaBlack, SeloBlack } from "@/components/black-november";
+import { SoNaPromo } from "@/components/promo";
 import { QuoteForm } from "@/components/quote-form";
 import { Reveal } from "@/components/reveal";
 import { Servicos } from "@/components/servicos";
@@ -121,13 +123,30 @@ export default function Home() {
         <Wrap className="relative">
           <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
             <Reveal>
-              <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
-                Peça seu orçamento de pneus <span className="text-jura-title">pelo WhatsApp</span>
-              </h2>
-              <p className="mt-4 leading-relaxed text-muted">
-                Diz a medida que está escrita no seu pneu e quantos você precisa. A gente responde
-                com o preço à vista e o parcelado.
-              </p>
+              <SoNaPromo
+                fallback={
+                  <>
+                    <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
+                      Peça seu orçamento de pneus <span className="text-jura-title">pelo WhatsApp</span>
+                    </h2>
+                    <p className="mt-4 leading-relaxed text-muted">
+                      Diz a medida que está escrita no seu pneu e quantos você precisa. A gente responde
+                      com o preço à vista e o parcelado.
+                    </p>
+                  </>
+                }
+              >
+                <SeloBlack />
+                <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
+                  Pneu com <span className="text-jura-title">preço de Black</span> o mês inteiro
+                </h2>
+                <p className="mt-4 leading-relaxed text-muted">
+                  Diz a medida que está escrita no seu pneu e quantos você precisa. A gente responde
+                  pelo WhatsApp com o preço de Black, à vista e parcelado.
+                </p>
+                {/* No computador a arte ao lado já traz a lista. */}
+                <ListaBlack className="mt-6 lg:hidden" />
+              </SoNaPromo>
               <QuoteForm local="home" enxuto />
               <p className="mt-6 text-[0.875rem] text-soft">
                 Quer ver tudo sobre pneus?{" "}
@@ -141,16 +160,31 @@ export default function Home() {
             </Reveal>
 
             <Reveal delay={0.12} className="hidden lg:block">
-              <figure className="overflow-hidden rounded-md border border-line">
-                <Foto
-                  src="/img/pneus-estoque.webp"
-                  alt="Pneus novos no estoque do Jura Auto Center"
-                  width={1000}
-                  height={850}
-                  sizes="45vw"
-                  className="aspect-[4/3.4] w-full object-cover"
-                />
-              </figure>
+              <SoNaPromo
+                fallback={
+                  <figure className="overflow-hidden rounded-md border border-line">
+                    <Foto
+                      src="/img/pneus-estoque.webp"
+                      alt="Pneus novos no estoque do Jura Auto Center"
+                      width={1000}
+                      height={850}
+                      sizes="45vw"
+                      className="aspect-[4/3.4] w-full object-cover"
+                    />
+                  </figure>
+                }
+              >
+                <figure className="mx-auto max-w-[460px] overflow-hidden rounded-md border border-line">
+                  <Foto
+                    src="/img/black-november.webp"
+                    alt="Black November no Jura: preço de Black em pneus nacionais 175/65 R14 e 175/70 R13, importados aro 15 e remoldados aro 13, 14 e 15"
+                    width={1080}
+                    height={1350}
+                    sizes="460px"
+                    className="h-auto w-full"
+                  />
+                </figure>
+              </SoNaPromo>
             </Reveal>
           </div>
         </Wrap>

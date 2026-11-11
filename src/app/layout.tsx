@@ -5,6 +5,8 @@ import { Footer } from "@/components/footer";
 import { WhatsFloat } from "@/components/whats-float";
 import { CookieBanner } from "@/components/cookie-banner";
 import { Rastreio } from "@/components/rastreio";
+import { FaixaPromo } from "@/components/promo";
+import { promoAtiva } from "@/lib/promo";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -109,7 +111,14 @@ const schema = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${bebas.variable} ${poppins.variable} ${montserrat.variable}`}>
+    <html
+      lang="pt-BR"
+      className={`${bebas.variable} ${poppins.variable} ${montserrat.variable}`}
+      /* Promoção valendo no dia do build: reserva o espaço da tarja (--faixa). O FaixaPromo
+         tira o atributo no aparelho do cliente quando a data passa. */
+      data-promo={promoAtiva() ? "" : undefined}
+      suppressHydrationWarning
+    >
       <body className="relative">
         <noscript><style>{".js-only { display: none !important; }"}</style></noscript>
         {/* Rastreio inicializa a tag somente fora da prévia local. */}
@@ -123,8 +132,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         >
           Pular para o conteúdo
         </a>
+        <FaixaPromo />
         <Header />
-        <main id="conteudo" tabIndex={-1}>{children}</main>
+        <main id="conteudo" tabIndex={-1} className="pt-(--faixa)">{children}</main>
         <Footer />
         <WhatsFloat />
         <CookieBanner />
