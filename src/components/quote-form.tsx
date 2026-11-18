@@ -1,6 +1,7 @@
 "use client";
 
-import { useId, useRef, useState, useSyncExternalStore } from "react";
+import { useEffect, useId, useRef, useState, useSyncExternalStore } from "react";
+import { EVENTO_MEDIDA } from "./medida-black";
 import { mensagemPneus, site, whats } from "@/lib/site";
 import { previaLocal, rastrear } from "@/lib/rastreio";
 import { mascararMedidaPneu, normalizarMedidaPneu, quantidadePneusValida } from "@/lib/medida-pneu";
@@ -42,6 +43,21 @@ export function QuoteForm({
   const [pedido, setPedido] = useState<string | null>(null);
   const campoMedida = useRef<HTMLInputElement>(null);
   const campoQtd = useRef<HTMLSelectElement>(null);
+
+  // Tocou numa medida da promoção (MedidaBlack): ela entra no campo e o campo aparece na tela.
+  useEffect(() => {
+    const receber = (e: Event) => {
+      const limpa = normalizarMedidaPneu((e as CustomEvent<string>).detail ?? "");
+      if (!limpa) return;
+      setMedida(limpa);
+      setSemMedida(false);
+      setErro(null);
+      setPedido(null);
+      campoMedida.current?.scrollIntoView({ block: "center", behavior: "smooth" });
+    };
+    window.addEventListener(EVENTO_MEDIDA, receber);
+    return () => window.removeEventListener(EVENTO_MEDIDA, receber);
+  }, []);
 
   function enviar(e: React.FormEvent) {
     e.preventDefault();

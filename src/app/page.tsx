@@ -152,7 +152,7 @@ export default function Home() {
                 Quer ver tudo sobre pneus?{" "}
                 <Link
                   href="/pneus"
-                  className="text-muted underline underline-offset-4 transition-colors hover:text-jura-text"
+                  className="inline-flex min-h-11 items-center text-muted underline underline-offset-4 transition-colors hover:text-jura-text"
                 >
                   Página de pneus
                 </Link>
@@ -508,7 +508,7 @@ export default function Home() {
             </div>
             <p className="mt-6 text-[0.875rem] text-soft">
               Ou passa na{" "}
-              <Link href="#onde-estamos" className="text-muted underline underline-offset-4 transition-colors hover:text-jura-text">
+              <Link href="#onde-estamos" className="inline-flex min-h-11 items-center text-muted underline underline-offset-4 transition-colors hover:text-jura-text">
                 Avenida Loreto, 889
               </Link>
               , de segunda a sábado.

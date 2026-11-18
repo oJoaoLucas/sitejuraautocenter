@@ -5,6 +5,10 @@ import { cta, site, telefoneFixoLink } from "@/lib/site";
 import { InstagramIcon, WhatsAppIcon } from "./icons";
 import { SpeedBars, Wrap } from "./ui";
 
+// Área de toque de 44 px no celular (18/11/2026: os links tinham 20 px de altura); no computador volta ao texto simples.
+const LINK = "inline-flex min-h-11 items-center transition-colors hover:text-jura-text md:min-h-0";
+const LISTA = "grid gap-0 text-sm text-muted md:gap-2.5";
+
 export function Footer() {
   return (
     <footer className="border-t border-line bg-[#0e0e0e] pt-14 pb-8">
@@ -54,25 +58,25 @@ export function Footer() {
             <h2 className="mb-4 font-ui text-[0.78rem] font-bold uppercase tracking-[0.14em] text-soft">
               Contato
             </h2>
-            <ul className="grid gap-2.5 text-sm text-muted">
+            <ul className={LISTA}>
               <li>
                 <a href={cta.whatsPrincipal} target="_blank" rel="noopener noreferrer"
-                   className="transition-colors hover:text-jura-text">
+                   className={LINK}>
                   WhatsApp {site.whatsappExibicao}
                 </a>
               </li>
               <li>
-                <a href={telefoneFixoLink} className="transition-colors hover:text-jura-text">
+                <a href={telefoneFixoLink} className={LINK}>
                   Fixo {site.telefoneFixo}
                 </a>
               </li>
               <li>
                 <a href={site.instagramUrl} target="_blank" rel="noopener noreferrer"
-                   className="transition-colors hover:text-jura-text">
+                   className={LINK}>
                   @{site.instagram}
                 </a>
               </li>
-              <li className="pt-1">
+              <li className="pt-2 md:pt-1">
                 <address className="not-italic leading-relaxed">
                   {site.endereco.rua}
                   <br />
@@ -103,14 +107,14 @@ export function Footer() {
             <h2 className="mt-7 mb-4 font-ui text-[0.78rem] font-bold uppercase tracking-[0.14em] text-soft">
               Navegar
             </h2>
-            <ul className="grid gap-2.5 text-sm text-muted">
-              <li><Link href="/pneus" className="transition-colors hover:text-jura-text">Pneus</Link></li>
-              <li><Link href="/freios" className="transition-colors hover:text-jura-text">Freios</Link></li>
-              <li><Link href="/suspensao" className="transition-colors hover:text-jura-text">Suspensão</Link></li>
-              <li><Link href="/alinhamento-e-balanceamento" className="transition-colors hover:text-jura-text">Alinhamento e balanceamento</Link></li>
-              <li><Link href="/#servicos" className="transition-colors hover:text-jura-text">Serviços</Link></li>
-              <li><Link href="/historia" className="transition-colors hover:text-jura-text">Nossa história</Link></li>
-              <li><Link href="/#duvidas" className="transition-colors hover:text-jura-text">Dúvidas frequentes</Link></li>
+            <ul className={LISTA}>
+              <li><Link href="/pneus" className={LINK}>Pneus</Link></li>
+              <li><Link href="/freios" className={LINK}>Freios</Link></li>
+              <li><Link href="/suspensao" className={LINK}>Suspensão</Link></li>
+              <li><Link href="/alinhamento-e-balanceamento" className={LINK}>Alinhamento e balanceamento</Link></li>
+              <li><Link href="/#servicos" className={LINK}>Serviços</Link></li>
+              <li><Link href="/historia" className={LINK}>Nossa história</Link></li>
+              <li><Link href="/#duvidas" className={LINK}>Dúvidas frequentes</Link></li>
             </ul>
           </div>
         </div>
@@ -123,7 +127,7 @@ export function Footer() {
           </p>
           <p>
             &copy; {new Date().getFullYear()} {site.nome}. Todos os direitos reservados. -{" "}
-            <Link href="/privacidade" className="underline underline-offset-4 transition-colors hover:text-jura-text">
+            <Link href="/privacidade" className="inline-flex min-h-11 items-center underline underline-offset-4 transition-colors hover:text-jura-text md:min-h-0">
               Política de Privacidade
             </Link>
             {" · "}<PreferenciasCookies className="hover:text-cream" />
