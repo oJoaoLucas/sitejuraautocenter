@@ -17,9 +17,10 @@ import {
   site,
 } from "@/lib/site";
 
-const titulo = "Pneus em Araras: nacionais, importados e remold";
+// Título curto o bastante pra não cortar no Google (22/11: 504 aparições, 1 clique, posição 7).
+const titulo = "Pneus em Araras até 10x no cartão";
 const descricao =
-  "Pneus nacionais, importados e remold em Araras/SP. Informe a medida e receba o preço pelo WhatsApp. Até 10x no cartão. Nota 4,9 no Google.";
+  "Pneus nacionais, importados e remold em Araras/SP. Mande a medida ou foto do pneu no WhatsApp e receba o preço. Até 10x no cartão. Nota 4,9 no Google.";
 
 export const metadata: Metadata = {
   title: titulo,
