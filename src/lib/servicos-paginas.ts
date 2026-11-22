@@ -17,6 +17,9 @@ export type PaginaServico = {
   /** Texto do botão e mensagem já escrita do WhatsApp. */
   whatsHref: string;
   fotoHero: string;
+  /** Foto do serviço acontecendo, ao lado de `fotoPasso` no "como funciona". */
+  fotoServico: string;
+  altServico: string;
   fotoPasso: string;
   altPasso: string;
   sinais: readonly string[];
@@ -75,6 +78,8 @@ export const freios: PaginaServico = {
   lead: "Pastilha, disco, tambor e fluido. A gente avalia o sistema, explica o que precisa de verdade e só faz o serviço depois de combinado com você.",
   whatsHref: whats("Olá! Vim pelo site e queria uma avaliação dos freios do meu carro."),
   fotoHero: "/img/oficina-elevadores.webp",
+  fotoServico: "/img/servico-freios-mecanico.webp",
+  altServico: "Mecânico do Jura Auto Center trabalhando no disco de freio de um carro",
   fotoPasso: "/img/servico-freios.webp",
   altPasso: "Freio a tambor aberto, em manutenção no elevador da oficina do Jura Auto Center",
   sinais: [
@@ -136,6 +141,8 @@ export const suspensao: PaginaServico = {
   lead: "Diagnóstico e reparo de suspensão com avaliação honesta: a gente explica, peça por peça, o que precisa mesmo de troca antes de fazer o serviço.",
   whatsHref: whats("Olá! Vim pelo site e queria uma avaliação da suspensão do meu carro."),
   fotoHero: "/img/oficina-interior.webp",
+  fotoServico: "/img/servico-suspensao-mecanico.webp",
+  altServico: "Mecânico do Jura Auto Center, de costas, montando um conjunto de suspensão",
   fotoPasso: "/img/servico-suspensao.webp",
   altPasso: "Mecânico do Jura Auto Center segurando caixas de amortecedores, com a parede de pneus ao fundo",
   sinais: [
@@ -206,8 +213,10 @@ export const alinhamento: PaginaServico = {
   lead: "Carro puxando, volante torto ou tremendo na estrada? A gente alinha e balanceia por ordem de chegada, e você sai com o carro andando reto.",
   whatsHref: whats("Olá! Vim pelo site e queria fazer alinhamento e balanceamento no meu carro."),
   fotoHero: "/img/oficina-elevadores.webp",
-  fotoPasso: "/img/oficina-galpao-alto.webp",
-  altPasso: "Elevadores da oficina do Jura Auto Center, onde é feito o alinhamento e o balanceamento",
+  fotoServico: "/img/servico-alinhamento.webp",
+  altServico: "Aparelho de alinhamento preso na roda de um carro na oficina do Jura Auto Center",
+  fotoPasso: "/img/alinhamento-fusca.webp",
+  altPasso: "Fusca verde na rampa de alinhamento da oficina do Jura Auto Center",
   sinais: [
     "Carro puxando para um lado em reta",
     "Volante torto com o carro andando reto",

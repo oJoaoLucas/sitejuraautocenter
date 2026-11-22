@@ -31,6 +31,16 @@ const fotos = [
     alt: "Vista interna do auto center com elevadores e pneus",
     pos: "object-center",
   },
+  {
+    src: "/img/servico-oleo.webp",
+    alt: "Troca de óleo no Jura Auto Center: óleo novo sendo colocado no motor",
+    pos: "object-center",
+  },
+  {
+    src: "/img/fachada-noite.webp",
+    alt: "Fachada vermelha do Jura Auto Center iluminada à noite",
+    pos: "object-center",
+  },
 ] as const;
 
 const INTERVALO_AUTOPLAY = 4500;
@@ -145,7 +155,7 @@ export function OndeEstamosCarrossel() {
             onClick={() => navegar(idx)}
             aria-label={`Ver foto ${idx + 1}`}
             aria-current={idx === i}
-            className="grid size-11 place-items-center rounded-sm"
+            className="grid h-11 w-7 place-items-center rounded-sm sm:w-11"
           >
             <span aria-hidden="true" className={`h-1.5 rounded-full transition-all duration-300 ease-jura ${
               idx === i ? "w-5 bg-jura-title" : "w-1.5 bg-cream/40 hover:bg-cream/70"

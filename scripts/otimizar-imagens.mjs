@@ -10,6 +10,8 @@ const fotos = [
   'oficina-elevadores', 'oficina-interior', 'estacionamento',
   'oficina-galpao-alto', 'oficina-galpao-amplo', 'loja-antiga-2019', 'jura-mecanico',
   'servico-freios', 'servico-suspensao', 'black-november',
+  'servico-alinhamento', 'servico-suspensao-mecanico', 'servico-freios-mecanico',
+  'alinhamento-fusca', 'fachada-noite', 'servico-oleo',
 ];
 const fontes = [
   ...fotos.map(nome => ({ src: `/img/${nome}.webp`, prefixo: `/img/otimizadas/${nome}`, tamanhos: [400, 800, 1200, 1800] })),

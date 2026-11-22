@@ -158,6 +158,78 @@
       1080
     ]
   },
+  "/img/servico-alinhamento.webp": {
+    "largura": 2000,
+    "altura": 2000,
+    "prefixo": "/img/otimizadas/servico-alinhamento",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800,
+      2000
+    ]
+  },
+  "/img/servico-suspensao-mecanico.webp": {
+    "largura": 2000,
+    "altura": 2499,
+    "prefixo": "/img/otimizadas/servico-suspensao-mecanico",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800,
+      2000
+    ]
+  },
+  "/img/servico-freios-mecanico.webp": {
+    "largura": 1938,
+    "altura": 2423,
+    "prefixo": "/img/otimizadas/servico-freios-mecanico",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800,
+      1938
+    ]
+  },
+  "/img/alinhamento-fusca.webp": {
+    "largura": 2000,
+    "altura": 2000,
+    "prefixo": "/img/otimizadas/alinhamento-fusca",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800,
+      2000
+    ]
+  },
+  "/img/fachada-noite.webp": {
+    "largura": 2000,
+    "altura": 1392,
+    "prefixo": "/img/otimizadas/fachada-noite",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800,
+      2000
+    ]
+  },
+  "/img/servico-oleo.webp": {
+    "largura": 2000,
+    "altura": 1387,
+    "prefixo": "/img/otimizadas/servico-oleo",
+    "larguras": [
+      400,
+      800,
+      1200,
+      1800,
+      2000
+    ]
+  },
   "/logo/jura-branco.png": {
     "largura": 1200,
     "altura": 521,

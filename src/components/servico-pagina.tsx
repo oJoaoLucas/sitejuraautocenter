@@ -123,16 +123,23 @@ export function ServicoPagina({ d }: { d: PaginaServico }) {
         <Wrap>
           <div className="grid items-center gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
             <Reveal>
-              <figure className="overflow-hidden rounded-md border border-line">
-                <Foto
-                  src={d.fotoPasso}
-                  alt={d.altPasso}
-                  width={1000}
-                  height={1000}
-                  sizes="(max-width: 1024px) 100vw, 45vw"
-                  className="aspect-square w-full object-cover"
-                />
-              </figure>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { src: d.fotoServico, alt: d.altServico },
+                  { src: d.fotoPasso, alt: d.altPasso },
+                ].map((f) => (
+                  <figure key={f.src} className="overflow-hidden rounded-md border border-line">
+                    <Foto
+                      src={f.src}
+                      alt={f.alt}
+                      width={800}
+                      height={1000}
+                      sizes="(max-width: 1024px) 50vw, 23vw"
+                      className="aspect-[4/5] w-full object-cover"
+                    />
+                  </figure>
+                ))}
+              </div>
             </Reveal>
 
             <Reveal delay={0.1}>
