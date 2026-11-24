@@ -33,11 +33,11 @@ const montserrat = Montserrat({
 export const metadata: Metadata = {
   metadataBase: new URL("https://juraautocenter.com.br"),
   title: {
-    default: "Jura Auto Center - Pneus, Suspensão e Freios em Araras/SP",
+    default: "Jura Auto Center Araras: Pneus, Alinhamento e Freios",
     template: "%s | Jura Auto Center",
   },
   description:
-    "Especialistas em suspensão, freios e pneus em Araras/SP há 7 anos. Mais de 10 mil carros atendidos e nota 4,9 no Google. Orçamento pelo WhatsApp.",
+    "Pneus, alinhamento, balanceamento, suspensão e freios em Araras/SP há 7 anos. Mais de 10 mil carros atendidos e nota 4,9 no Google. Orçamento pelo WhatsApp.",
   keywords: [
     "pneus araras", "borracharia araras", "alinhamento araras",
     "balanceamento araras", "oficina araras", "suspensão araras",
@@ -48,14 +48,14 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     siteName: site.nome,
     url: "/",
-    title: "Jura Auto Center - Pneus, Suspensão e Freios em Araras/SP",
+    title: "Jura Auto Center Araras: Pneus, Alinhamento e Freios",
     description:
       "Em Araras desde 2019, cuidando de quem depende do carro todo dia. Nota 4,9 no Google. Vem pro Jura!",
     images: [{ url: "/img/og.jpg", width: 1200, height: 630, alt: "Fachada do Jura Auto Center" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Jura Auto Center - Pneus, Suspensão e Freios em Araras/SP",
+    title: "Jura Auto Center Araras: Pneus, Alinhamento e Freios",
     description:
       "Em Araras desde 2019, cuidando de quem depende do carro todo dia. Nota 4,9 no Google. Vem pro Jura!",
     images: ["/img/og.jpg"],
