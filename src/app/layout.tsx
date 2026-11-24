@@ -84,7 +84,7 @@ const schema = {
   priceRange: "$$",
   address: {
     "@type": "PostalAddress",
-    streetAddress: site.endereco.rua,
+    streetAddress: `${site.endereco.rua} - ${site.endereco.bairro}`,
     addressLocality: site.endereco.cidade,
     addressRegion: site.endereco.uf,
     postalCode: site.endereco.cep,
