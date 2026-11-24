@@ -112,6 +112,8 @@ export function Footer() {
               <li><Link href="/freios" className={LINK}>Freios</Link></li>
               <li><Link href="/suspensao" className={LINK}>Suspensão</Link></li>
               <li><Link href="/alinhamento-e-balanceamento" className={LINK}>Alinhamento e balanceamento</Link></li>
+              <li><Link href="/troca-de-oleo" className={LINK}>Troca de óleo</Link></li>
+              <li><Link href="/revisao" className={LINK}>Revisão</Link></li>
               <li><Link href="/#servicos" className={LINK}>Serviços</Link></li>
               <li><Link href="/historia" className={LINK}>Nossa história</Link></li>
               <li><Link href="/#duvidas" className={LINK}>Dúvidas frequentes</Link></li>

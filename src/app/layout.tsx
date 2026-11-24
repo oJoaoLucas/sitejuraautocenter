@@ -61,6 +61,8 @@ export const metadata: Metadata = {
     images: ["/img/og.jpg"],
   },
   robots: { index: true, follow: true },
+  /* Bing Webmaster Tools (dono, 24/11/2026). Não tirar: o Bing confere de tempos em tempos. */
+  verification: { other: { "msvalidate.01": "60A7691D7175A448C045578304D6DD9E" } },
   alternates: { canonical: "/" },
 };
 

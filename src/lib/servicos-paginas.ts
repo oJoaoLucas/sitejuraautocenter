@@ -270,4 +270,134 @@ export const alinhamento: PaginaServico = {
   ctaFinal: ["Carro puxando?", "Vem pro Jura."],
 };
 
-export const paginasServico = [freios, suspensao, alinhamento] as const;
+/** Troca de óleo (dono, 24/11/2026: página simples, é pouco procurado; marcas grandes; flex, gasolina e etanol). */
+export const oleo: PaginaServico = {
+  rota: "/troca-de-oleo",
+  titulo: "Troca de óleo em Araras: Mobil e Petronas",
+  descricao:
+    "Troca de óleo e filtro em Araras/SP com óleo Mobil, Petronas e outras marcas grandes, pra carro flex, gasolina e etanol. Sem hora marcada. Nota 4,9 no Google.",
+  h1: ["Troca de óleo", "e filtro", "em Araras"],
+  lead: "Óleo de marca grande, como Mobil e Petronas, no tipo certo pro seu carro flex, a gasolina ou a etanol. Troca do filtro junto e a próxima troca anotada pra você não esquecer.",
+  whatsHref: whats("Olá! Vim pelo site e queria fazer troca de óleo no meu carro."),
+  fotoHero: "/img/oficina-interior.webp",
+  fotoPasso: "/img/oficina-galpao-amplo.webp",
+  altPasso: "Oficina do Jura Auto Center, onde é feita a troca de óleo",
+  sinais: [
+    "Passou a quilometragem da última troca",
+    "Passou o tempo indicado no manual",
+    "Luz do óleo acesa no painel",
+    "Óleo escuro ou baixo na vareta",
+    "Motor mais barulhento que o normal",
+    "Não lembra quando foi a última troca",
+  ],
+  sinaisNota: "Óleo vencido gasta o motor por dentro. Trocar no prazo sai muito mais barato que consertar.",
+  faz: [
+    {
+      icone: "/icons/oleo.png",
+      titulo: "Óleo de marca grande",
+      texto: "Mobil, Petronas e outras marcas conhecidas, na especificação que o seu carro pede.",
+    },
+    {
+      icone: "/icons/oleo.png",
+      titulo: "Filtro de óleo",
+      texto: "Troca do filtro junto com o óleo, pra o óleo novo não trabalhar com sujeira velha.",
+    },
+    {
+      icone: "/icons/revisao.png",
+      titulo: "Próxima troca anotada",
+      texto: "A gente registra a data e a quilometragem da próxima troca pra você ter o controle certo.",
+    },
+    {
+      icone: "/icons/pneus.png",
+      titulo: "Olhada geral",
+      texto: "Com o carro no elevador, a gente olha pneus e suspensão e te avisa se tiver algo.",
+    },
+  ],
+  depoimentos: ["Renato Curtolo", "Geraldo César Bergamin", "Gabriela Chinalia de Sena"],
+  duvidasTitulo: ["Dúvidas sobre", "troca de óleo"],
+  faq: [
+    {
+      q: "Vocês trocam óleo de carro flex?",
+      a: "Sim. Trocamos óleo de carro flex, a gasolina e a etanol, sempre com o óleo na especificação que o fabricante pede.",
+    },
+    {
+      q: "Qual óleo vocês usam?",
+      a: "Trabalhamos com marcas grandes, como Mobil e Petronas. O tipo do óleo segue o manual do seu carro.",
+    },
+    {
+      q: "De quanto em quanto tempo trocar o óleo?",
+      a: "O prazo certo está no manual do carro, em quilometragem ou em tempo, o que vencer primeiro. Na troca, a gente anota a próxima pra você.",
+    },
+    duvidasComuns.agendar,
+    duvidasComuns.parcelar,
+    duvidasComuns.estacionar,
+  ],
+  ctaFinal: ["Óleo vencendo?", "Vem pro Jura."],
+};
+
+/** Revisão (dono, 24/11/2026: checar suspensão, freios, pneus e o resto que a oficina já faz). */
+export const revisao: PaginaServico = {
+  rota: "/revisao",
+  titulo: "Revisão do carro em Araras: suspensão, freios e pneus",
+  descricao:
+    "Revisão do carro em Araras/SP: suspensão, freios, pneus, alinhamento e óleo conferidos item por item, com o preço combinado antes. Sem hora marcada. Nota 4,9 no Google.",
+  h1: ["Revisão do carro", "item por item", "em Araras"],
+  lead: "Antes de viajar ou quando o carro está pedindo atenção: a gente confere suspensão, freios, pneus e óleo, mostra o que está bom e o que precisa de cuidado, e só faz o serviço com o seu ok.",
+  whatsHref: whats("Olá! Vim pelo site e queria fazer uma revisão no meu carro."),
+  fotoHero: "/img/oficina-elevadores.webp",
+  fotoPasso: "/img/oficina-galpao-alto.webp",
+  altPasso: "Elevadores da oficina do Jura Auto Center, onde é feita a revisão",
+  sinais: [
+    "Vai pegar estrada ou viajar",
+    "Comprou um carro usado",
+    "Faz tempo que ninguém olha o carro",
+    "Barulho novo na suspensão ou no freio",
+    "Pneu gastando estranho",
+    "Quer saber o que vai precisar trocar logo",
+  ],
+  sinaisNota: "Revisão em dia evita surpresa na estrada e deixa você planejar os gastos com calma.",
+  faz: [
+    {
+      icone: "/icons/suspensao.png",
+      titulo: "Suspensão e amortecedores",
+      texto: "Conferimos peça por peça e falamos com sinceridade o que precisa de troca.",
+    },
+    {
+      icone: "/icons/freios.png",
+      titulo: "Freios",
+      texto: "Pastilhas, discos, tambor e fluido: o estado real de cada um.",
+    },
+    {
+      icone: "/icons/pneus.png",
+      titulo: "Pneus, alinhamento e balanceamento",
+      texto: "Desgaste, calibragem e se o carro está puxando ou tremendo.",
+    },
+    {
+      icone: "/icons/oleo.png",
+      titulo: "Óleo e filtro",
+      texto: "Nível, prazo da troca e o filtro. Se estiver vencendo, já dá pra trocar.",
+    },
+  ],
+  depoimentos: ["Alex Carciragui", "Gedaias Oliveira", "Renato Curtolo"],
+  duvidasTitulo: ["Dúvidas sobre", "revisão"],
+  faq: [
+    {
+      q: "O que vocês olham na revisão?",
+      a: "Suspensão e amortecedores, freios, pneus, alinhamento, balanceamento, óleo e filtro. No fim você sabe o que está bom, o que precisa de troca agora e o que pode esperar.",
+    },
+    {
+      q: "Sou obrigado a fazer tudo que aparecer?",
+      a: "Não. A gente mostra o que encontrou e o preço de cada coisa, e você escolhe o que fazer. Nada é feito sem o seu ok.",
+    },
+    {
+      q: "Quanto custa a revisão?",
+      a: "Depende do carro e do que a revisão mostrar. Chama no WhatsApp com o modelo: a gente orienta e combina o valor antes de fazer.",
+    },
+    duvidasComuns.extra,
+    duvidasComuns.agendar,
+    duvidasComuns.parcelar,
+  ],
+  ctaFinal: ["Vai viajar?", "Revisa no Jura."],
+};
+
+export const paginasServico = [freios, suspensao, alinhamento, oleo, revisao] as const;

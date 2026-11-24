@@ -17,6 +17,10 @@ const links = [
   { href: "/freios", label: "Freios" },
   { href: "/suspensao", label: "Suspensão" },
   { href: "/alinhamento-e-balanceamento", label: "Alinhamento" },
+  /* largo: no menu de cima do computador só aparecem em tela larga (não cabem em notebook pequeno);
+     no menu do celular e no rodapé aparecem sempre. */
+  { href: "/troca-de-oleo", label: "Troca de óleo", largo: true },
+  { href: "/revisao", label: "Revisão", largo: true },
 ];
 
 export function Header() {
@@ -119,7 +123,7 @@ export function Header() {
                 key={l.href}
                 href={l.href}
                 aria-current={pathname === l.href ? "page" : undefined}
-                className="group relative py-1 text-sm font-medium whitespace-nowrap text-muted transition-colors hover:text-cream aria-[current=page]:text-cream"
+                className={`${"largo" in l ? "hidden min-[1360px]:inline-block " : ""}group relative py-1 text-sm font-medium whitespace-nowrap text-muted transition-colors hover:text-cream aria-[current=page]:text-cream`}
               >
                 {l.label}
                 <span className="absolute inset-x-0 bottom-0 h-0.5 origin-left skew-jura scale-x-0 bg-jura transition-transform duration-300 ease-jura group-hover:scale-x-100 group-aria-[current=page]:scale-x-100" />
