@@ -17,7 +17,7 @@ import { avaliacoesGoogle, celularLink, cta, faq, site, telefoneFixoLink } from 
 
 export const metadata: Metadata = {
   description:
-    "Pneus, alinhamento, balanceamento, freios, suspensão, troca de óleo e revisão em Araras/SP. Em Araras desde 2019, mais de 10 mil carros atendidos e nota 4,9 no Google.",
+    "Pneus, alinhamento, balanceamento, freios, suspensão, troca de óleo e revisão em Araras/SP. Desde 2019, mais de 10 mil carros e nota 4,9 no Google.",
 };
 
 export default function Home() {

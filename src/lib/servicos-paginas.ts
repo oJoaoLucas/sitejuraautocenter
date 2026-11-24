@@ -340,9 +340,9 @@ export const oleo: PaginaServico = {
 /** Revisão (dono, 24/11/2026: checar suspensão, freios, pneus e o resto que a oficina já faz). */
 export const revisao: PaginaServico = {
   rota: "/revisao",
-  titulo: "Revisão do carro em Araras: suspensão, freios e pneus",
+  titulo: "Revisão do carro em Araras",
   descricao:
-    "Revisão do carro em Araras/SP: suspensão, freios, pneus, alinhamento e óleo conferidos item por item, com o preço combinado antes. Sem hora marcada. Nota 4,9 no Google.",
+    "Revisão do carro em Araras/SP: suspensão, freios, pneus, alinhamento e óleo conferidos item por item, com o preço combinado antes. Nota 4,9 no Google.",
   h1: ["Revisão do carro", "item por item", "em Araras"],
   lead: "Antes de viajar ou quando o carro está pedindo atenção: a gente confere suspensão, freios, pneus e óleo, mostra o que está bom e o que precisa de cuidado, e só faz o serviço com o seu ok.",
   whatsHref: whats("Olá! Vim pelo site e queria fazer uma revisão no meu carro."),
