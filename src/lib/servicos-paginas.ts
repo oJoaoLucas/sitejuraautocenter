@@ -280,6 +280,8 @@ export const oleo: PaginaServico = {
   lead: "Óleo de marca grande, como Mobil e Petronas, no tipo certo pro seu carro flex, a gasolina ou a etanol. Troca do filtro junto e a próxima troca anotada pra você não esquecer.",
   whatsHref: whats("Olá! Vim pelo site e queria fazer troca de óleo no meu carro."),
   fotoHero: "/img/oficina-interior.webp",
+  fotoServico: "/img/servico-oleo.webp",
+  altServico: "Mecânico do Jura Auto Center colocando óleo Mobil no motor de um carro",
   fotoPasso: "/img/oficina-galpao-amplo.webp",
   altPasso: "Oficina do Jura Auto Center, onde é feita a troca de óleo",
   sinais: [
@@ -345,8 +347,10 @@ export const revisao: PaginaServico = {
   lead: "Antes de viajar ou quando o carro está pedindo atenção: a gente confere suspensão, freios, pneus e óleo, mostra o que está bom e o que precisa de cuidado, e só faz o serviço com o seu ok.",
   whatsHref: whats("Olá! Vim pelo site e queria fazer uma revisão no meu carro."),
   fotoHero: "/img/oficina-elevadores.webp",
-  fotoPasso: "/img/oficina-galpao-alto.webp",
-  altPasso: "Elevadores da oficina do Jura Auto Center, onde é feita a revisão",
+  fotoServico: "/img/servico-suspensao-mecanico.webp",
+  altServico: "Mecânico do Jura Auto Center conferindo a suspensão de um carro",
+  fotoPasso: "/img/servico-freios-mecanico.webp",
+  altPasso: "Mecânico do Jura Auto Center trabalhando no disco de freio de um carro",
   sinais: [
     "Vai pegar estrada ou viajar",
     "Comprou um carro usado",
