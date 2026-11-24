@@ -7,7 +7,7 @@ import { CookieBanner } from "@/components/cookie-banner";
 import { Rastreio } from "@/components/rastreio";
 import { FaixaPromo } from "@/components/promo";
 import { promoAtiva } from "@/lib/promo";
-import { site } from "@/lib/site";
+import { servicos, site } from "@/lib/site";
 import "./globals.css";
 
 /* Fontes do brand book (p.05), auto-hospedadas pelo next/font: zero request externo. */
@@ -106,7 +106,26 @@ const schema = {
   ],
   hasMap: site.perfilGoogleUrl,
   areaServed: { "@type": "City", name: "Araras" },
-  sameAs: [site.instagramUrl, "https://www.facebook.com/juraautocenter"],
+  sameAs: [site.instagramUrl, "https://www.facebook.com/juraautocenter", site.perfilGoogleUrl],
+  /* O que as IAs (ChatGPT, Claude, Gemini) leem pra saber o que a oficina faz.
+     Só o que o site já afirma: sem preço, marca ou garantia. */
+  description:
+    "Auto center em Araras/SP especializado em pneus, alinhamento, balanceamento, suspensão e freios, com troca de óleo e revisão. Atendimento por ordem de chegada, estacionamento próprio e parcelamento em até 10x no cartão.",
+  logo: "https://juraautocenter.com.br/logo/jura-vermelho.png",
+  foundingDate: "2019-06-15",
+  founder: { "@type": "Person", name: "Jura" },
+  contactPoint: [
+    { "@type": "ContactPoint", telephone: "+5519997818371", contactType: "customer service", availableLanguage: "pt-BR" },
+    { "@type": "ContactPoint", telephone: "+551933513004", contactType: "customer service", availableLanguage: "pt-BR" },
+  ],
+  paymentAccepted: "Cartão de crédito, Cartão de débito",
+  currenciesAccepted: "BRL",
+  knowsAbout: servicos.map((s) => s.titulo),
+  makesOffer: servicos.map((s) => ({
+    "@type": "Offer",
+    itemOffered: { "@type": "Service", name: s.titulo, description: s.texto, areaServed: "Araras/SP" },
+  })),
+  amenityFeature: [{ "@type": "LocationFeatureSpecification", name: "Estacionamento próprio", value: true }],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

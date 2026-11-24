@@ -16,3 +16,22 @@ export function FaqSchema({ itens }: { itens: readonly { q: string; a: string }[
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
   );
 }
+
+/**
+ * Service em JSON-LD, ligado à oficina do layout pelo @id. Diz pro Google e pras
+ * IAs que esta página é o serviço X, feito pelo Jura, em Araras.
+ */
+export function ServicoSchema({ nome, descricao, rota }: { nome: string; descricao: string; rota: string }) {
+  const schema = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: nome,
+    description: descricao,
+    url: `https://juraautocenter.com.br${rota}`,
+    areaServed: { "@type": "City", name: "Araras" },
+    provider: { "@id": "https://juraautocenter.com.br" },
+  };
+  return (
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+  );
+}

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Faq } from "@/components/faq";
-import { FaqSchema } from "@/components/faq-schema";
+import { FaqSchema, ServicoSchema } from "@/components/faq-schema";
 import { Foto } from "@/components/foto";
 import { PhoneIcon, PinIcon, Stars } from "@/components/icons";
 import { Reveal } from "@/components/reveal";
@@ -22,6 +22,7 @@ export function ServicoPagina({ d }: { d: PaginaServico }) {
   return (
     <>
       <FaqSchema itens={d.faq} />
+      <ServicoSchema nome={d.titulo} descricao={d.descricao} rota={d.rota} />
 
       {/* ============================================================
           1. PRIMEIRA TELA

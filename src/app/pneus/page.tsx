@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Faq } from "@/components/faq";
-import { FaqSchema } from "@/components/faq-schema";
+import { FaqSchema, ServicoSchema } from "@/components/faq-schema";
 import { Foto } from "@/components/foto";
 import { PhoneIcon, PinIcon, Stars } from "@/components/icons";
 import { ResumoBlack, SeloBlack } from "@/components/black-november";
@@ -46,6 +46,7 @@ export default function Pneus() {
   return (
     <>
       <FaqSchema itens={faqPneus} />
+      <ServicoSchema nome={titulo} descricao={descricao} rota="/pneus" />
 
       {/* ============================================================
           1. PRIMEIRA TELA
