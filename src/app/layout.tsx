@@ -106,6 +106,8 @@ const schema = {
       closes: "12:00",
     },
   ],
+  /* Ponto do perfil do Google Maps (24/11/2026). */
+  geo: { "@type": "GeoCoordinates", latitude: -22.3605031, longitude: -47.3671551 },
   hasMap: site.perfilGoogleUrl,
   areaServed: { "@type": "City", name: "Araras" },
   sameAs: [site.instagramUrl, "https://www.facebook.com/juraautocenter", site.perfilGoogleUrl],
