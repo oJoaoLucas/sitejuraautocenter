@@ -13,7 +13,7 @@ export const whatsRevisaoFimDeAno = whats(MENSAGEM_REVISAO);
 /** Selo pequeno acima do título da primeira tela. */
 export function SeloViagem() {
   return (
-    <span className="mb-4 inline-flex items-center gap-2 rounded-full bg-jura px-3.5 py-1.5 font-ui text-[0.75rem] font-extrabold tracking-[0.08em] text-white uppercase">
+    <span className="mb-5 flex w-fit items-center gap-2 rounded-full bg-jura px-3.5 py-1.5 font-ui text-[0.75rem] font-extrabold tracking-[0.08em] text-white uppercase">
       <FlocoIcon className="size-4" />
       Revisão de fim de ano
     </span>
@@ -25,7 +25,6 @@ const itens = [
   { titulo: "Freio", texto: "Pastilha, disco e fluido de freio." },
   { titulo: "Alinhamento e balanceamento", texto: "Volante reto e pneu gastando por igual." },
   { titulo: "Suspensão", texto: "Amortecedor, bieleta e bucha." },
-  { titulo: "Óleo e água", texto: "Nível certo pra pegar estrada." },
 ];
 
 /** Árvore de Natal de pneus empilhados, com bolinhas e estrela. Só ilustração (aria-hidden). */

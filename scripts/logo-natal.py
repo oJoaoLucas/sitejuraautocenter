@@ -72,19 +72,50 @@ def gorro(w, h):
     return im
 
 
-def main():
-    logo = Image.open(ORIGEM).convert("RGBA")
+def com_gorro(logo, opacidade_sombra=0.45):
+    """Põe o gorro no A de um logo 1200x521 (mesmo desenho do Brand Book)."""
     g = gorro(205, 150).rotate(-12, resample=Image.BICUBIC, expand=True)
-    # Sombra suave embaixo do gorro, pra descolar do fundo escuro.
+    # Sombra suave embaixo do gorro, pra descolar do fundo.
     sombra = Image.new("RGBA", g.size, (0, 0, 0, 0))
-    sombra.putalpha(g.split()[3].point(lambda a: int(a * 0.45)))
+    sombra.putalpha(g.split()[3].point(lambda a: int(a * opacidade_sombra)))
     sombra = sombra.filter(ImageFilter.GaussianBlur(6))
     # Topo do A fica em x≈955–1055, y≈100 (logo 1200x521).
     x, y = 918, -2
     logo.alpha_composite(sombra, (x + 4, y + 8))
     logo.alpha_composite(g, (x, y))
+    return logo
+
+
+def foto_whatsapp():
+    """Foto do perfil do WhatsApp (o modelo de sempre: fundo branco, pneu e chave pretos, JURA vermelho)
+    com o gorro. 1080x1080; o WhatsApp corta em círculo, então o logo fica dentro da área segura."""
+    base = Image.open(RAIZ / "public/logo/jura-fachada.png").convert("RGBA")
+    px = base.load()
+    w, h = base.size
+    vermelho = (210, 26, 20, 255)
+    # O miolo das letras JURA é branco opaco (fundo é transparente): pinta de vermelho.
+    for yy in range(0, 318):
+        for xx in range(250, w):
+            r, gg, b, a = px[xx, yy]
+            if a > 200 and r > 200 and gg > 200 and b > 200:
+                px[xx, yy] = vermelho
+    logo = com_gorro(base, 0.3)
+    lado = 1080
+    tela = Image.new("RGBA", (lado, lado), (255, 255, 255, 255))
+    largura = 960
+    alto = round(logo.size[1] * largura / logo.size[0])
+    logo = logo.resize((largura, alto), Image.LANCZOS)
+    tela.alpha_composite(logo, ((lado - largura) // 2, (lado - alto) // 2 + 10))
+    destino = RAIZ / "public/logo/whatsapp-natal.png"
+    tela.convert("RGB").save(destino)
+    print("ok", destino)
+
+
+def main():
+    logo = com_gorro(Image.open(ORIGEM).convert("RGBA"))
     logo.save(DESTINO)
     print("ok", DESTINO, logo.size)
+    foto_whatsapp()
 
 
 if __name__ == "__main__":
