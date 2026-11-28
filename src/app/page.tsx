@@ -8,7 +8,8 @@ import { Foto } from "@/components/foto";
 import { OndeEstamosCarrossel } from "@/components/carrossel";
 import { ArrowIcon, InstagramIcon, PhoneIcon, PinIcon, StarIcon, Stars, WhatsAppIcon } from "@/components/icons";
 import { ListaBlack, SeloBlack } from "@/components/black-november";
-import { SoNaPromo } from "@/components/promo";
+import { SoNaPromo, SoNaViagem } from "@/components/promo";
+import { ChecklistViagem, SeloViagem, whatsRevisaoFimDeAno } from "@/components/natal";
 import { QuoteForm } from "@/components/quote-form";
 import { Reveal } from "@/components/reveal";
 import { Servicos } from "@/components/servicos";
@@ -33,14 +34,28 @@ export default function Home() {
           ============================================================ */}
       <section className="relative flex min-h-[90dvh] items-end overflow-hidden pt-[76px]">
         <div className="absolute inset-0">
-          <Foto
-            src="/img/fachada-hero.webp"
-            alt="Fachada do Jura Auto Center aberta na Avenida Loreto, 889, em Araras"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-[58%_42%]"
-          />
+          <SoNaViagem
+            fallback={
+              <Foto
+                src="/img/fachada-hero.webp"
+                alt="Fachada do Jura Auto Center aberta na Avenida Loreto, 889, em Araras"
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover object-[58%_42%]"
+              />
+            }
+          >
+            {/* Dezembro: a fachada à noite, com o letreiro aceso (clima de fim de ano, foto real). */}
+            <Foto
+              src="/img/fachada-noite.webp"
+              alt="Fachada do Jura Auto Center à noite, com o letreiro aceso, na Avenida Loreto, 889, em Araras"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-[60%_45%]"
+            />
+          </SoNaViagem>
           {/* No computador a camada clareia à direita pra fachada aparecer; o texto
               fica sobre a parte escura da esquerda. */}
           <div
@@ -60,6 +75,9 @@ export default function Home() {
               </span>
             </Reveal>
 
+            <SoNaViagem>
+              <SeloViagem />
+            </SoNaViagem>
             <Reveal>
               <h1 className="mb-4 text-[clamp(2.75rem,7.5vw,4.5rem)] [text-shadow:0_2px_24px_rgb(0_0_0/0.6)]">
                 <span className="block">Pneu, freio e suspensão</span>
@@ -69,15 +87,32 @@ export default function Home() {
 
             <Reveal>
               <p className="mb-8 max-w-lg text-[1.075rem] leading-relaxed text-[#e4e4e4]">
-                Em Araras desde 2019, cuidando de quem depende do carro todo dia.
-                Peça seu orçamento pelo WhatsApp.
+                <SoNaViagem
+                  fallback={
+                    <>
+                      Em Araras desde 2019, cuidando de quem depende do carro todo dia.
+                      Peça seu orçamento pelo WhatsApp.
+                    </>
+                  }
+                >
+                  Vai pegar estrada no fim de ano? A gente revisa pneu, freio e suspensão antes da viagem.
+                  Peça pelo WhatsApp.
+                </SoNaViagem>
               </p>
             </Reveal>
 
             <Reveal className="flex flex-wrap gap-3.5">
-              <BtnWhats href={cta.whatsPrincipal} className="max-sm:w-full" local="hero">
-                Chamar no WhatsApp
-              </BtnWhats>
+              <SoNaViagem
+                fallback={
+                  <BtnWhats href={cta.whatsPrincipal} className="max-sm:w-full" local="hero">
+                    Chamar no WhatsApp
+                  </BtnWhats>
+                }
+              >
+                <BtnWhats href={whatsRevisaoFimDeAno} className="max-sm:w-full" local="hero-revisao">
+                  Pedir revisão no WhatsApp
+                </BtnWhats>
+              </SoNaViagem>
               <Btn href={celularLink} variant="red" className="max-sm:w-full" evento="ligar_agora_click" local="hero">
                 <PhoneIcon className="size-5 shrink-0" />
                 Ligar agora
@@ -102,6 +137,10 @@ export default function Home() {
         </Wrap>
       </section>
 
+      <SoNaViagem>
+        <ChecklistViagem />
+      </SoNaViagem>
+
       {/* ============================================================
           2. ORÇAMENTO DE PNEU
           Logo abaixo da apresentação: quem vem de anúncio de pneu vê o
@@ -125,15 +164,27 @@ export default function Home() {
             <Reveal>
               <SoNaPromo
                 fallback={
-                  <>
+                  <SoNaViagem
+                    fallback={
+                      <>
+                        <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
+                          Peça seu orçamento de pneus <span className="text-jura-title">pelo WhatsApp</span>
+                        </h2>
+                        <p className="mt-4 leading-relaxed text-muted">
+                          Diz a medida que está escrita no seu pneu e quantos você precisa. A gente responde
+                          com o preço à vista e o parcelado.
+                        </p>
+                      </>
+                    }
+                  >
                     <h2 className="text-[clamp(2rem,5vw,2.75rem)]">
-                      Peça seu orçamento de pneus <span className="text-jura-title">pelo WhatsApp</span>
+                      Pneu novo pra <span className="text-jura-title">viagem de fim de ano</span>
                     </h2>
                     <p className="mt-4 leading-relaxed text-muted">
                       Diz a medida que está escrita no seu pneu e quantos você precisa. A gente responde
-                      com o preço à vista e o parcelado.
+                      pelo WhatsApp com o preço à vista e o parcelado no cartão.
                     </p>
-                  </>
+                  </SoNaViagem>
                 }
               >
                 <SeloBlack />

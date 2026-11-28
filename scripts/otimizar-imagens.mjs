@@ -17,6 +17,7 @@ const fontes = [
   ...fotos.map(nome => ({ src: `/img/${nome}.webp`, prefixo: `/img/otimizadas/${nome}`, tamanhos: [400, 800, 1200, 1800] })),
   { src: '/logo/jura-branco.png', prefixo: '/logo/otimizadas/jura-branco', tamanhos: [160, 320, 480], logo: true },
   { src: '/logo/jura-uniforme.png', prefixo: '/logo/otimizadas/jura-uniforme', tamanhos: [160, 320, 480], logo: true },
+  { src: '/logo/jura-uniforme-natal.png', prefixo: '/logo/otimizadas/jura-uniforme-natal', tamanhos: [160, 320, 480], logo: true },
   { src: '/logo/jura-fachada.png', prefixo: '/logo/otimizadas/jura-fachada', tamanhos: [160, 320, 480], logo: true },
 ];
 const manifest = {};

@@ -250,6 +250,16 @@
       480
     ]
   },
+  "/logo/jura-uniforme-natal.png": {
+    "largura": 1200,
+    "altura": 521,
+    "prefixo": "/logo/otimizadas/jura-uniforme-natal",
+    "larguras": [
+      160,
+      320,
+      480
+    ]
+  },
   "/logo/jura-fachada.png": {
     "largura": 1200,
     "altura": 521,

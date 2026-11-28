@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion } from "motion/react";
 import { cta, site } from "@/lib/site";
 import { WhatsAppIcon } from "./icons";
+import { useNatal } from "./promo";
 
 const links = [
   { href: "/#servicos", label: "Serviços" },
@@ -24,6 +25,7 @@ const links = [
 ];
 
 export function Header() {
+  const natal = useNatal();
   const [preso, setPreso] = useState(false);
   const [aberto, setAberto] = useState(false);
   const sentinela = useRef<HTMLDivElement>(null);
@@ -105,7 +107,7 @@ export function Header() {
             {/* Logo "uniforme" do Brand Book v2 (pneu branco, JURA vermelho):
                 feito pra fundo escuro, vale sobre a foto e no header preso. */}
             <Foto
-              src="/logo/jura-uniforme.png"
+              src={natal ? "/logo/jura-uniforme-natal.png" : "/logo/jura-uniforme.png"}
               alt={site.nome}
               width={1200}
               height={521}

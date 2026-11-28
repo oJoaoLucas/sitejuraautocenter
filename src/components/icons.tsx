@@ -64,6 +64,16 @@ export function ChevronIcon({ className }: P) {
   );
 }
 
+export function FlocoIcon({ className }: P) {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className={className}
+         fill="none" stroke="currentColor" strokeWidth={2}
+         strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 2v20M3.3 7l17.4 10M20.7 7 3.3 17M9 3.6l3 2.2 3-2.2M9 20.4l3-2.2 3 2.2M3.6 10.4l2.8-1.4-.6-3M20.4 13.6l-2.8 1.4.6 3M20.4 10.4l-2.8-1.4.6-3M3.6 13.6l2.8 1.4-.6 3" />
+    </svg>
+  );
+}
+
 export function ArrowIcon({ className }: P) {
   return (
     <svg viewBox="0 0 24 24" aria-hidden="true" className={className}

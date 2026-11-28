@@ -6,7 +6,7 @@ import { WhatsFloat } from "@/components/whats-float";
 import { CookieBanner } from "@/components/cookie-banner";
 import { Rastreio } from "@/components/rastreio";
 import { FaixaPromo } from "@/components/promo";
-import { promoAtiva } from "@/lib/promo";
+import { campanhaDoDia } from "@/lib/epoca";
 import { servicos, site } from "@/lib/site";
 import "./globals.css";
 
@@ -139,7 +139,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${bebas.variable} ${poppins.variable} ${montserrat.variable}`}
       /* Promoção valendo no dia do build: reserva o espaço da tarja (--faixa). O FaixaPromo
          tira o atributo no aparelho do cliente quando a data passa. */
-      data-promo={promoAtiva() ? "" : undefined}
+      data-promo={campanhaDoDia() ? "" : undefined}
+      data-campanha={campanhaDoDia()?.id}
       suppressHydrationWarning
     >
       <body className="relative">
