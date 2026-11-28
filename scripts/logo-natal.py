@@ -138,7 +138,7 @@ def foto_whatsapp():
     alto = round(logo.size[1] * largura / logo.size[0])
     logo = logo.resize((largura, alto), Image.LANCZOS)
     tela.alpha_composite(logo, ((lado - largura) // 2, (lado - alto) // 2 + 10))
-    pisca_pisca(tela)
+    # pisca_pisca(tela)  # dono, 28/11: sem luzinha na foto, só o gorro
     destino = RAIZ / "public/logo/whatsapp-natal.png"
     tela.convert("RGB").save(destino)
     print("ok", destino)
