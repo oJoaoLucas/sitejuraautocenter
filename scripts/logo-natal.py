@@ -86,6 +86,48 @@ def com_gorro(logo, opacidade_sombra=0.45):
     return logo
 
 
+CORES_LUZ = [(229, 48, 76), (255, 196, 0), (46, 170, 90), (70, 150, 255)]
+
+
+def pisca_pisca(tela):
+    """Fio de luzinhas de Natal em arco, em cima e embaixo, dentro do círculo do WhatsApp."""
+    import math
+    lado = tela.size[0]
+    W = lado * S
+    camada = Image.new("RGBA", (W, W), (0, 0, 0, 0))
+    brilho = Image.new("RGBA", (W, W), (0, 0, 0, 0))
+    d = ImageDraw.Draw(camada)
+    db = ImageDraw.Draw(brilho)
+    c = W / 2
+    raio = W * 0.405
+    for inicio, fim in ((200, 340), (25, 155)):
+        # Fio: arco com uma leve onda.
+        pts = []
+        for i in range(0, 241):
+            a = math.radians(inicio + (fim - inicio) * i / 240)
+            onda = math.sin(i / 240 * math.pi * 7) * W * 0.008
+            pts.append((c + (raio + onda) * math.cos(a), c + (raio + onda) * math.sin(a)))
+        d.line(pts, fill=(40, 60, 40, 255), width=int(5 * S), joint="curve")
+        # Lâmpadas.
+        n = 9
+        for k in range(n):
+            a = math.radians(inicio + (fim - inicio) * (k + 0.5) / n)
+            x = c + raio * math.cos(a)
+            y = c + raio * math.sin(a)
+            # Lâmpada aponta pra fora do círculo.
+            dx, dy = math.cos(a), math.sin(a)
+            bx, by = x + dx * 26 * S, y + dy * 26 * S
+            cor = CORES_LUZ[k % len(CORES_LUZ)]
+            r = 15 * S
+            db.ellipse([bx - r * 2.4, by - r * 2.4, bx + r * 2.4, by + r * 2.4], fill=cor + (110,))
+            d.ellipse([bx - r, by - r * 1.25, bx + r, by + r * 1.25], fill=cor + (255,))
+            d.rectangle([x + dx * 6 * S - 7 * S, y + dy * 6 * S - 7 * S, x + dx * 6 * S + 7 * S, y + dy * 6 * S + 7 * S], fill=(70, 80, 70, 255))
+            d.ellipse([bx - r * 0.45 - 4 * S, by - r * 0.7, bx - r * 0.45 + 4 * S, by - r * 0.1], fill=(255, 255, 255, 170))
+    brilho = brilho.filter(ImageFilter.GaussianBlur(18 * S))
+    camada = Image.alpha_composite(brilho, camada).resize((lado, lado), Image.LANCZOS)
+    tela.alpha_composite(camada)
+
+
 def foto_whatsapp():
     """Foto do perfil do WhatsApp (o modelo de sempre: fundo branco, pneu e chave pretos, JURA vermelho)
     com o gorro. 1080x1080; o WhatsApp corta em círculo, então o logo fica dentro da área segura."""
@@ -106,6 +148,7 @@ def foto_whatsapp():
     alto = round(logo.size[1] * largura / logo.size[0])
     logo = logo.resize((largura, alto), Image.LANCZOS)
     tela.alpha_composite(logo, ((lado - largura) // 2, (lado - alto) // 2 + 10))
+    pisca_pisca(tela)
     destino = RAIZ / "public/logo/whatsapp-natal.png"
     tela.convert("RGB").save(destino)
     print("ok", destino)

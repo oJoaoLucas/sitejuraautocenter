@@ -4,6 +4,7 @@ import { useEffect, useSyncExternalStore, type ReactNode } from "react";
 import { agoraDaPagina, campanhaDoDia, campanhas, ehNatal, ehViagem, type IdCampanha } from "@/lib/epoca";
 import { whats } from "@/lib/site";
 import { ArrowIcon, FlocoIcon } from "./icons";
+import { PiscaPisca } from "./natal";
 
 function semInscricao() { return () => {}; }
 /* O site é estático: o HTML guarda a campanha que valia no dia do build (`data-campanha` no <html>).
@@ -69,8 +70,11 @@ export function FaixaPromo() {
   );
   const classe =
     "faixa-promo fixed inset-x-0 top-0 z-61 flex h-(--faixa) items-center justify-center gap-x-2.5 bg-jura px-3 text-[0.8125rem] text-white sm:gap-x-3.5";
-  if (!c.mensagem) return <div className={classe}>{conteudo}</div>;
+  const luzes = c.natal ? <PiscaPisca /> : null;
+  if (!c.mensagem) return <>{luzes}<div className={classe}>{conteudo}</div></>;
   return (
+    <>
+    {luzes}
     <a
       href={whats(c.mensagem)}
       target="_blank"
@@ -80,5 +84,6 @@ export function FaixaPromo() {
     >
       {conteudo}
     </a>
+    </>
   );
 }

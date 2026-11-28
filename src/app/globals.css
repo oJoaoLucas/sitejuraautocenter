@@ -114,3 +114,14 @@ html[data-menu-aberto="true"] [aria-label="Aviso de cookies"] {
 
 /* O aviso é compacto no celular; enquanto aparece, o botão flutuante sobe pela
    altura dele (--cookie-h) e continua visível acima da faixa. */
+
+/* Pisca-pisca de Natal (componente PiscaPisca): as lâmpadas acendem e apagam de leve, em tempos diferentes.
+   Quem pede menos movimento vê as luzes paradas e acesas. */
+@keyframes pisca { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+.pisca-pisca .luz { filter: drop-shadow(0 0 3px currentColor); }
+@media (prefers-reduced-motion: no-preference) {
+  .pisca-pisca .luz-0 { animation: pisca 2.4s ease-in-out infinite; }
+  .pisca-pisca .luz-1 { animation: pisca 2.4s ease-in-out 0.6s infinite; }
+  .pisca-pisca .luz-2 { animation: pisca 2.4s ease-in-out 1.2s infinite; }
+  .pisca-pisca .luz-3 { animation: pisca 2.4s ease-in-out 1.8s infinite; }
+}

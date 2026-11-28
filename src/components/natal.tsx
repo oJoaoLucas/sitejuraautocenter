@@ -10,6 +10,30 @@ import { BtnWhats, Wrap } from "./ui";
 
 export const whatsRevisaoFimDeAno = whats(MENSAGEM_REVISAO);
 
+/** Fio de luzinhas de Natal (pisca-pisca) logo abaixo da faixa do topo. Só enfeite: não recebe clique. */
+export function PiscaPisca() {
+  const cores = ["#e5304c", "#ffc400", "#2eaa5a", "#4696ff"];
+  return (
+    <div aria-hidden="true" className="pisca-pisca pointer-events-none fixed inset-x-0 top-(--faixa) z-61 h-[22px] overflow-hidden">
+      <svg width="100%" height="22">
+        <defs>
+          <pattern id="fio-luzes" width="160" height="22" patternUnits="userSpaceOnUse">
+            <path d="M0 3 Q20 11 40 3 T80 3 T120 3 T160 3" fill="none" stroke="#2c3a2c" strokeWidth="1.5" />
+            {[20, 60, 100, 140].map((x, i) => (
+              <g key={x} className={`luz luz-${i}`}>
+                <rect x={x - 2.5} y="6" width="5" height="4" rx="1" fill="#555" />
+                <ellipse cx={x} cy="14" rx="4" ry="5.5" fill={cores[i]} />
+                <ellipse cx={x - 1.3} cy="12" rx="1" ry="1.8" fill="#fff" opacity="0.7" />
+              </g>
+            ))}
+          </pattern>
+        </defs>
+        <rect width="100%" height="22" fill="url(#fio-luzes)" />
+      </svg>
+    </div>
+  );
+}
+
 /** Selo pequeno acima do título da primeira tela. */
 export function SeloViagem() {
   return (
