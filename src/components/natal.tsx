@@ -47,7 +47,7 @@ export function SeloViagem() {
 const itens = [
   { titulo: "Pneus e estepe", texto: "Calibragem, desgaste e data de fabricação." },
   { titulo: "Freio", texto: "Pastilha, disco e fluido de freio." },
-  { titulo: "Alinhamento e balanceamento", texto: "Volante reto e pneu gastando por igual." },
+  { titulo: "Alinhamento", texto: "Volante reto e pneu gastando por igual." },
   { titulo: "Suspensão", texto: "Amortecedor, bieleta e bucha." },
 ];
 
@@ -103,36 +103,41 @@ export function ArvoreDePneus({ className = "" }: { className?: string }) {
 /** Seção "Checklist antes de viajar", logo abaixo da primeira tela. */
 export function ChecklistViagem() {
   return (
-    <section id="revisao-fim-de-ano" className="relative scroll-mt-20 overflow-hidden border-y-4 border-jura bg-ink-deep py-14 lg:py-20">
-      <Wrap>
+    <section id="revisao-fim-de-ano" className="relative scroll-mt-20 overflow-hidden border-y-4 border-jura bg-ink-deep py-10 lg:py-20">
+      {/* Celular: a árvore fica atrás do texto, apagadinha, pra seção não ficar comprida (dono, 28/11). */}
+      <ArvoreDePneus className="pointer-events-none absolute -right-6 top-8 h-auto w-[190px] opacity-[0.22] lg:hidden" />
+      <Wrap className="relative">
         <div className="grid items-center gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:gap-14">
           <Reveal>
-            <p className="mb-2 font-ui text-[0.75rem] font-extrabold tracking-[0.12em] text-jura-text uppercase">
+            <p className="mb-1.5 font-ui text-[0.75rem] font-extrabold tracking-[0.12em] text-jura-text uppercase">
               Dezembro no Jura
             </p>
-            <h2 className="text-[clamp(2.2rem,6vw,3.4rem)]">
+            <h2 className="text-[clamp(2rem,6vw,3.4rem)]">
               Checklist <span className="text-jura-title">antes de viajar</span>
             </h2>
-            <p className="mt-4 max-w-xl leading-relaxed text-muted">
-              Pneu careca na estrada dá multa de R$ 195,23 e 5 pontos na carteira (Detran-SP), e o carro freia
-              pior na chuva. A gente confere tudo e te fala na hora o que precisa.
+            <p className="mt-3 max-w-xl text-[0.95rem] leading-relaxed text-muted lg:mt-4 lg:text-base">
+              <span className="lg:hidden">Pneu careca na estrada dá multa e 5 pontos. A gente confere e te fala na hora.</span>
+              <span className="hidden lg:inline">
+                Pneu careca na estrada dá multa de R$ 195,23 e 5 pontos na carteira (Detran-SP), e o carro freia
+                pior na chuva. A gente confere tudo e te fala na hora o que precisa.
+              </span>
             </p>
-            <ul className="mt-7 grid gap-3 sm:grid-cols-2">
+            <ul className="mt-5 grid grid-cols-2 gap-2 lg:mt-7 lg:gap-3">
               {itens.map((i) => (
-                <li key={i.titulo} className="rounded-md border border-line border-l-4 border-l-jura bg-surface px-4 py-3.5">
-                  <b className="block font-ui font-extrabold text-cream">✔ {i.titulo}</b>
-                  <span className="text-[0.9rem] text-muted">{i.texto}</span>
+                <li key={i.titulo} className="rounded-md border border-line border-l-4 border-l-jura bg-surface/90 px-3 py-2.5 lg:px-4 lg:py-3.5">
+                  <b className="block font-ui text-[0.875rem] leading-snug font-extrabold text-cream lg:text-base">✔ {i.titulo}</b>
+                  <span className="hidden text-[0.9rem] text-muted lg:block">{i.texto}</span>
                 </li>
               ))}
             </ul>
-            <div className="mt-7 flex flex-wrap items-center gap-x-5 gap-y-3">
+            <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 lg:mt-7 lg:gap-y-3">
               <BtnWhats href={whatsRevisaoFimDeAno} className="max-sm:w-full" local="checklist-viagem">
-                Pedir revisão de fim de ano
+                Pedir revisão
               </BtnWhats>
               <span className="text-[0.875rem] text-soft">Atendimento por ordem de chegada · Av. Loreto, 889</span>
             </div>
           </Reveal>
-          <Reveal delay={0.12} className="mx-auto w-full max-w-[300px] lg:max-w-[340px]">
+          <Reveal delay={0.12} className="mx-auto hidden w-full max-w-[340px] lg:block">
             <ArvoreDePneus className="h-auto w-full" />
             <p className="mt-3 text-center font-display text-[1.6rem] tracking-[0.03em] text-cream uppercase">
               Boas festas <span className="text-jura-title">do Jura</span>
