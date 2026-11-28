@@ -6,6 +6,7 @@ import { mensagemPneus, site, whats } from "@/lib/site";
 import { previaLocal, rastrear } from "@/lib/rastreio";
 import { mascararMedidaPneu, normalizarMedidaPneu, quantidadePneusValida } from "@/lib/medida-pneu";
 import { blackNovember } from "@/lib/promo";
+import { comMarca, marcaDaVisita } from "@/lib/origem";
 import { Stars, WhatsAppIcon } from "./icons";
 import { usePromoAtiva } from "./promo";
 
@@ -86,8 +87,9 @@ export function QuoteForm({
     setErro(null);
     setErroQtd(null);
     if (!semMedida && limpa) setMedida(limpa);
-    const href = whats(
-      mensagemPneus({ quantidade: Number(qtd), medida: limpa ?? "", promo: promo ? blackNovember.nome : undefined }),
+    const href = comMarca(
+      whats(mensagemPneus({ quantidade: Number(qtd), medida: limpa ?? "", promo: promo ? blackNovember.nome : undefined })),
+      marcaDaVisita(),
     );
     setPedido(href);
     // Mede a intenção de iniciar contato. Não confirma envio ou atendimento.

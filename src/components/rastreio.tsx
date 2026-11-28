@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
+import { comMarca, guardarOrigem, marcaDaVisita } from "@/lib/origem";
 import { ADS_ID, eventoValido, iniciarRastreio, previaLocal, rastrear, revogarRastreio, type Evento } from "@/lib/rastreio";
 
 import { useConsentimento } from "./use-consentimento";
@@ -29,12 +30,17 @@ export function Rastreio() {
     return () => { script.remove(); };
   }, [estado]);
   useEffect(() => {
+    guardarOrigem();
     function aoClicar(e: MouseEvent) {
       if (e.defaultPrevented) return;
       const alvo = e.target;
       if (!(alvo instanceof Element)) return;
       const link = alvo.closest<HTMLAnchorElement>("a[href]");
       if (!link) return;
+      // Veio de anúncio: o texto do WhatsApp leva "[ref: pagina/fonte]" (o Jurinha separa a origem).
+      const href = link.getAttribute("href") ?? "";
+      const marcado = comMarca(href, marcaDaVisita());
+      if (marcado !== href) link.setAttribute("href", marcado);
 
       const evento = eventoDoLink(link);
       if (evento) {
